@@ -359,7 +359,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Bare Demo of IEEEtran.cls\\ for IEEE Journals}
+\title{Estudio de La Caída de Una Gota}
 %
 %
 % author names and IEEE memberships
@@ -371,14 +371,9 @@
 % was not built to handle multiple paragraphs
 %
 
-\author{Michael~Shell,~\IEEEmembership{Member,~IEEE,}
-        John~Doe,~\IEEEmembership{Fellow,~OSA,}
-        and~Jane~Doe,~\IEEEmembership{Life~Fellow,~IEEE}% <-this % stops a space
-\thanks{M. Shell was with the Department
-of Electrical and Computer Engineering, Georgia Institute of Technology, Atlanta,
-GA, 30332 USA e-mail: (see http://www.michaelshell.org/contact.html).}% <-this % stops a space
-\thanks{J. Doe and J. Doe are with Anonymous University.}% <-this % stops a space
-\thanks{Manuscript received April 19, 2005; revised August 26, 2015.}}
+\author{Alberto García García (48718198-N) e-mail: agg180@alu.ua.es % <-this % stops a space
+\thanks{}%
+}
 
 % note the % following the last \IEEEmembership and also \thanks - 
 % these prevent an unwanted space from occurring between the last author name
@@ -401,8 +396,8 @@ GA, 30332 USA e-mail: (see http://www.michaelshell.org/contact.html).}% <-this %
 
 
 % The paper headers
-\markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
-{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for IEEE Journals}
+\markboth{Física I -- Grado en Física -- 2018-2019}%
+{}
 % The only time the second header will appear is for the odd numbered pages
 % after the title page when using the twoside option.
 % 
@@ -437,15 +432,6 @@ GA, 30332 USA e-mail: (see http://www.michaelshell.org/contact.html).}% <-this %
 The abstract goes here.
 \end{abstract}
 
-% Note that keywords are not normally used for peerreview papers.
-\begin{IEEEkeywords}
-IEEE, IEEEtran, journal, \LaTeX, paper, template.
-\end{IEEEkeywords}
-
-
-
-
-
 
 % For peer review papers, you can put extra information on the cover
 % page as needed:
@@ -458,23 +444,24 @@ IEEE, IEEEtran, journal, \LaTeX, paper, template.
 \IEEEpeerreviewmaketitle
 
 
+\section{Introducción}
 
-\section{Introduction}
-% The very first letter is a 2 line initial drop letter followed
-% by the rest of the first word in caps.
-% 
-% form to use if the first word consists of a single letter:
-% \IEEEPARstart{A}{demo} file is ....
-% 
-% form to use if you need the single drop letter followed by
-% normal text (unknown if ever used by the IEEE):
-% \IEEEPARstart{A}{}demo file is ....
-% 
-% Some journals put the first two words in caps:
-% \IEEEPARstart{T}{his demo} file is ....
-% 
-% Here we have the typical use of a "T" for an initial drop letter
-% and "HIS" in caps to complete the first word.
+En esta primera práctica de la asignatura Física I del Grado en Física (curso académico 2018-2019) estudiaremos la caída de una gota de agua. Para ello consideraremos que la gota cae desde una nube alta y aproximaremos su forma mediante una esfera, de esta forma emplearemos la Ley de Stokes para expresar el rozamiento de la gota con el aire.
+
+Este problema será resuelto de dos formas diferentes. Por una parte, estudiaremos la caída de forma analítica. Por otro lado, estudiaremos dicha caída de manera numérica, siendo esta segunda forma el objetivo principal de esta práctica. Para ello, discretizaremos el tiempo y resolveremos la ecuación diferencial suponiendo que en cada tramo o instante temporal $dt$ el movimiento transcurre con aceleración constante.
+
+Una vez resuelto el problema tanto de forma numérica como analítica, calcularemos la velocidad con la que la gota impacta en el suelo y dispondremos en una gráfica la evolución de la velocidad y de la posición respecto al tiempo para comparar el resultado numérico con el analítico.
+
+Además, obtendremos también la velocidad límite de la gota y experimentaremos con distintos tamaños y otros parámetros para comprobar la precisión de nuestra solución con las suposiciones anteriormente mencionadas respecto a las verdaderas velocidades alcanzadas por las gotas con modelos más cercanos a la realidad.
+
+Por último, llevaremos a cabo una serie de experimentos cambiando la Ley de Stokes de forma que la velocidad $v$ quede expresada con una potencia mayor que $1$ con el objetivo de determinar qué ley o proporción es la más adecuada para representar la fricción de una gota de lluvia con el aire.
+
+El código Python que implementa los modelos matemáticos así como las rutinas de visualización para la resolución de este ejercicio se adjunta con este informe y además puede ser consultado en el siguiente repositorio online (TODO: enlace a GitHub).
+
+El resto del informe se estructura en las siguientes secciones: Sección 1 ..., Sección 2..., Sección 3...
+
+\section{Hundimiento de un Cuerpo en un Fluido}
+
 \IEEEPARstart{C}{uando} un fluido fluye en capas de manera uniforme y regular, se está en presencia de un flujo laminar. Cuando se aumenta la velocidad relativa entre el sólido y el fluido, se alcanza un punto en el que el flujo ya no es uniforme ni regular. Se dice entonces que es un flujo turbulento.
 
 Todo fluido real presenta viscosidad. Esta viscosidad se manifiesta cuando un sólido se mueve en su seno.
@@ -483,17 +470,15 @@ El desarrollo de una capa límite en la que existe turbulencia depende de la for
 
 El resultado es la aparición de una fuerza de arrastre que se opone al movimiento. A velocidades muy bajas, la fuerza es proporcional a la velocidad, a velocidades moderadas $F = \displaystyle\frac{1}{2} C_d \rho S v^2$.
 
-\section{Hundimiento de un Cuerpo en un Fluido}
-
 $\sum \vec{F} = m\vec{a}$
 
 $m\vec{g} - \vec{F_r} - \vec{E} = m\vec{a}$
 
 $F_r = \rho S v^2 f(Re)$ donde $f(Re)$ es el factor de Reynolds. Para una esfera y número de Reynolds bajo, se tiene $f(Re) = \displaystyle\frac{12}{Re}$
 
-Si escribimos $Re = \displaytyle\frac{v \rho 2 R}{\eta}$ por lo que $F = 6 \pi \rho R v$. Por lo tanto, si la velocidad va creciendo, la fuerza de arrastre va creciendo hasta que se llega a un equilibrio:
+Si escribimos $Re = \displaystyle\frac{v \rho 2 R}{\eta}$ por lo que $F = 6 \pi \rho R v$. Por lo tanto, si la velocidad va creciendo, la fuerza de arrastre va creciendo hasta que se llega a un equilibrio:
 
-$V_{\text{lim}} = \displaystyle\frac{2 R^2 (\rho_{\text{cuerpo}} - \rho_{\text{fluido}}) g}{9 \eta}$
+$V_{lim} = \displaystyle\frac{2 R^2 (\rho_{cuerpo} - \rho_{fluido}) g}{9 \eta}$
 
 Como la fuerza es proporcional a la velocidad:
 
@@ -515,29 +500,27 @@ $F_d = 6 \pi R \eta v$
 
 \section{Solución Numérica}
 
+\section{Solución Analítica}
 
+\section{Implementación en Python}
 
+\section{Experimentación}
 
-% you can choose not to have a title for an appendix
-% if you want by leaving the argument blank
-\section{}
-Appendix two text goes here.
+\subsection{Velocidad y Posición}
 
+\subsection{Velocidad Límite}
 
-% use section* for acknowledgment
-\section*{Acknowledgment}
+\subsection{Variando el Tamaño de la Gota}
 
+\subsection{Variando la Potencia de la Velocidad}
 
-The authors would like to thank...
-
+\section{Conclusión}
 
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.
 \ifCLASSOPTIONcaptionsoff
   \newpage
 \fi
-
-
 
 % trigger a \newpage just before the given reference
 % number - used to balance the columns on the last page
@@ -569,49 +552,4 @@ H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
 
 \end{thebibliography}
 
-% biography section
-% 
-% If you have an EPS/PDF photo (graphicx package needed) extra braces are
-% needed around the contents of the optional argument to biography to prevent
-% the LaTeX parser from getting confused when it sees the complicated
-% \includegraphics command within an optional argument. (You could create
-% your own custom macro containing the \includegraphics command to make things
-% simpler here.)
-%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
-% or if you just want to reserve a space for a photo:
-
-\begin{IEEEbiography}{Michael Shell}
-Biography text here.
-\end{IEEEbiography}
-
-% if you will not have a photo at all:
-\begin{IEEEbiographynophoto}{John Doe}
-Biography text here.
-\end{IEEEbiographynophoto}
-
-% insert where needed to balance the two columns on the last page with
-% biographies
-%\newpage
-
-\begin{IEEEbiographynophoto}{Jane Doe}
-Biography text here.
-\end{IEEEbiographynophoto}
-
-% You can push biographies down or up by placing
-% a \vfill before or after them. The appropriate
-% use of \vfill depends on what kind of text is
-% on the last page and whether or not the columns
-% are being equalized.
-
-%\vfill
-
-% Can be used to pull up biographies so that the bottom of the last one
-% is flush with the other column.
-%\enlargethispage{-5in}
-
-
-
-% that's all folks
 \end{document}
-
-
