@@ -63,7 +63,14 @@
 % (uncomment the ones you want to load)
 \usepackage[spanish]{babel}
 \usepackage[utf8]{inputenc}
-
+\usepackage{url}
+\usepackage{minted}
+\setminted{fontsize=\small,baselinestretch=1}
+\usepackage{listings}
+\usepackage{subcaption}
+\renewcommand\listingscaption{Código}
+\newenvironment{code}{\captionsetup{type=listing}}{\par\addvspace{\baselineskip}}
+\usepackage{graphicx}
 
 % *** MISC UTILITY PACKAGES ***
 %
@@ -429,7 +436,17 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-The abstract goes here.
+En esta primera práctica de la asignatura Física I del Grado en Física (curso académico 2018-2019) estudiaremos la caída de una gota de agua. Para ello consideraremos que la gota cae desde una nube alta y aproximaremos su forma mediante una esfera, de esta forma emplearemos la Ley de Stokes para expresar el rozamiento de la gota con el aire.
+
+Este problema será resuelto de dos formas diferentes. Por una parte, estudiaremos la caída de forma analítica. Por otro lado, estudiaremos dicha caída de manera numérica, siendo esta segunda forma el objetivo principal de esta práctica. Para ello, discretizaremos el tiempo y resolveremos la ecuación diferencial suponiendo que en cada tramo o instante temporal $dt$ el movimiento transcurre con aceleración constante.
+
+Una vez resuelto el problema tanto de forma numérica como analítica, calcularemos la velocidad con la que la gota impacta en el suelo y dispondremos en una gráfica la evolución de la velocidad y de la posición respecto al tiempo para comparar el resultado numérico con el analítico.
+
+Además, obtendremos también la velocidad límite de la gota y experimentaremos con distintos tamaños y otros parámetros para comprobar la precisión de nuestra solución con las suposiciones anteriormente mencionadas respecto a las verdaderas velocidades alcanzadas por las gotas con modelos más cercanos a la realidad.
+
+Por último, llevaremos a cabo una serie de experimentos cambiando la Ley de Stokes de forma que la velocidad $v$ quede expresada con una potencia mayor que $1$ con el objetivo de determinar qué ley o proporción es la más adecuada para representar la fricción de una gota de lluvia con el aire.
+
+El código Python que implementa los modelos matemáticos así como las rutinas de visualización para la resolución de este ejercicio se adjunta con este informe y además puede ser consultado en el siguiente repositorio online \footnote{\url{https://github.com/Blitzman/physics}}.
 \end{abstract}
 
 
@@ -443,24 +460,7 @@ The abstract goes here.
 % creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
 
-
 \section{Introducción}
-
-En esta primera práctica de la asignatura Física I del Grado en Física (curso académico 2018-2019) estudiaremos la caída de una gota de agua. Para ello consideraremos que la gota cae desde una nube alta y aproximaremos su forma mediante una esfera, de esta forma emplearemos la Ley de Stokes para expresar el rozamiento de la gota con el aire.
-
-Este problema será resuelto de dos formas diferentes. Por una parte, estudiaremos la caída de forma analítica. Por otro lado, estudiaremos dicha caída de manera numérica, siendo esta segunda forma el objetivo principal de esta práctica. Para ello, discretizaremos el tiempo y resolveremos la ecuación diferencial suponiendo que en cada tramo o instante temporal $dt$ el movimiento transcurre con aceleración constante.
-
-Una vez resuelto el problema tanto de forma numérica como analítica, calcularemos la velocidad con la que la gota impacta en el suelo y dispondremos en una gráfica la evolución de la velocidad y de la posición respecto al tiempo para comparar el resultado numérico con el analítico.
-
-Además, obtendremos también la velocidad límite de la gota y experimentaremos con distintos tamaños y otros parámetros para comprobar la precisión de nuestra solución con las suposiciones anteriormente mencionadas respecto a las verdaderas velocidades alcanzadas por las gotas con modelos más cercanos a la realidad.
-
-Por último, llevaremos a cabo una serie de experimentos cambiando la Ley de Stokes de forma que la velocidad $v$ quede expresada con una potencia mayor que $1$ con el objetivo de determinar qué ley o proporción es la más adecuada para representar la fricción de una gota de lluvia con el aire.
-
-El código Python que implementa los modelos matemáticos así como las rutinas de visualización para la resolución de este ejercicio se adjunta con este informe y además puede ser consultado en el siguiente repositorio online (TODO: enlace a GitHub).
-
-El resto del informe se estructura en las siguientes secciones: Sección 1 ..., Sección 2..., Sección 3...
-
-\section{Hundimiento de un Cuerpo en un Fluido}
 
 \IEEEPARstart{C}{uando} un fluido fluye en capas de manera uniforme y regular, se está en presencia de un flujo laminar. Cuando se aumenta la velocidad relativa entre el sólido y el fluido, se alcanza un punto en el que el flujo ya no es uniforme ni regular. Se dice entonces que es un flujo turbulento.
 
@@ -498,21 +498,54 @@ $v = \displaystyle\frac{mg}{b}$
 
 $F_d = 6 \pi R \eta v$
 
-\section{Solución Numérica}
+\subsection{Solución Analítica}
 
-\section{Solución Analítica}
+\subsection{Solución Numérica}
 
-\section{Implementación en Python}
+\begin{code}
+	\begin{minted}{python}
+def update_acceleration(mass, velocity, b, ve):
+  return (G - (b * velocity**ve / mass))
+
+def update_velocity(velocity, acceleration, dt):
+  return velocity + acceleration * dt
+
+def update_position(position, velocity, dt):
+  return position - velocity * dt
+	\end{minted}
+\end{code}
 
 \section{Experimentación}
 
-\subsection{Velocidad y Posición}
+Una vez expuestas las soluciones tanto analítica como numérica y comparados los resultados obtenidos, procederemos a realizar una experimentación más extensa sobre la implementación numérica. Este conjunto de experimentos consistirá por un lado en la comparación de la velocidad límite obtenida para gotas de diferentes tamaños y por otro en el estudio del efecto de la potencia de $v$ en la Ley de Stokes.
 
-\subsection{Velocidad Límite}
+En ambos casos emplearemos el mismo juego de parámetros para todos los factores externos que no tienen que ver ni con la potencia de la velocidad ni con el tamaño de la gota: la densidad del agua $\rho = 1000~[kg/m^3]$, la viscosidad del aire $\eta = 18 \cdot 10^{-6}~[N\cdot s/m^2]$ a $20$ grados centígrados, la altura desde la cual cae la gota $h = 100~[m]$ y el intervalo o diferencial de tiempo $dt = 0.001~[s]$.
 
-\subsection{Variando el Tamaño de la Gota}
+\subsection{Radio de la Gota}
 
-\subsection{Variando la Potencia de la Velocidad}
+En este primer conjunto de experimentos variaremos el tamaño de la gota de agua, es decir, el radio de la misma, lo cual afectará tanto a la fuerza de rozamiento (ya que recordemos que el radio $r$ es uno de sus componentes) como a la aceleración (puesto que al variar el radio también cambiará el volumen y por lo tanto la masa de la gota). Para estas pruebas hemos utilizado una potencia de $v$ de $1$ y los valores del radio de la gota $r = [0.10, 0.15, 0.20, 0.25, 0.30]~[mm]$.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=1.1\linewidth]{graficas_radio}
+	\caption{Gráficas de posición, velocidad y aceleración que muestran la evolución de dichas componentes a lo largo del tiempo de simulación para diferentes tamaños de gota.}
+\end{figure}
+
+\begin{table}[!htb]
+	\begin{tabular}{cccc}
+		Radio $[mm]$ & Velocidad Límite $[m/s]$ & Tiempo de Impacto $[s]$\\
+		\hline
+		$0.10$ & 1.21 & 82.77\\
+		$0.15$ & 2.72 & 37.01\\
+		$0.20$ & 4.84 & 21.16\\
+		$0.25$ & 7.56 & 14.00\\
+		$0.30$ & 10.89 & 10.30\\
+	\end{tabular}
+\end{table}
+
+\subsection{Potencia de $v$}
+
+En esta segunda aprte de los experimentos cambiaremos la Ley de Stokes de forma que la potencia de $v$ tome diferentes valores $v_e = [0, 1, 2, 3, 4]$ con el fin de determinar cuál es la Ley más adecuada para representar la fricción de una gota de lluvia con el aire. Para estas pruebas utilizamos el mismo juego de parámetros previamente descrito y una gota de lluvia de radio $r = 0.25~[mm]$.
 
 \section{Conclusión}
 
