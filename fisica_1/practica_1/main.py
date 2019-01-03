@@ -8,22 +8,19 @@ log = logging.getLogger(__name__)
 
 G = 9.8
 
+def update_acceleration_stokes(mass, velocity, b, ve):
+    return ((mass * G - b * pow(velocity, ve)) / mass)
+
+def update_acceleration_stokes2(mass, velocity, b, ve):
+  return (G - (b * velocity**ve / mass))
+
 def update_velocity(velocity, acceleration, dt):
     return velocity + acceleration * dt
 
 def update_position(position, velocity, dt):
-    return position + velocity * dt
-
-def update_acceleration_stokes(acceleration, mass, velocity, b):
-    return ((mass * G - b * velocity) / mass)
-
-def update_velocity_stokes(velocity, mass, acceleration, b):
-    return ((mass * acceleration - mass * G) / (-1.0 * b))
-
-def update_position_stokes(position, velocity, dt):
     return position - velocity * dt
 
-def simulate(dt, y0, v0, a0, b, mass):
+def simulate(dt, y0, v0, a0, b, mass, ve):
     
     time_samples_ = np.empty(0)
     position_samples_ = np.empty(0)
@@ -36,6 +33,7 @@ def simulate(dt, y0, v0, a0, b, mass):
     y_ = y0
     
     log.info("Starting simulation...")
+    log.info("Drop mass is {0}".format(mass))
     log.info("Position at t=0 [s] is {0} [m]".format(y_))
     log.info("Velocity at t=0 [s] is {0} [m/s]".format(v_))
     log.info("Acceleration at t=0 [s] is {0} [m/s2]".format(a_))
@@ -47,18 +45,15 @@ def simulate(dt, y0, v0, a0, b, mass):
         velocity_samples_ = np.append(velocity_samples_, v_)
         acceleration_samples_ = np.append(acceleration_samples_, a_)
         
-        log.info("Time: {0} [s]".format(t_))
-        log.info("Position: {0} [m]".format(y_))
-        log.info("Velocity: {0} [m/s]".format(v_))
-        log.info("Acceleration: {0} [m/s2]".format(a_))
-        
-        v_t_1_ = v_
+        #log.info("Time: {0} [s]".format(t_))
+        #log.info("Position: {0} [m]".format(y_))
+        #log.info("Velocity: {0} [m/s]".format(v_))
+        #log.info("Acceleration: {0} [m/s2]".format(a_))
         
         t_ += dt
-        y_ = update_position_stokes(y_, v_, dt)
-        #v_ = update_velocity_stokes(v_, mass, a_, b)
+        y_ = update_position(y_, v_, dt)
         v_ = update_velocity(v_, a_, dt)
-        a_ = update_acceleration_stokes(a_, mass, v_, b)
+        a_ = update_acceleration_stokes2(mass, np.sqrt(v_ * v_), b, ve)
         
     log.info("Elapsed time until hitting the ground: {0} [s]".format(t_))
     log.info("Impact velocity: {0} [m/s]".format(v_))
@@ -66,24 +61,38 @@ def simulate(dt, y0, v0, a0, b, mass):
         
     return time_samples_, position_samples_, velocity_samples_, acceleration_samples_
 
-def plot(times, positions, velocities, accelerations):
+def plot(times, positions, velocities, accelerations, labels):
+
+    plt.rc('text', usetex=True)
+    plt.rc('font', family='serif')
+    plt.rc('font', size='22')
     
     plt.subplot(3, 1, 1)
-    plt.plot(times, positions, "-")
-    plt.xlabel("Time [s]")
-    plt.ylabel("Position [m]")
+    for i in range(len(positions)):
+      plt.plot(times[i], positions[i], "-", linewidth=2)
+
+    plt.xticks(np.arange(0, 90, 5.0))
+    plt.xlabel(r"\textbf{Tiempo $[s]$}")
+    plt.ylabel(r"\textbf{Posición $[m]$}")
+    plt.legend(labels)
     plt.grid()
     
     plt.subplot(3, 1, 2)
-    plt.plot(times, velocities, "-")
-    plt.xlabel("Time [s]")
-    plt.ylabel("Velocity [m/s]")
+    for i in range(len(velocities)):
+      plt.plot(times[i], velocities[i], "-", linewidth=2)
+    plt.xticks(np.arange(0, 90, 5.0))
+    plt.xlabel(r"\textbf{Tiempo $[s]$}")
+    plt.ylabel(r"\textbf{Velocidad $[m/s]$}")
+    plt.legend(labels)
     plt.grid()
     
     plt.subplot(3, 1, 3)
-    plt.plot(times, accelerations, "-")
-    plt.xlabel("Time [s]")
-    plt.ylabel("Acceleration [m/s2]")
+    for i in range(len(accelerations)):
+      plt.plot(times[i], accelerations[i], "-", linewidth=2)
+    plt.xticks(np.arange(0, 90, 5.0))
+    plt.xlabel(r"\textbf{Tiempo $[s]$}")
+    plt.ylabel(r"\textbf{Aceleración $[m/s^2]$}")
+    plt.legend(labels)
     plt.grid()
     
     plt.show()
@@ -93,21 +102,39 @@ if __name__ == "__main__":
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
     
     # Simulation parameters
-    dt_ = 0.01 # [s]
-    height_ = 10000 # [m]
+    dt_ = 0.001 # [s]
+    height_ = 100 # [m]
     
-    drop_radius_ = 1 # [mm]
-    drop_radius_ = drop_radius_ / 1000 # [m]
-    
-    drop_volume_ = 4.0/3.0 * np.pi * pow(drop_radius_, 3) # [m3]
-    drop_density_ = 997 # [kg / m3]
-    drop_mass_ = drop_volume_ * drop_density_ # [kg]
-    
-    temperature_ = 20 # [Cº]
-    temperature_ = temperature_ + 273.15 # [K]
-    air_viscosity_ = 1.81 * pow(10, -5) # [Pa s]
-    
-    b_ = 6 * np.pi * drop_radius_ * air_viscosity_
-    
-    times_, positions_, velocities_, accelerations_ = simulate(dt_, height_, 0.0, G, b_, drop_mass_)
-    plot(times_, positions_, velocities_, accelerations_)
+    times_list_ = []
+    positions_list_ = []
+    velocities_list_ = []
+    accelerations_list_ = []
+    label_list_ = []
+
+    for r in [0.10, 0.15, 0.20, 0.25, 0.30]:
+      drop_radius_ = r # [mm]
+      drop_radius_ = drop_radius_ / 1000.0 # [m]
+      log.info("Drop radius {0} [m]".format(drop_radius_))
+      
+      drop_volume_ = 4.0 / 3.0 * np.pi * drop_radius_ * drop_radius_ * drop_radius_ # [m3]
+      drop_density_ = 1000 # [kg / m3]
+      drop_mass_ = drop_volume_ * drop_density_ # [kg]
+      
+      temperature_ = 20 # [Cº]
+      temperature_ = temperature_ + 273.15 # [K]
+      air_viscosity_ = 18e-6
+
+      ve_ = 1
+      
+      b_ = 6 * np.pi * drop_radius_ * air_viscosity_
+
+      label_ = "r = " + str(drop_radius_ * 1000.0) + " [mm]"
+      
+      times_, positions_, velocities_, accelerations_ = simulate(dt_, height_, 0.0, G, b_, drop_mass_, ve_)
+      times_list_.append(times_)
+      positions_list_.append(positions_)
+      velocities_list_.append(velocities_)
+      accelerations_list_.append(accelerations_)
+      label_list_.append(label_)
+
+    plot(times_list_, positions_list_, velocities_list_, accelerations_list_, label_list_)
