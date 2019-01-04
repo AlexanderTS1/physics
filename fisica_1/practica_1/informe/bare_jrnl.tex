@@ -496,11 +496,43 @@ $v = \displaystyle\frac{mg}{b}$
 
 \section{Ley de Stokes}
 
-$F_d = 6 \pi R \eta v$
+La Ley de Stokes, en su forma general, hace referencia a la fuerza que se opone al movimiento y que es experimentada por cuerpos esféricos cuando se mueven en un fluido en un régimen laminar (números de Reynolds bajos). Esto significa que la Ley únicamente es válida para movimientos de partículas pequeñas a baja velocidad (mientras el régimen no sea turbulento). La ecuación de Stokes se define como:
+
+\begin{equation}
+  F_d = 6 \pi r \eta v
+\end{equation}
+
+, donde $\eta$ es la viscosidad del fluido, $r$ el radio de la esfera y $v$ la velocidad de la misma.
+
+En nuestro caso, la gota se ve sometida a dos fuerzas: la gravitatoria (con sentido hacia el suelo) y la de rozamiento (en sentido opuesto). La fuerza de rozamiento se rige por la ecuación de Stokes previamente descrita. Como se puede comprobar, es una función de la velocidad $v$ de la partícula por lo que en un determinado instante de tiempo, ambas fuerzas se igualarán, produciendo entonces una aceleración nula y una velocidad constante (la denominada velocidad límite
+$v_{lim}$).
 
 \subsection{Solución Analítica}
 
 \subsection{Solución Numérica}
+
+Para implementar una solución numérica al problema del rozamiento y cálculo de la posición, velocidad y aceleración de la gota en cada instante discretizaremos el tiempo y supondremos que en cada tramo $dt$ el movimiento transcurre con aceleración constante. Así pues, la implementación se reduce a un bucle (cuyas condiciones iniciales son el tiempo $t = 0~[s]$ y la altura de la gota $y~[m]$) que iterará incrementando el instante de tiempo de acuerdo al intervalo $dt$ elegido hasta que la
+gota impacte contra el suelo $y = 0~[m]$.
+
+Así pues, en cada iteración se producen cuatro operaciones: (1) incremento del tiempo, (2) actualización de posición, (3) actualización de velocidad, (4) actualización de aceleración. El fragmento de Código \ref{code:bucle} muestra dichas operaciones.
+
+\bigskip
+
+\begin{code}
+  \begin{minted}{python}
+t_ += dt
+y_ = update_position(y_, v_, dt)
+v_ = update_velocity(v_, a_, dt)
+a_ = update_acceleration(mass, v_, b, ve)
+  \end{minted}
+  \caption{Actualizaciones en bucle de simulación.}
+  \label{code:bucle}
+\end{code}
+
+A lo largo del código, \mintinline{python}{t_} es el instante de tiempo actual en $[s]$, \mintinline{python}{dt} es el intervalo discreto de tiempo en $[s]$ y prefijado al inicio de la simulación, \mintinline{python}{y_}, \mintinline{python}{v_} y \mintinline{python}{a_} son la posición $[m]$, velocidad $[m/s]$ y la aceleración respectivamente $[m/s^2]$, \mintinline{python}{mass} es la masa de la gota $[kg]$ prefijada, \mintinline{python}{b} es la constante de la Ley de Stokes
+$6\pi r\eta\rho$ y \mintinline{python}{ve} es la potencia de la velocidad en la fuera de rozamiento. Las funciones del bucle que actualizan la posición $y$, velocidad $v$ y aceleración $a$ se muestran en el fragmento de Código \ref{code:functions}.
+
+\bigskip
 
 \begin{code}
 	\begin{minted}{python}
@@ -513,7 +545,27 @@ def update_velocity(velocity, acceleration, dt):
 def update_position(position, velocity, dt):
   return position - velocity * dt
 	\end{minted}
+  \caption{Funciones de actualización.}
+  \label{code:functions}
 \end{code}
+
+Como ya comentamos anteriormente, asumimos que en cada intervalo de tiempo el movimiento transcurre con aceleración y velocidad constante por lo que la posición puede calcularse de forma sencilla como:
+
+\begin{equation}
+  y(t) = y(t-1) - v(t) \cdot dt~.
+\end{equation}
+
+De igual manera podemos proceder con la velocidad:
+
+\begin{equation}
+  v(t) = v(t-1) + a(t) \cdot dt~.
+\end{equation}
+
+La aceleración por su parte se obtiene teniendo en cuenta las dos fuerzas que actúan (la gravedad y el rozamiento) así como la masa de la gota:
+
+\begin{equation}
+  a(t) = \displaystyle\frac{m\cdot g - b \cdot v^{v_e}}{m} = g - \displaystyle\frac{b\cdot v^{v_e}}{m}~.
+\end{equation}
 
 \section{Experimentación}
 
