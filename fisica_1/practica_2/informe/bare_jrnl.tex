@@ -462,6 +462,22 @@ El código Python que implementa los modelos matemáticos así como las rutinas 
 
 \section{Estudio del Período con la Amplitud}
 
+En este primer conjunto de experimentos trataremos de determinar cómo depende el período de la oscilación del péndulo $T$ con la amplitud inicial del mismo $\theta_0$. Para ello hemos solucionado las ecuaciones diferenciales expuestas anteriormente con la rutina \mintinline{python}{odeint} con el propósito de obtener la amplitud $\theta(t)$ en cada instante de tiempo y así poder comprobar la evolución de la misma.
+
+Para estos experimentos hemos elegido un tiempo inicial $t_0 = 0~[s]$, un tiempo final $t = 10~[s]$, un intervalo de tiempo $dt = 0.01~[s]$, masa del péndulo $m = 1.0~[kg]$, longitud del mismo $l = 5.0~[m]$ y siete posibles valores para la amplitud inicial $\theta_0 = \{5, 10, 15, 30, 45, 60, 90\}~[deg]$.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{theta0}
+  \caption{...}
+  \label{fig:theta0}
+\end{figure}
+
+La Figura \ref{fig:theta0} muestra las soluciones obtenidas a medida que incrementamos el valor del ángulo inicial $\theta_0$. Como podemos observar, para ángulos iniciales pequeños podemos realizar la aproximación $sin(\theta) \sim \theta$ y calcular su período como $T \sim 2\pi\sqrt{\frac{l}{g}}$. Para el caso que nos ocupa $T \sim 2\pi\sqrt{\frac{5}{9.8}} = 4.48~[s]$ y vemos que esta aproximación se cumple para los valores $\theta_0 = \{5, 10,
+15\}$. A partir de $\theta_0 = 30$ se comienza a producir una desviación significativa respecto a ese período.
+
+Así pues, podemos concluir con que existe una relación entre la amplitud inicial y el período del péndulo de manera que a medida que la amplitud aumenta también lo hace el propio período $T\propto \theta_0$.
+
 \section{Comparación con Solución Analítica}
 
 \section{Introducción de Rozamiento}
