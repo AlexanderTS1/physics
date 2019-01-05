@@ -71,6 +71,9 @@
 \renewcommand\listingscaption{Código}
 \newenvironment{code}{\captionsetup{type=listing}}{\par\addvspace{\baselineskip}}
 \usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{calc,patterns,angles,quotes}
+\usetikzlibrary{babel}
 
 % *** MISC UTILITY PACKAGES ***
 %
@@ -378,7 +381,7 @@
 % was not built to handle multiple paragraphs
 %
 
-\author{Alberto García García (48718198-N) e-mail: agg180@alu.ua.es % <-this % stops a space
+\author{Alberto García García\\ (48718198-N)\\ \texttt{agg180@alu.ua.es} % <-this % stops a space
 \thanks{}%
 }
 
@@ -436,7 +439,8 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-En esta segunda práctica de la asignatura Física I del Grado en Física (curso académico 2018-2019) estudiaremos la oscilación de un péndulo. Para ello consideraremos que el péndulo posee una masa y longitud preestablecidas y que se deja caer desde el reposo al apartarlo de su posición de equilibrio en cierta medida.
+En esta segunda práctica de la asignatura Física I del Grado en Física (curso académico 2018-2019) estudiaremos la oscilación de un péndulo. Para ello consideraremos que el péndulo posee una masa y longitud preestablecidas y que se deja caer desde el reposo al apartarlo de su posición de equilibrio en cierta medida. En primer lugar, obtendremos las ecuaciones diferenciales que permiten calcular los diferentes componentes del péndulo. Seguidamente resolveremos
+  dichas ecuaciones con un módulo de integración numérica para calcular la amplitud, la velocidad angular y la tensión de la cuerda. Con tal resolución, estudiaremos la dependencia entre el período de oscilación y la amplitud inicial. También compararemos los resultados numéricos obtenidos anteriormente con la solución analítica. Por último, introduciremos un término de rozamiento y estudiaremos su efecto sobre el péndulo y su período.
 
 El código Python que implementa los modelos matemáticos así como las rutinas de visualización para la resolución de este ejercicio se adjunta con este informe y además puede ser consultado en el siguiente repositorio online \footnote{\url{https://github.com/Blitzman/physics}}.
 \end{abstract}
@@ -454,7 +458,45 @@ El código Python que implementa los modelos matemáticos así como las rutinas 
 
 \section{Introducción}
 
-\IEEEPARstart{E}{n} esta práctica consideraremos un péndulo de longitud $L$ y masa $M$ que se aparta de su posición de equilibrio un ángulo $\theta_0$ y se deja caer desde el reposo.
+\IEEEPARstart{E}{l} péndulo es un cuerpo suspendido por una cuerda de un punto alrededor del cual oscila por acción de la fuerza gravitatoria. Podemos hablar de péndulo ideal cuando se asume que la cuerda no tiene masa y que el cuerpo carece de fricción o rozamiento con el medio. Es decir, que el péndulo oscilará indefinidamente.
+
+En esta práctica consideraremos un péndulo de longitud $l$ y masa $m$ que se aparta de su posición de equilibrio un ángulo $\theta_0$ y se deja caer desde el reposo (tal y como se muestra en la Figura \ref{fig:pendulum}). Inicialmente supondremos un péndulo ideal para posteriormente introducir fuerzas amortiguadoras y estudiar el efecto de las mismas.
+
+\begin{figure}[!hbt]
+  \centering
+\begin{tikzpicture}
+    % save length of g-vector and theta to macros
+    \pgfmathsetmacro{\Gvec}{1.5}
+    \pgfmathsetmacro{\myAngle}{45}
+    % calculate lengths of vector components
+    \pgfmathsetmacro{\Gcos}{\Gvec*cos(\myAngle)}
+    \pgfmathsetmacro{\Gsin}{\Gvec*sin(\myAngle)}
+
+    \coordinate (centro) at (0,0);
+    \draw[dashed,gray,-] (centro) -- ++ (0,-3.5) node (mary) [black,below]{$ $};
+    \draw[thick] (centro) -- ++(270+\myAngle:3) coordinate (bob)
+      node[midway, above right]{$l$};
+    \pic [olive, draw, ->, "$\theta$", angle eccentricity=1.5] {angle = mary--centro--bob};
+    \draw [blue,-stealth] (bob) -- ($(bob)!\Gcos cm!(centro)$)
+      node[midway, above right]{$T$};
+    \draw [-stealth] (bob) -- ($(bob)!-\Gcos cm!(centro)$)
+      coordinate (gcos)
+      node[midway,above right] {$mg\cos\theta$};
+    \draw [-stealth] (bob) -- ($(bob)!\Gsin cm!90:(centro)$)
+      coordinate (gsin)
+      node[midway,above left] {$mg\sin\theta$};
+    \draw [red,-stealth] ($(bob)!1.0*\Gsin cm!90:(centro)$) -- ($(bob)!2.0*\Gsin cm!90:(centro)$)
+      coordinate (gsin)
+      node[left] {$\vec{v}$};
+    \draw [-stealth] (bob) -- ++(0,-\Gvec)
+      coordinate (g)
+      node[near end,left] {$g$};
+    \pic [olive, draw, ->, "$\theta$", angle eccentricity=1.5] {angle = g--bob--gcos};
+    \filldraw [fill=black!40,draw=black] (bob) circle[radius=0.1];
+\end{tikzpicture}
+  \caption{Diagrama de cuerpo libre de un péndulo de masa $m$ y cuerda de longitud $l$ apartado un ángulo $theta$ de la vertical.}
+  \label{fig:pendulum}
+\end{figure}
 
 \section{Ecuaciones Diferenciales del Péndulo}
 
@@ -469,7 +511,7 @@ Para estos experimentos hemos elegido un tiempo inicial $t_0 = 0~[s]$, un tiempo
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\linewidth]{theta0}
-  \caption{...}
+  \caption{Evolución de la amplitud $\theta$ con el tiempo $t$ para diferentes amplitudes iniciales $\theta_0$. Valores calculados empleando la rutina de integración \mintinline{python}{odeint}.}
   \label{fig:theta0}
 \end{figure}
 
@@ -481,6 +523,13 @@ Así pues, podemos concluir con que existe una relación entre la amplitud inici
 \section{Comparación con Solución Analítica}
 
 \section{Introducción de Rozamiento}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{alpha}
+  \caption{Evolución de la amplitud $\theta$ con el tiempo $t$ para diferentes valores del término de rozamiento $\alpha$ con amplitud inicial $\theta_0=90~[deg]$. Valores calculados empleando la rutina de integración \mintinline{python}{odeint}.}
+  \label{fig:alpha}
+\end{figure}
 
 \section{Conclusión}
 
