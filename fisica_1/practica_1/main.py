@@ -1,3 +1,4 @@
+import argparse
 import logging
 import sys
 
@@ -45,10 +46,10 @@ def simulate(dt, y0, v0, a0, b, mass, ve):
         velocity_samples_ = np.append(velocity_samples_, v_)
         acceleration_samples_ = np.append(acceleration_samples_, a_)
 
-        #log.info("Time: {0} [s]".format(t_))
-        #log.info("Position: {0} [m]".format(y_))
-        #log.info("Velocity: {0} [m/s]".format(v_))
-        #log.info("Acceleration: {0} [m/s2]".format(a_))
+        log.debug("Time: {0} [s]".format(t_))
+        log.debug("Position: {0} [m]".format(y_))
+        log.debug("Velocity: {0} [m/s]".format(v_))
+        log.debug("Acceleration: {0} [m/s2]".format(a_))
 
         t_ += dt
         y_ = update_position(y_, v_, dt)
@@ -101,9 +102,17 @@ if __name__ == "__main__":
 
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
+    parser_ = argparse.ArgumentParser(description="Parámetros")
+    parser_.add_argument("--r", nargs="+", type=float, default=[0.10, 0.15, 0.20, 0.25, 0.30], help="Lista de radios [mm]")
+    parser_.add_argument("--ve", nargs="+", type=int, default=[1], help="Lista de exponentes para la velocidad")
+    parser_.add_argument("--h", nargs="?", type=float, default=100.0, help="Tiempo final [s]")
+    parser_.add_argument("--dt", nargs="?", type=float, default=0.001, help="Diferencial de tiempo [s]")
+    
+    args_ = parser_.parse_args()
+
     # Simulation parameters
-    dt_ = 0.001 # [s]
-    height_ = 100 # [m]
+    dt_ = args_.dt# [s]
+    height_ = args_.h # [m]
 
     times_list_ = []
     positions_list_ = []
@@ -111,11 +120,12 @@ if __name__ == "__main__":
     accelerations_list_ = []
     label_list_ = []
 
-    for r in [0.25]:
-        for ve in [1, 2, 3, 4]:
+    for ve in args_.ve:
+
+        for r in args_.r:
+
             drop_radius_ = r # [mm]
             drop_radius_ = drop_radius_ / 1000.0 # [m]
-            log.info("Drop radius {0} [m]".format(drop_radius_))
 
             drop_volume_ = 4.0 / 3.0 * np.pi * drop_radius_ * drop_radius_ * drop_radius_ # [m3]
             drop_density_ = 1000 # [kg / m3]
@@ -124,7 +134,6 @@ if __name__ == "__main__":
             temperature_ = 20 # [Cº]
             temperature_ = temperature_ + 273.15 # [K]
             air_viscosity_ = 18e-6
-
 
             b_ = 6 * np.pi * drop_radius_ * air_viscosity_
 
