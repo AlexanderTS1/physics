@@ -71,6 +71,9 @@
 \renewcommand\listingscaption{Código}
 \newenvironment{code}{\captionsetup{type=listing}}{\par\addvspace{\baselineskip}}
 \usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{scopes}
+\usetikzlibrary{babel}
 
 % *** MISC UTILITY PACKAGES ***
 %
@@ -378,7 +381,7 @@
 % was not built to handle multiple paragraphs
 %
 
-\author{Alberto García García (48718198-N) e-mail: agg180@alu.ua.es % <-this % stops a space
+\author{Alberto García García\\ (48718198-N)\\ \texttt{agg180@alu.ua.es} % <-this % stops a space
 \thanks{}%
 }
 
@@ -466,6 +469,28 @@ El código Python que implementa los modelos matemáticos así como las rutinas 
 
 Todo fluido real presenta viscosidad. Esta viscosidad se manifiesta cuando un sólido se mueve en su seno.
 
+\begin{figure}[!htb]
+  \centering
+  \begin{tikzpicture}[
+      force/.style={>=latex,draw=blue,fill=blue},
+      axis/.style={densely dashed,gray,font=\small},
+      M/.style={rectangle,draw,fill=lightgray,minimum size=0.5cm,thin},
+      m/.style={circle,draw=black,fill=lightgray,minimum size=0.3cm,thin},
+      plane/.style={draw=black,fill=blue!10},
+      string/.style={draw=red, thick},
+      pulley/.style={thick},
+  ]
+\node[m] (m) {};
+    \draw[axis,->] (m) -- ++(0,-2) node[left] {$y$};
+    {[force,->]
+        \draw [red](m.north) -- ++(0,1) node[above] {$F_d$};
+        \draw (m.south) -- ++(0,-1) node[right] {$mg$};
+    }
+  \end{tikzpicture}
+  \caption{...}
+  \label{fig:gota}
+\end{figure}
+
 El desarrollo de una capa límite en la que existe turbulencia depende de la forma del sólido (fundamentalmente de la superficie que presenta).
 
 El resultado es la aparición de una fuerza de arrastre que se opone al movimiento. A velocidades muy bajas, la fuerza es proporcional a la velocidad, a velocidades moderadas $F = \displaystyle\frac{1}{2} C_d \rho S v^2$.
@@ -508,6 +533,65 @@ En nuestro caso, la gota se ve sometida a dos fuerzas: la gravitatoria (con sent
 $v_{lim}$).
 
 \subsection{Solución Analítica}
+
+La solución analítica a este problema podemos obtenerla a partir de las ecuaciones de Newton de la propia gota. Partiendo de la base
+
+\begin{equation}
+- F_r + P = m a~,
+\end{equation}
+
+donde $F_r$ es la ecuación de Stokes $6\pi r \eta v^{v_e}$ (siendo $v_e > 0$); podemos factorizar $D = 6\pi r \eta$ y entonces
+
+\begin{equation}
+  F_r = Dv = mg - ma~,
+\end{equation}
+
+y por lo tanto podemos despejar la aceleración como
+
+\begin{equation}
+  a = g - \displaystyle\frac{Dv}{m}~.
+\end{equation}
+
+Sabemos que $a = \displaystyle\frac{dv}{dt}$. Podemos entonces agrupar los términos de la siguiente forma
+
+\begin{equation}
+  a = g - \displaystyle\frac{Dv}{m} = \displaystyle\frac{mg - Dv}{m}
+\end{equation}
+
+para poder integrar a un lado y a otro:
+
+\begin{equation}
+  \displaystyle\frac{m}{mg - Dv} dv = dt~,
+\end{equation}
+
+por lo que
+
+\begin{equation}
+  m \int_{v_0}^v \displaystyle\frac{1}{mg - Dv}dv = t - t_0
+\end{equation}
+\begin{equation}
+  - \displaystyle\frac{m}{D} ln(mg - Dv)|^v_{v_0} = \displaystyle\frac{m}{D}ln\left(\displaystyle\frac{mg - Dv_0}{mg - Dv}\right)~.
+\end{equation}
+
+Tomando que en $t_0 = 0~[s]$ la velocidad inicial $v_0 = 0~[m/s]$, entonces
+
+\begin{equation}
+  t = \displaystyle\frac{m}{D} ln \left(\displaystyle\frac{mg}{mg - Dv}\right)
+\end{equation}
+
+y por lo tanto, tomando exponentes
+
+\begin{equation}
+  e^(\displaystyle\frac{tD}{m}) = \displaystyle\frac{mg}{mg - Dv}
+\end{equation}
+
+llegamos a la solución analítica del problema:
+
+\begin{equation}
+  v(t) = \displaystyle\frac{mg}{D}(1 - e^{-(\displaystyle\frac{tD}{m})})~[m/s]
+\end{equation}
+
+
 
 \subsection{Solución Numérica}
 
@@ -566,6 +650,34 @@ La aceleración por su parte se obtiene teniendo en cuenta las dos fuerzas que a
 \begin{equation}
   a(t) = \displaystyle\frac{m\cdot g - b \cdot v^{v_e}}{m} = g - \displaystyle\frac{b\cdot v^{v_e}}{m}~.
 \end{equation}
+
+\subsection{Solución Analítica vs. Numérica}
+
+Una vez implementadas ambas soluciones, ejecutamos la simulación para realizar una comparativa de los resultados proporcionados por ambas. Para esta comparativa elegimos un conjunto de parámetros que nos permitiera observar el alcance de la velocidad límite para gotas de agua de diferente tamaño. Aunque habitualmente las gotas de agua caen por encima de los $2000~[m]$ de altura, para los tamaños considerados como habituales (alrededor de los $0.25~[mm]$ de radio), la
+velocidad límite se alcanza mucho antes de haber recorrido dicho espacio. En nuestro caso con una altura $h = 500~[m]$ para gotas de radio $r = \{0.15, 0.25, 0.30\}~[mm]$ podemos alcanzar la velocidad límite en todos los casos. Adicionalmente, cabe tener en cuenta los valores para la viscosidad del aire $\eta = 18\cdot10^{-16}~[Ns/m^2]$ y la densidad del agua $\rho = 1000~[kg/m^3]$. Los resultados de la simulación ejecutada con un intervalo de tiempo $dt = 0.001~[s]$ y con $t_0 =
+0~[s]$ se muestran en la Figura \ref{fig:analitica} y se resumen en la Tabla \ref{table:analitica}. Cabe destacar que ignoramos el efecto de la altura sobre la fuerza gravitatoria y consideramos en todo momento $g = 9.8~[m/s^2]$.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=\linewidth]{graficas_analitica}
+  \caption{Gráficas de posición y velocidad que muestran la evolución de dichas componentes a lo largo del tiempo de simulación para diferentes tamaños de gota tanto para la solución numérica como para la analítica (A).}
+  \label{fig:analitica}
+\end{figure}
+
+\begin{table}[!htb]
+	\begin{tabular}{ccccc}
+    Radio $[mm]$ & \multicolumn{2}{c}{Velocidad Límite $[m/s]$} & \multicolumn{2}{c}{Tiempo de Impacto $[s]$}\\
+    & Numérica & Analítica & Numérica & Analítica\\
+		\hline
+    $0.15$ & 2.72 & 2.72 & 183.95 & 183.95 \\
+    $0.25$ & 7.56 & 7.56 & 66.89 & 66.89 \\
+    $0.30$ & 10.89 & 10.89 & 47.03 & 47.03 \\
+	\end{tabular}
+  \caption{Comparativa de resultados obtenidos mediante la solución analítica y la solución numérica para gotas de radio $r=\{0.15, 0.25, 0.30\}$.}
+  \label{table:analitica}
+\end{table}
+
+Como podemos comprobar, no existe ninguna diferencia significativa en los resultados finales de cualquiera de las dos aproximaciones tanto analítica como numérica.
 
 \section{Experimentación}
 
