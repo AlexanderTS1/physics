@@ -500,7 +500,119 @@ En esta práctica consideraremos un péndulo de longitud $l$ y masa $m$ que se a
 
 \section{Ecuaciones Diferenciales del Péndulo}
 
+Las ecuaciones diferenciales que permiten calcular el ángulo $\theta$ y la tensión de la cuerda $T$ como función del tiempo pueden obtenerse a partir de las ecuaciones de Newton que rigen el funcionamiento del péndulo ideal.
+
+El sumatorio de fuerzas sobre el eje radial ($y$) es
+
+\begin{equation}
+  \sum F_y = T - Pcos(\theta) = 0 \Rightarrow T = mgcos(\theta)~.
+\end{equation}
+
+Puesto que $\theta$ depende del tiempo (ya que la posición o ángulo del péndulo varía con el mismo), hemos encontrado la ecuación que permite calcular la tensión de la cuerda
+
+\begin{equation}
+  T(\theta(t)) = mgcos(\theta(t)) ~ [N]~.
+\end{equation}
+
+Por otro lado, en el eje tangencial o angular es
+
+\begin{equation}
+  \sum F_x = -Psin(\theta) = ma \Rightarrow -mgsin(\theta) = ma_\theta
+\end{equation}
+\begin{equation}
+  \Rightarrow -gsin(\theta) = a_\theta
+\end{equation}
+
+Toda la aceleración producida en el eje tangencial podemos expresarla en coordenadas polares (teniendo en cuenta que el radio $l$ es constante) como
+
+\begin{equation}
+  a_\theta = 2\displaystyle\frac{dl}{dt}\displaystyle\frac{d\theta}{dt} + l\displaystyle\frac{d^2\theta}{dt^2} = l\displaystyle\frac{d^2\theta}{dt^2}~.
+\end{equation}
+
+Reemplazando la aceleración obtenida y reorganizando los términos teniendo en cuenta la aproximación de pequeñas oscilaciones ($sin(\theta) \sim \theta$) obtenemos
+
+\begin{equation}
+  \displaystyle\frac{d^2\theta}{dt^2} + \displaystyle\frac{g}{l}sin(\theta) = 0 ~.
+\end{equation}
+\begin{equation}
+  \displaystyle\frac{d^2\theta}{dt^2} + \displaystyle\frac{g}{l}\theta = 0 ~.
+\end{equation}
+
+Esta ecuación describe un movimiento armónico simple cuya solución analítica para la posición o ángulo es
+
+\begin{equation}
+  \theta(t) = \theta_0 cos(\sqrt{\displaystyle\frac{g}{l}}t) = \theta_0 cos(\omega_0t) ~[rad]
+\end{equation}
+
+y para la velocidad angular
+
+\begin{equation}
+  \omega(t) = - \omega_0\theta_0 sin(\omega_0t) ~[rad/s]~.
+\end{equation}
+
 \section{Ángulo, Velocidad Angular y Período}
+
+Una vez obtenidas las ecuaciones diferenciales que rigen el estado del péndulo en función del tiempo, podemos resolverlas para encontrar $\theta(t)$, $\omega(t)$ y $T(t)$ empleando la rutina \mintinline{python}{odeint} tal y como se muestra en el Código \ref{code:odeint}. A dicha rutina le proporcionaremos la función con las derivadas \mintinline{python}{pendulum} (mostrada en el Código \ref{code:derivs}), las condiciones iniciales
+\mintinline{python}{z_0_}, los pasos de tiempo \mintinline{python}{t_values_} y los parámetros necesarios para la integración \mintinline{python}{args=([G, args.l],)} (la constante gravitatoria y la longitud del péndulo.
+
+Posteriormente, del resultado \mintinline{python}{z_} extraeremos los valores de $\theta(t)$ en \mintinline{python}{z_[:,0]}, los de $\omega(t)$ en \mintinline{python}{z_[:,1]} y calcularemos los valores para la tensión empleando los valores anteriores.
+
+\medskip
+
+\begin{code}
+  \begin{minted}{python}
+w_0_ = 0.0
+theta_0_ = np.radians(theta_0)
+t_values_ = np.linspace(args.t0,
+            args.tf,
+            int((args.tf - args.t0) / args.dt))
+z_0_ = [theta_0_, w_0_]
+z_ = odeint(pendulum, z_0_, t_values_,
+            args=([G, args.l], ))
+
+thetas_ = z_[:,0]
+omegas_ = z_[:,1]
+tension_ = args.m * G * np.cos(z_[:,0])
+  \end{minted}
+  \caption{Parámetros de integración, llamada a rutina \mintinline{python}{odeint} y extracción de valores de $\theta(t)$, $\omega(t)$ y $T(t)$.}
+  \label{code:odeint}
+\end{code}
+
+\begin{code}
+  \begin{minted}{python}
+def pendulum(y, t, params):
+    phi, omega = y
+    g, R = params
+    derivs = [omega,
+              -(g/R)*np.sin(phi)]
+    return derivs
+  \end{minted}
+  \caption{Código de derivadas para \mintinline{python}{odeint}.}
+  \label{code:derivs}
+\end{code}
+
+Los resultados para diferentes ángulos iniciales $\theta_0 = \{0.0, 5.0, 10.0, 20.0, 40.0\}~[rad]$, $l=5.0~[m]$ y $m=1.0~[kg]$ se muestran en las Figuras \ref{fig:theta}, \ref{fig:omega}, \ref{fig:tension} para $\theta(t)$, $\omega(t)$ y $T(t)$ respectivamente. En todos los casos $dt=0.001~[s]$, $t_0 = 0~[s]$ y $t_f = 10~[s]$.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{theta}
+  \caption{Evolución del ángulo $\theta$ con el tiempo para diversos ángulos iniciales $\theta_0$.}
+  \label{fig:theta}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{omega}
+  \caption{Evolución de la velocidad angular $\omega$ con el tiempo para diversos ángulos iniciales $\theta_0$.}
+  \label{fig:omega}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{tension}
+  \caption{Evolución de la tensión $T$ con el tiempo para diversos ángulos iniciales $\theta_0$.}
+  \label{fig:tension}
+\end{figure}
 
 \section{Estudio del Período con la Amplitud}
 
