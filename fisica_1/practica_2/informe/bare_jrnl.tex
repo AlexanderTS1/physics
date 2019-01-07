@@ -61,7 +61,7 @@
 
 % Some very useful LaTeX packages include:
 % (uncomment the ones you want to load)
-\usepackage[spanish]{babel}
+\usepackage[spanish, es-tabla]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{url}
 \usepackage{minted}
@@ -633,6 +633,77 @@ La Figura \ref{fig:theta0} muestra las soluciones obtenidas a medida que increme
 Así pues, podemos concluir con que existe una relación entre la amplitud inicial y el período del péndulo de manera que a medida que la amplitud aumenta también lo hace el propio período $T\propto \theta_0$.
 
 \section{Comparación con Solución Analítica}
+
+A continuación procederemos a comparar los resultados numéricos con las soluciones analíticas obtenidas empleando la aproximación de pequeñas oscilaciones implementada en el Código \ref{code:peqosc}. Las Figuras \ref{fig:numanal_5}, \ref{fig:numanal_10}, \ref{fig:numanal_20} y \ref{fig:numanal_40} muestran comparativas de los valores de $\theta$ para ambas soluciones con diferentes ángulos iniciales $\theta_0$. Podemos comprobar como la aproximación difiere de los resultados numéricos a medida que el tiempo transcurre, siendo esta diferencia acentuada conforme incrementamos el ángulo inicial $\theta_0$.
+
+\medskip
+
+\begin{code}
+  \begin{minted}{python}
+def small_angle_approx (theta0, w0, t):
+  return theta0 * np.cos(w0 * t)
+  \end{minted}
+  \caption{Código de aproximación de pequeñas oscilaciones.}
+  \label{code:peqosc}
+\end{code}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{theta_5_diff}
+  \caption{Evolución de la amplitud $\theta$ con el tiempo $t$ para amplitud inicial $\theta_0 = 5 [deg]$. Valores numéricos calculados empleando la rutina de integración \mintinline{python}{odeint} y analíticos empleando la aproximación de pequeñas oscilaciones.}
+  \label{fig:numanal_5}
+\end{figure}
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{theta_10_diff}
+  \caption{Evolución de la amplitud $\theta$ con el tiempo $t$ para amplitud inicial $\theta_0 = 10 [deg]$. Valores numéricos calculados empleando la rutina de integración \mintinline{python}{odeint} y analíticos empleando la aproximación de pequeñas oscilaciones.}
+  \label{fig:numanal_10}
+\end{figure}
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{theta_20_diff}
+  \caption{Evolución de la amplitud $\theta$ con el tiempo $t$ para amplitud inicial $\theta_0 = 20 [deg]$. Valores numéricos calculados empleando la rutina de integración \mintinline{python}{odeint} y analíticos empleando la aproximación de pequeñas oscilaciones.}
+  \label{fig:numanal_20}
+\end{figure}
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{theta_40_diff}
+  \caption{Evolución de la amplitud $\theta$ con el tiempo $t$ para amplitud inicial $\theta_0 = 40 [deg]$. Valores numéricos calculados empleando la rutina de integración \mintinline{python}{odeint} y analíticos empleando la aproximación de pequeñas oscilaciones.}
+  \label{fig:numanal_40}
+\end{figure}
+
+La Tabla \ref{table:tiempodiff} muestra el tiempo que transcurre para cada uno de dichos experimentos mostrados en las gráficas hasta que el resultado analítico $\theta_T(t)$ y el numérico $\theta(t)$ difieren en más de un umbral determinado ($1\%$), es decir $\left|\displaystyle\frac{\theta(t) - \theta_T(t)}{\theta_T(t)}\right|>0.01$.
+
+Esta diferencia se puede apreciar también en otra vista proporcionada por la Figura \ref{fig:diff}, la cual muestra la diferencia angular $\theta$ entre ambas soluciones a medida que transcurre el tiempo.
+
+\begin{table}[!htb]
+  \centering
+  \begin{tabular}{c|cccc}
+    & $\theta_0 = 5$ & $\theta_0 = 10$ & $\theta_0 = 20$ & $\theta_0 = 40$\\
+    \hline
+    Tiempo $[s]$ & $1.08$ & $0.94$ & $0.64$ & $0.35$\\
+    \hline
+  \end{tabular}
+  \caption{Tiempo transcurrido hasta que la solución analítica y la numérica difieren en más de un $1\%$ para diferentes valores de ángulo inicial $\theta_0 = \{5, 10, 20, 40\} [deg]$.}
+  \label{table:tiempodiff}
+\end{table}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{theta_diff}
+  \caption{Evolución de la diferencia angular $\theta$ entre las soluciones analítica y numérica a lo largo del tiempo para diferentes valores de ángulos iniciales.}
+  \label{fig:diff}
+\end{figure}
+
+Por último, la Figura \ref{fig:tensiones_diff} muestra una comparativa entre la evolución de la tensión para los experimentos anteriores, tanto para los casos numéricos como analíticos. Como se puede comprobar, existe una pequeña discrepancia entre ambas (la cual es causada a su vez por la diferencia entre las posiciones $\theta$ obtenidas ya que la propia tensión es dependiente del ángulo del péndulo $T(\theta(t))$).
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.49\linewidth]{tension_diff}
+  \includegraphics[width=0.49\linewidth]{tension_diff_approx}
+  \caption{Evolución de la tensión $T$ a lo largo del tiempo para diversos valores iniciales del ángulo $\theta_0 = \{5.0, 10.0, 20.0, 40.0\}$ tanto para la solución numérica (izquierda) como analítica (derecha).}
+  \label{fig:tensiones_diff}
+\end{figure}
 
 \section{Introducción de Rozamiento}
 
