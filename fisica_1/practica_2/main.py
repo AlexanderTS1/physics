@@ -19,6 +19,14 @@ def pendulum(y, t, params):
 def small_angle_approximation_theta (theta0, w0, t):
     return theta0 * np.cos(w0 * t)
 
+def time_to_diff(tValues, thetaNumeric, thetaAnalytic, threshold=0.01):
+
+    for i in range(len(thetaNumeric)):
+        if abs((thetaNumeric[i] - thetaAnalytic[i])/thetaAnalytic[i]) > 0.01:
+            return tValues[i]
+
+    return None
+
 def plot_list(tValues, values, yTicks, yLabel, legends, loc='right'):
     
     plt.rc('text', usetex=True)
@@ -38,30 +46,64 @@ def plot_list(tValues, values, yTicks, yLabel, legends, loc='right'):
 
     plt.show()
 
-def plot(tValues, thetaValuesApprox, thetaValuesIntegration):
+def plot(tValues, thetaValuesApprox, thetaValuesIntegration, legend, loc='lower left'):
     
+    plt.rc('text', usetex=True)
+    plt.rc('font', family='serif')
+    plt.rc('font', size='42')
+
     theta_values_approx_deg_ = np.degrees(np.array(thetaValuesApprox))
     theta_values_integration_deg_ = np.degrees(np.array(thetaValuesIntegration))
     
     plt.subplot(1, 1, 1)
-    plt.plot(tValues, theta_values_approx_deg_, "-")
-    plt.plot(tValues, theta_values_integration_deg_, "-")
-    plt.xlabel("Time [s]")
-    plt.ylabel("Theta [deg]")
-    
+    plt.plot(tValues, theta_values_approx_deg_, "-", linewidth=2)
+    plt.plot(tValues, theta_values_integration_deg_, "-", linewidth=2)
+    plt.xlabel(r"Tiempo $[s]$")
+    plt.ylabel(r"$\theta [deg]$")
+    plt.legend([legend + " Numérico", legend + " Analítico"], loc=loc)
+    plt.grid()
+
     plt.show()
     
-def plot_difference(tValues, thetaValuesApprox, thetaValuesIntegration):
+def plot_difference(tValues, thetaValuesApprox, thetaValuesIntegration, legend):
     
+    plt.rc('text', usetex=True)
+    plt.rc('font', family='serif')
+    plt.rc('font', size='42')
+
     theta_values_approx_deg_ = np.degrees(np.array(thetaValuesApprox))
     theta_values_integration_deg_ = np.degrees(np.array(thetaValuesIntegration))
     
     theta_values_diff_ = theta_values_integration_deg_ - theta_values_approx_deg_
     
     plt.subplot(1, 1, 1)
-    plt.plot(tValues, theta_values_diff_, "-")
-    plt.xlabel("Time [s]")
-    plt.ylabel("Theta [deg]")
+    plt.plot(tValues, theta_values_diff_, "-", linewidth=2)
+    plt.xlabel(r"Tiempo $[s]$")
+    plt.ylabel(r"$\theta [deg]$")
+    plt.grid()
+    
+    plt.show()
+
+def plot_difference_list(tValues, thetaValuesApprox, thetaValuesIntegration, legends, loc='upper right'):
+    
+    plt.rc('text', usetex=True)
+    plt.rc('font', family='serif')
+    plt.rc('font', size='42')
+
+    plt.subplot(1, 1, 1)
+
+    for i in range(len(thetaValuesApprox)):
+        theta_values_approx_deg_ = np.degrees(np.array(thetaValuesApprox[i]))
+        theta_values_integration_deg_ = np.degrees(np.array(thetaValuesIntegration[i]))
+        
+        theta_values_diff_ = theta_values_integration_deg_ - theta_values_approx_deg_
+        
+        plt.plot(tValues, theta_values_diff_, "-", linewidth=2)
+        
+    plt.xlabel(r"Tiempo $[s]$")
+    plt.ylabel(r"$\theta [deg]$")
+    plt.legend(legends, loc=loc)
+    plt.grid()
     
     plt.show()
 
@@ -72,6 +114,7 @@ def simulate(args):
     theta_values_list_ = []
     omega_values_list_ = []
     tension_values_list_ = []
+    tension_values_approx_list_ = []
     legend_list_ = []
     
     for theta_0 in args.theta_0:
@@ -104,6 +147,8 @@ def simulate(args):
                 theta_values_approx_.append(theta_t_)
                 
                 t_ += args.dt
+
+            tension_approx_ = args.m * G * np.cos(theta_values_approx_)
                 
             ## ODE INTEGRATION    
             w_0_ = 0.0
@@ -113,24 +158,34 @@ def simulate(args):
             z_ = odeint(pendulum, z_0_, t_values_, args=([G, args.l, alpha], ))
             tension_ = args.m * G * np.cos(z_[:, 0])
 
-            # Plotting
-            #plot(t_values_, theta_values_approx_, z_[:, 0])
-            #plot_difference(t_values_, theta_values_approx_, z_[:, 0])
-
             # Add values to list
             t_values_list_.append(t_values_)
             theta_values_approx_list_.append(theta_values_approx_)
             theta_values_list_.append(z_[:, 0])
             omega_values_list_.append(z_[:, 1])
             tension_values_list_.append(tension_)
-            legend_list_.append(r"$\theta_0$=" + str(theta_0))
+            tension_values_approx_list_.append(tension_approx_)
+            #legend_list_.append(r"$\theta_0$=" + str(theta_0))
             #legend_list_.append(r"$\theta_0$=" + str(theta_0) + r" $\alpha$=" + str(alpha))
-            #legend_list_.append(r" $\alpha$=" + str(alpha))
+            legend_list_.append(r" $\alpha$=" + str(alpha))
+
+            # Time to 1% difference
+            ttd_ = time_to_diff(t_values_, z_[:, 0], theta_values_approx_, 0.01)
+            ttd2_ = time_to_diff(t_values_, theta_values_approx_, z_[:, 0], 0.01)
+            log.info("Time until solutions differ 1%: {0}".format(ttd_))
+            log.info("Time until solutions differ 2 1%: {0}".format(ttd2_))
+
+            # Plotting
+            plot(t_values_, theta_values_approx_, z_[:, 0], r"$\theta_0$=" + str(theta_0))
+            #plot_difference(t_values_, theta_values_approx_, z_[:, 0])
         
         ## Plotting
         plot_list(t_values_list_, np.degrees(np.array(theta_values_list_)), np.arange(-50, 60, step=10), r"$\theta [deg]$", legend_list_)
         plot_list(t_values_list_, omega_values_list_, np.arange(-1, 1.5, step=0.5), r"$\omega [rad/s]$", legend_list_)
-        plot_list(t_values_list_, tension_values_list_, np.arange(0, 11, step=1), r"$T [N]$", legend_list_, loc='bottom center')
+        plot_list(t_values_list_, tension_values_list_, np.arange(0, 11, step=1), r"$T [N]$", legend_list_, loc='lower center')
+        plot_list(t_values_list_, tension_values_approx_list_, np.arange(0, 11, step=1), r"$T [N]$", legend_list_, loc='lower center')
+        plot_difference_list(t_values_, theta_values_approx_list_, theta_values_list_, legend_list_)
+
 
 if __name__ == "__main__":
     
