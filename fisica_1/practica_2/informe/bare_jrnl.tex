@@ -646,6 +646,26 @@ def small_angle_approx (theta0, w0, t):
   \caption{Código de aproximación de pequeñas oscilaciones.}
   \label{code:peqosc}
 \end{code}
+La Tabla \ref{table:tiempodiff} muestra el tiempo que transcurre para cada uno de dichos experimentos mostrados en las gráficas hasta que el resultado analítico $\theta_T(t)$ y el numérico $\theta(t)$ difieren en más de un umbral determinado ($1\%$), es decir $\left|\displaystyle\frac{\theta(t) - \theta_T(t)}{\theta_T(t)}\right|>0.01$ (ver Código \ref{code:discrepancy}).
+
+\medskip
+
+\begin{code}
+  \begin{minted}{python}
+def time_to_diff(tValues,
+  thetaNumeric,
+  thetaAnalytic, threshold=0.01):
+
+  for i in range(len(thetaNumeric)):
+    if abs((thetaNumeric[i] - 
+      thetaAnalytic[i])/thetaAnalytic[i]) > 0.01:
+        return tValues[i]
+  return None
+  \end{minted}
+  \caption{Código de cálculo de discrepancia.}
+  \label{code:discrepancy}
+\end{code}
+
 
 \begin{figure}[!htb]
   \centering
@@ -672,7 +692,6 @@ def small_angle_approx (theta0, w0, t):
   \label{fig:numanal_40}
 \end{figure}
 
-La Tabla \ref{table:tiempodiff} muestra el tiempo que transcurre para cada uno de dichos experimentos mostrados en las gráficas hasta que el resultado analítico $\theta_T(t)$ y el numérico $\theta(t)$ difieren en más de un umbral determinado ($1\%$), es decir $\left|\displaystyle\frac{\theta(t) - \theta_T(t)}{\theta_T(t)}\right|>0.01$.
 
 Esta diferencia se puede apreciar también en otra vista proporcionada por la Figura \ref{fig:diff}, la cual muestra la diferencia angular $\theta$ entre ambas soluciones a medida que transcurre el tiempo.
 
@@ -707,11 +726,52 @@ Por último, la Figura \ref{fig:tensiones_diff} muestra una comparativa entre la
 
 \section{Introducción de Rozamiento}
 
+Para el último experimento introducimos un término de rozamiento proporcional a la velocidad ($\alpha\omega$) en la ecuación original. El fragmento de Código \ref{code:alpha} muestra la implementación del mismo en la función de derivadas para \mintinline{python}{odeint} empleando un parámetro adicional \mintinline{python}{alpha} de acuerdo con la ecuación
+
+\begin{equation}
+  -\displaystyle\frac{g}{l} sin(\theta) - \alpha\omega~.
+\end{equation}
+
+\medskip
+
+\begin{code}
+  \begin{minted}{python}
+def pendulum(y, t, params):
+    phi, omega = y
+    g, R, alpha = params
+    derivs = [omega,
+        -(g/R)*np.sin(phi) - alpha * omega]
+    return derivs
+  \end{minted}
+  \caption{Código de derivadas para \mintinline{python}{odeint}.}
+  \label{code:alpha}
+\end{code}
+
+
 \begin{figure}[!htb]
   \centering
-  \includegraphics[width=\linewidth]{alpha}
-  \caption{Evolución de la amplitud $\theta$ con el tiempo $t$ para diferentes valores del término de rozamiento $\alpha$ con amplitud inicial $\theta_0=90~[deg]$. Valores calculados empleando la rutina de integración \mintinline{python}{odeint}.}
-  \label{fig:alpha}
+  \includegraphics[width=\linewidth]{alpha_m1}
+  \caption{Evolución de la amplitud $\theta$ con el tiempo $t$ para diferentes valores del término de rozamiento $\alpha$ con amplitud inicial $\theta_0=40~[deg]$ y masa $m=1~[kg]$. Valores calculados empleando la rutina de integración \mintinline{python}{odeint}.}
+  \label{fig:alpha_m1}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{alpha_m5}
+  \caption{Evolución de la amplitud $\theta$ con el tiempo $t$ para diferentes valores del término de rozamiento $\alpha$ con amplitud inicial $\theta_0=40~[deg]$ y masa $m=5~[kg]$. Valores calculados empleando la rutina de integración \mintinline{python}{odeint}.}
+  \label{fig:alpha_m2}
+\end{figure}
+
+Las Figuras \ref{fig:alpha_m1} y \ref{fig:alpha_m2} muestran el efecto del parámetro $\alpha$ sobre la evolución del ángulo del péndulo $\theta$ para distintos valores del término de rozamiento y para masas $m=1~[kg]$ y $m=5~[kg]$ respectivamente.
+
+Como podemos observar, respecto a los experimentos anteriores, la introducción de este término de rozamiento provoca una disminución gradual de la amplitud de la oscilación (más acusada a medida que incrementamos la magnitud del coeficiente $\alpha$). Observamos también una disminución en la velocidad $w$ que se ve confirmada en la gráfica de la Figura \ref{fig:alpha_omega} por lo que el período también disminuye con el tiempo y por lo tanto depende de la constante $\alpha$ en
+ese sentido. Por último, apreciamos que no depende de la masa puesto que hemos demostrado empíricamente que los resultados son idénticos para $m=1~[kg]$ y $m=2~[kg]$ tal y como se aprecia en las gráficas anteriores.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{alpha_omega}
+  \caption{Evolución de la velocidad $\omega$ con el tiempo $t$ para diferentes valores del término de rozamiento $\alpha$ con amplitud inicial $\theta_0=40~[deg]$ y masa $m=1~[kg]$. Valores calculados empleando la rutina de integración \mintinline{python}{odeint}.}
+  \label{fig:alpha_omega}
 \end{figure}
 
 \section{Conclusión}
