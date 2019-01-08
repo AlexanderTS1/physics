@@ -113,6 +113,7 @@ def simulate(args):
     theta_values_approx_list_ = []
     theta_values_list_ = []
     omega_values_list_ = []
+    omega_values_approx_list_ = []
     tension_values_list_ = []
     tension_values_approx_list_ = []
     legend_list_ = []
@@ -134,6 +135,7 @@ def simulate(args):
             ## SMALL-ANGLE APPROXIMATION
             t_values_ = []
             theta_values_approx_ = []
+            omega_values_approx_ = []
             
             t_ = args.t0
             w_0_ = np.sqrt(G / args.l)
@@ -145,10 +147,12 @@ def simulate(args):
                 
                 theta_t_ = small_angle_approximation_theta(theta_0_, w_0_, t_)
                 theta_values_approx_.append(theta_t_)
+                omega_t_ = -w_0_ * theta_0_ * np.sin(w_0_ * t_)
+                omega_values_approx_.append(omega_t_)
                 
                 t_ += args.dt
 
-            tension_approx_ = args.m * G * np.cos(theta_values_approx_)
+            tension_approx_ = args.m * G * np.cos(theta_values_approx_) + args.l * np.square(omega_values_approx_)
                 
             ## ODE INTEGRATION    
             w_0_ = 0.0
@@ -156,7 +160,7 @@ def simulate(args):
             #t_values_ = np.linspace(args.t0, args.tf, int((args.tf - args.t0) / args.dt))
             z_0_ = [theta_0_, w_0_]
             z_ = odeint(pendulum, z_0_, t_values_, args=([G, args.l, alpha], ))
-            tension_ = args.m * G * np.cos(z_[:, 0])
+            tension_ = args.m * G * np.cos(z_[:, 0]) + args.l * np.square(z_[:, 1])
 
             # Add values to list
             t_values_list_.append(t_values_)
@@ -165,9 +169,9 @@ def simulate(args):
             omega_values_list_.append(z_[:, 1])
             tension_values_list_.append(tension_)
             tension_values_approx_list_.append(tension_approx_)
-            #legend_list_.append(r"$\theta_0$=" + str(theta_0))
+            legend_list_.append(r"$\theta_0$=" + str(theta_0))
             #legend_list_.append(r"$\theta_0$=" + str(theta_0) + r" $\alpha$=" + str(alpha))
-            legend_list_.append(r" $\alpha$=" + str(alpha))
+            #legend_list_.append(r" $\alpha$=" + str(alpha))
 
             # Time to 1% difference
             ttd_ = time_to_diff(t_values_, z_[:, 0], theta_values_approx_, 0.01)
@@ -182,8 +186,8 @@ def simulate(args):
         ## Plotting
         plot_list(t_values_list_, np.degrees(np.array(theta_values_list_)), np.arange(-50, 60, step=10), r"$\theta [deg]$", legend_list_)
         plot_list(t_values_list_, omega_values_list_, np.arange(-1, 1.5, step=0.5), r"$\omega [rad/s]$", legend_list_)
-        plot_list(t_values_list_, tension_values_list_, np.arange(0, 11, step=1), r"$T [N]$", legend_list_, loc='lower center')
-        plot_list(t_values_list_, tension_values_approx_list_, np.arange(0, 11, step=1), r"$T [N]$", legend_list_, loc='lower center')
+        plot_list(t_values_list_, tension_values_list_, np.arange(0, 22, step=2), r"$T [N]$", legend_list_, loc='lower right')
+        plot_list(t_values_list_, tension_values_approx_list_, np.arange(0, 22, step=2), r"$T [N]$", legend_list_, loc='lower right')
         plot_difference_list(t_values_, theta_values_approx_list_, theta_values_list_, legend_list_)
 
 
@@ -194,8 +198,8 @@ if __name__ == "__main__":
     parser_ = argparse.ArgumentParser(description="Parámetros")
     parser_.add_argument("--l", nargs="?", type=float, default=5.0, help="Longitud del péndulo [m]")
     parser_.add_argument("--m", nargs="?", type=float, default=1.0, help="Masa del péndulo [kg]")
-    parser_.add_argument("--theta_0", nargs="+", type=float, default=[5.0], help="Ángulo inicial [deg]")
-    parser_.add_argument("--alpha", nargs="+", type=float, default=[0.0, 0.2, 0.4, 0.8], help="Constante de rozamiento")
+    parser_.add_argument("--theta_0", nargs="+", type=float, default=[5.0, 10.0, 20.0, 40.0], help="Ángulo inicial [deg]")
+    parser_.add_argument("--alpha", nargs="+", type=float, default=[0.0], help="Constante de rozamiento")
     parser_.add_argument("--t0", nargs="?", type=float, default=0.0, help="Tiempo inicial [s]")
     parser_.add_argument("--tf", nargs="?", type=float, default=10.0, help="Tiempo final [s]")
     parser_.add_argument("--dt", nargs="?", type=float, default=0.01, help="Diferencial de tiempo [s]")
