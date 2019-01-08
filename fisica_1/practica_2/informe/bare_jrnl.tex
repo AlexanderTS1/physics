@@ -505,13 +505,13 @@ Las ecuaciones diferenciales que permiten calcular el ángulo $\theta$ y la tens
 El sumatorio de fuerzas sobre el eje radial ($y$) es
 
 \begin{equation}
-  \sum F_y = T - Pcos(\theta) = 0 \Rightarrow T = mgcos(\theta)~.
+  \sum F_y = T - Pcos(\theta) = ma_n \Rightarrow T = ma_n + mgcos(\theta)~.
 \end{equation}
 
 Puesto que $\theta$ depende del tiempo (ya que la posición o ángulo del péndulo varía con el mismo), hemos encontrado la ecuación que permite calcular la tensión de la cuerda
 
 \begin{equation}
-  T(\theta(t)) = mgcos(\theta(t)) ~ [N]~.
+  T(\theta(t)) = l\omega(t)^2 + mgcos(\theta(t)) ~ [N]~.
 \end{equation}
 
 Por otro lado, en el eje tangencial o angular es
@@ -572,7 +572,8 @@ z_ = odeint(pendulum, z_0_, t_values_,
 
 thetas_ = z_[:,0]
 omegas_ = z_[:,1]
-tension_ = args.m * G * np.cos(z_[:,0])
+tension_ = args.m * G * np.cos(z_[:,0]) + \
+    args.l * np.square(z_[:,1])
   \end{minted}
   \caption{Parámetros de integración, llamada a rutina \mintinline{python}{odeint} y extracción de valores de $\theta(t)$, $\omega(t)$ y $T(t)$.}
   \label{code:odeint}
@@ -765,7 +766,19 @@ def pendulum(y, t, params):
 Las Figuras \ref{fig:alpha_m1} y \ref{fig:alpha_m2} muestran el efecto del parámetro $\alpha$ sobre la evolución del ángulo del péndulo $\theta$ para distintos valores del término de rozamiento y para masas $m=1~[kg]$ y $m=5~[kg]$ respectivamente.
 
 Como podemos observar, respecto a los experimentos anteriores, la introducción de este término de rozamiento provoca una disminución gradual de la amplitud de la oscilación (más acusada a medida que incrementamos la magnitud del coeficiente $\alpha$). Observamos también una disminución en la velocidad $w$ que se ve confirmada en la gráfica de la Figura \ref{fig:alpha_omega} por lo que el período también disminuye con el tiempo y por lo tanto depende de la constante $\alpha$ en
-ese sentido. Por último, apreciamos que no depende de la masa puesto que hemos demostrado empíricamente que los resultados son idénticos para $m=1~[kg]$ y $m=2~[kg]$ tal y como se aprecia en las gráficas anteriores.
+ese sentido. Anteriormente comentamos que, en la aproximación de pequeñas oscilaciones, el período podía expresarse como
+
+\begin{equation}
+  T = \displaystyle\frac{2\pi}{\omega} ~[T].
+\end{equation}
+
+Por completitud, aportaremos la ecuación (la cual podemos derivar de la solución analítica antes expuesta) que permite calcular el período con un ángulo inicial arbitraria
+
+\begin{equation}
+  T = \displaystyle\frac{4}{\sqrt{2}}\sqrt{\displaystyle\frac{l}{g}}\int_0^{\theta_0} \displaystyle\frac{d\theta}{\sqrt{(cos\theta - cos\theta_0)}}~.
+\end{equation}
+
+Por último, apreciamos que no depende de la masa puesto que hemos demostrado empíricamente que los resultados son idénticos para $m=1~[kg]$ y $m=2~[kg]$ tal y como se aprecia en las gráficas anteriores.
 
 \begin{figure}[!htb]
   \centering
@@ -775,6 +788,12 @@ ese sentido. Por último, apreciamos que no depende de la masa puesto que hemos 
 \end{figure}
 
 \section{Conclusión}
+
+En esta segunda práctica de la asignatura hemos llevado a cabo un estudio de la oscilación de un péndulo. Para ello derivamos todas las ecuaciones que nos permiten calcular el ángulo $\theta$ y la tensión de la cuerda como función del tiempo. Posteriormente implementamos un simulador en Python que emplea la rutina \mintinline{python}{odeint} para resolver las ecuaciones anteriores y encontrar los valores $\theta(t)$, $\omega(t)$ y $T(t)$. Utilizando dicho simulador estudiamos la
+variación del período de la oscilación con el ángulo inicial, concluyendo que el mismo aumentaba al incrementar esa amplitud inicial. También comparamos el resultado numérico con el resultado analítico obtenido mediante la aproximación de pequeñas oscilaciones, demostrando que la discrepancia es mínima cuando el ángulo inicial es reducido pero significativa a medida que incrementamos la amplitud inicial. Por último, llevamos a cabo otro conjunto de
+experimentos introduciendo un término de rozamiento proporcional a la velocidad y demostramos que el período se ve afectado puesto que la velocidad angular disminuye con el tiempo (más rápidamente cuanto mayor sea el coeficiente del término de rozamiento) pero que no depende de la masa del péndulo.
+
+El código Python que implementa los modelos matemáticos así como las rutinas de visualización para la resolución de este ejercicio se adjunta con este informe y además puede ser consultado en el siguiente repositorio online \footnote{\url{https://github.com/Blitzman/physics}}.
 
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.
@@ -806,9 +825,14 @@ ese sentido. Por último, apreciamos que no depende de la masa puesto que hemos 
 % (used to reserve space for the reference number labels box)
 \begin{thebibliography}{1}
 
-\bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+\bibitem{Tipler}
+  Tipler, P. A., and Mosca, G. (2007). \emph{Physics for scientists and engineers}. Macmillan.
+\bibitem{Alonso}
+  Alonso, M., and Finn, E. J. (1967). \emph{Fundamental university physics} (Vol. 2). Reading, MA: Addison-Wesley.
+\bibitem{Halliday}
+  Halliday, D., Resnick, R., and Walker, J. (2016). \emph{Principles of Physics Extended}. India: Wiley India Pvt. Ltd.
+\bibitem{Ohanian}
+  Ohanian, H. C., and Market, J. T. (2007). \emph{Physics for Engineers and Scientists} Vol. 1. ed: McGraw Hill.
 
 \end{thebibliography}
 
