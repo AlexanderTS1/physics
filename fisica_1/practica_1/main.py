@@ -159,7 +159,7 @@ if __name__ == "__main__":
     parser_ = argparse.ArgumentParser(description="Parámetros")
     parser_.add_argument("--r", nargs="+", type=float, default=[0.15, 0.25, 0.3], help="Lista de radios [mm]")
     parser_.add_argument("--ve", nargs="+", type=int, default=[1], help="Lista de exponentes para la velocidad")
-    parser_.add_argument("--h", nargs="?", type=float, default=100.0, help="Tiempo final [s]")
+    parser_.add_argument("--h", nargs="?", type=float, default=100.0, help="Altura [h]")
     parser_.add_argument("--dt", nargs="?", type=float, default=0.001, help="Diferencial de tiempo [s]")
     
     args_ = parser_.parse_args()
