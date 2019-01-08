@@ -465,9 +465,9 @@ El código Python que implementa los modelos matemáticos así como las rutinas 
 
 \section{Introducción}
 
-\IEEEPARstart{C}{uando} un fluido fluye en capas de manera uniforme y regular, se está en presencia de un flujo laminar. Cuando se aumenta la velocidad relativa entre el sólido y el fluido, se alcanza un punto en el que el flujo ya no es uniforme ni regular. Se dice entonces que es un flujo turbulento.
+\IEEEPARstart{U}{na} gota de agua que cae verticalmente desde una nube puede modelarse como una esfera en el seno de un fluido que se mueve bajo la acción de diversas fuerzas: el peso, el empuje y una fuerza de rozamiento que puede formularse como proporcional a la velocidad según la Ley de Stokes.
 
-Todo fluido real presenta viscosidad. Esta viscosidad se manifiesta cuando un sólido se mueve en su seno.
+En esta práctica simularemos la caída de una gota de radio $r$ que cae desde una altura $h$ y que se ve sometida a la fuerza ejercida tanto por su peso como por el rozamiento, omitiendo el empuje tal y como se muestra en la Figura \ref{fig:gota}.
 
 \begin{figure}[!htb]
   \centering
@@ -487,37 +487,9 @@ Todo fluido real presenta viscosidad. Esta viscosidad se manifiesta cuando un s�
         \draw (m.south) -- ++(0,-1) node[right] {$mg$};
     }
   \end{tikzpicture}
-  \caption{...}
+  \caption{Diagrama de cuerpo libre de caída de la gota.}
   \label{fig:gota}
 \end{figure}
-
-El desarrollo de una capa límite en la que existe turbulencia depende de la forma del sólido (fundamentalmente de la superficie que presenta).
-
-El resultado es la aparición de una fuerza de arrastre que se opone al movimiento. A velocidades muy bajas, la fuerza es proporcional a la velocidad, a velocidades moderadas $F = \displaystyle\frac{1}{2} C_d \rho S v^2$.
-
-$\sum \vec{F} = m\vec{a}$
-
-$m\vec{g} - \vec{F_r} - \vec{E} = m\vec{a}$
-
-$F_r = \rho S v^2 f(Re)$ donde $f(Re)$ es el factor de Reynolds. Para una esfera y número de Reynolds bajo, se tiene $f(Re) = \displaystyle\frac{12}{Re}$
-
-Si escribimos $Re = \displaystyle\frac{v \rho 2 R}{\eta}$ por lo que $F = 6 \pi \rho R v$. Por lo tanto, si la velocidad va creciendo, la fuerza de arrastre va creciendo hasta que se llega a un equilibrio:
-
-$V_{lim} = \displaystyle\frac{2 R^2 (\rho_{cuerpo} - \rho_{fluido}) g}{9 \eta}$
-
-Como la fuerza es proporcional a la velocidad:
-
-$mg - bv = ma$
-
-$mg - bv = m \displaystyle\frac{dv}{dt}$
-
-\textbf{Integración de esta ecuación para obtener una solución analítica.}
-
-Por lo que la velocidad límite se alcanza en:
-
-$mg = bv$
-
-$v = \displaystyle\frac{mg}{b}$
 
 \section{Ley de Stokes}
 
@@ -653,8 +625,9 @@ La aceleración por su parte se obtiene teniendo en cuenta las dos fuerzas que a
 
 \subsection{Solución Analítica vs. Numérica}
 
-Una vez implementadas ambas soluciones, ejecutamos la simulación para realizar una comparativa de los resultados proporcionados por ambas. Para esta comparativa elegimos un conjunto de parámetros que nos permitiera observar el alcance de la velocidad límite para gotas de agua de diferente tamaño. Aunque habitualmente las gotas de agua caen por encima de los $2000~[m]$ de altura, para los tamaños considerados como habituales (alrededor de los $0.25~[mm]$ de radio), la
-velocidad límite se alcanza mucho antes de haber recorrido dicho espacio. En nuestro caso con una altura $h = 500~[m]$ para gotas de radio $r = \{0.15, 0.25, 0.30\}~[mm]$ podemos alcanzar la velocidad límite en todos los casos. Adicionalmente, cabe tener en cuenta los valores para la viscosidad del aire $\eta = 18\cdot10^{-16}~[Ns/m^2]$ y la densidad del agua $\rho = 1000~[kg/m^3]$. Los resultados de la simulación ejecutada con un intervalo de tiempo $dt = 0.001~[s]$ y con $t_0 =
+Una vez implementadas ambas soluciones, ejecutamos la simulación para realizar una comparativa de los resultados proporcionados por ambas. Para esta comparativa elegimos un conjunto de parámetros que nos permitiera observar el alcance de la velocidad límite para gotas de agua de diferente tamaño. Aunque habitualmente las gotas de agua caen por encima de los $2000~[m]$ de altura, para los tamaños considerados como habituales \cite{Laws}\cite{Corbert} (alrededor de los $0.25~[mm]$ de radio para
+las gotas más pequeñas), la
+velocidad límite se alcanza mucho antes de haber recorrido dicho espacio. En nuestro caso con una altura $h = 100~[m]$ para gotas de radio $r = \{0.15, 0.25, 0.30\}~[mm]$ podemos alcanzar la velocidad límite en todos los casos por lo que elegiremos esta altura para reducir el tiempo de experimentación. Adicionalmente, cabe tener en cuenta los valores para la viscosidad del aire $\eta = 18\cdot10^{-16}~[Ns/m^2]$ y la densidad del agua $\rho = 1000~[kg/m^3]$. Los resultados de la simulación ejecutada con un intervalo de tiempo $dt = 0.001~[s]$ y con $t_0 =
 0~[s]$ se muestran en la Figura \ref{fig:analitica} y se resumen en la Tabla \ref{table:analitica}. Cabe destacar que ignoramos el efecto de la altura sobre la fuerza gravitatoria y consideramos en todo momento $g = 9.8~[m/s^2]$.
 
 \begin{figure}[!htb]
@@ -665,6 +638,7 @@ velocidad límite se alcanza mucho antes de haber recorrido dicho espacio. En nu
 \end{figure}
 
 \begin{table}[!htb]
+  \centering
 	\begin{tabular}{ccccc}
     Radio $[mm]$ & \multicolumn{2}{c}{Velocidad Límite $[m/s]$} & \multicolumn{2}{c}{Tiempo de Impacto $[s]$}\\
     & Numérica & Analítica & Numérica & Analítica\\
@@ -689,12 +663,6 @@ En ambos casos emplearemos el mismo juego de parámetros para todos los factores
 
 En este primer conjunto de experimentos variaremos el tamaño de la gota de agua, es decir, el radio de la misma, lo cual afectará tanto a la fuerza de rozamiento (ya que recordemos que el radio $r$ es uno de sus componentes) como a la aceleración (puesto que al variar el radio también cambiará el volumen y por lo tanto la masa de la gota). Para estas pruebas hemos utilizado una potencia de $v$ de $1$ y los valores del radio de la gota $r = [0.10, 0.15, 0.20, 0.25, 0.30]~[mm]$.
 
-\begin{figure}[!htb]
-	\centering
-	\includegraphics[width=1.1\linewidth]{graficas_radio}
-	\caption{Gráficas de posición, velocidad y aceleración que muestran la evolución de dichas componentes a lo largo del tiempo de simulación para diferentes tamaños de gota.}
-\end{figure}
-
 \begin{table}[!htb]
 	\begin{tabular}{cccc}
 		Radio $[mm]$ & Velocidad Límite $[m/s]$ & Tiempo de Impacto $[s]$\\
@@ -705,13 +673,45 @@ En este primer conjunto de experimentos variaremos el tamaño de la gota de agua
 		$0.25$ & 7.56 & 14.00\\
 		$0.30$ & 10.89 & 10.30\\
 	\end{tabular}
+  \caption{Resumen de experimentos de radio mostrando la velocidad límite de cada gota y el tiempo necesario para lograr el impacto contra el suelo desde el inicio de la simulación.}
+  \label{table:radio}
 \end{table}
+
+\newpage
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=1\linewidth]{graficas_radio}
+	\caption{Gráficas de posición, velocidad y aceleración que muestran la evolución de dichas componentes a lo largo del tiempo de simulación para diferentes tamaños de gota.}
+  \label{fig:radio}
+\end{figure}
+
+\newpage
+
+Como muestran las gráficas de la Figura \ref{fig:radio} (resumidos sus valores en la Tabla \ref{table:radio}), la velocidad límite depende en gran medida del tamaño de la gota, siendo mayor a medida que el radio de la gota aumenta. En comparación a la velocidad límite de las gotas en la realidad se observa una notable diferencia. Por ejemplo, en el caso de la gota de $0.25~[mm
+]$ de radio ($0.50~[mm]$ de radio), su velocidad límite se establece en $7.56~[m/s]$ según nuestra solución, mientras que otros estudios \cite{Holladay} \cite{Spilhaus} \cite{Beard} sugieren una velocidad de alrededor de entre $2~[m/s]$ y $3~[m/s]$.
 
 \subsection{Potencia de $v$}
 
-En esta segunda aprte de los experimentos cambiaremos la Ley de Stokes de forma que la potencia de $v$ tome diferentes valores $v_e = [0, 1, 2, 3, 4]$ con el fin de determinar cuál es la Ley más adecuada para representar la fricción de una gota de lluvia con el aire. Para estas pruebas utilizamos el mismo juego de parámetros previamente descrito y una gota de lluvia de radio $r = 0.25~[mm]$.
+En esta segunda aprte de los experimentos cambiaremos la Ley de Stokes de forma que la potencia de $v$ tome diferentes valores $v_e = [1, 2, 3, 4]$ con el fin de determinar cuál es la Ley más adecuada para representar la fricción de una gota de lluvia con el aire. Para estas pruebas utilizamos el mismo juego de parámetros previamente descrito y una gota de lluvia de radio $r = 0.25~[mm]$. La Figura \ref{fig:ve} muestra la evolución de la posición, velocidad y aceleración para
+dichos experimentos.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=\linewidth]{ve}
+  \label{fig:ve}
+  \caption{Gráficas de posición, velocidad y aceleración que muestran la evolución de dichas componentes a lo largo del tiempo de simulación para diferentes valores del exponente de la velocidad en el término de rozamiento $ve$ con una gota de radio $0.25~[mm]$.}
+\end{figure}
+
+Podemos observar los diferentes valores de la velocidad límite obtenidos para las diversas potencias: en el caso que ya estudiamos anteriormente $v_e = 1$ la velocidad límite es de $7.56~[m/s]$, para $v_e = 2$ la velocidad es $2.74~[m/s]$, para $v_e = 3$ es $1.96~[m/s]$ y para $v_e = 4$ se obtiene una velocidad límite de $1.66~[m/s]$. Según los estudios antes mencionados, la velocidad límite de una gota de $0.50~[mm]$ de diámetro se aproxima a $2.50~[m/s]$. Esta
+correspondencia implica que un exponente cuadrático refleja mejor el rozamiento producido, hipótesis que concuerda con el hecho de que la Ley de Stokes se cumpla únicamente para números de Reynold bajos (es decir, mientras que la velocidad baja con una esfera de radio reducido y el flujo sea laminar) y que para el resto de situaciones el término de rozamiento sea proporcional al cuadrado de la velocidad.
 
 \section{Conclusión}
+
+En esta primera práctica de la asignatura hemos presentado un estudio completo de la caída de una gota de agua. Para ello, hemos implementado una simulación en Python capaz de resolver el problema de dos formas teniendo en cuenta las ecuaciones del movimiento de la gota: analítica y numérica. A lo largo de la experimentación hemos validado ambas soluciones, mostrando que no existe discrepancia entre ellas. En una tanda de experimentación adicional mostramos el efecto que tiene el
+radio de la gota en su velocidad de caída así. Por último, demostramos empíricamente cuál es el exponente más adecuado para la velocidad en el término de rozamiento.
+
+El código Python que implementa los modelos matemáticos así como las rutinas de visualización para la resolución de este ejercicio se adjunta con este informe y además puede ser consultado en el siguiente repositorio online\footnote{\url{https://github.com/Blitzman/physics}}.
 
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.
@@ -743,9 +743,16 @@ En esta segunda aprte de los experimentos cambiaremos la Ley de Stokes de forma 
 % (used to reserve space for the reference number labels box)
 \begin{thebibliography}{1}
 
-\bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+\bibitem{Corbert}
+  J.H.~Corbert, \emph{Physical Geography Manual}, 1974. 5th ed. N.p.: Kendall/Hunt, 2003.
+\bibitem{Laws}
+  J.O.~Laws, \emph{ Measurements of the fall‐velocity of water‐drops and raindrops}. Eos, Transactions American Geophysical Union (1947), 22(3), 709-721.
+\bibitem{Beard}
+  K.V.~Beard, \emph{Terminal Velocity and Shape of Cloud and Precipitation Drops}, Journal of the Atmospheric Sciences (May 1976): 851-864.
+\bibitem{Spilhaus}
+  A.F.~Spilhaus, \emph{Raindrop Size, Shape, and Falling Speed}, Journal of Meteorology. 5 (June 1948): 108-110.
+\bibitem{Holladay}
+  A.~Holladay, \emph{Falling Raindrops Hit 5 to 20 mph speeds}, Wonderquest.
 
 \end{thebibliography}
 
