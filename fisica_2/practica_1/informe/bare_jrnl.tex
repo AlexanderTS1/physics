@@ -366,16 +366,46 @@ El código Python que implementa los modelos matemáticos así como las rutinas 
 
 \section{Introducción}
 
-\IEEEPARstart{U}{na} partícula cargada en el seno de un campo electromagnético se ve sometida a una fuerza que provoca un movimiento de la misma. En esta primera práctica de la asignatura estudiaremos el movimiento de partículas cargadas en campos electromagnéticos generados por diversos artefactos: el espectrómetro de masas, el selector de velocidad y el ciclotrón.
+\IEEEPARstart{U}{na} partícula cargada en el seno de un campo electromagnético se ve sometida a una fuerza que provoca un movimiento de la misma. En esta primera práctica de la asignatura estudiaremos el movimiento de partículas cargadas en campos electromagnéticos generados por los siguientes instrumentos: el espectrómetro de masas, el selector de velocidad y por último el ciclotrón.
 
-Para ello, analizaremos en primer lugar de forma teórica todos los instrumentos mencionados y obtendremos las ecuaciones del movimiento y los resultados del mismo de forma analítica. Posteriormente, resolveremos numéricamente las ecuaciones de movimiento utilizando algoritmos de simulación en Python. En cada caso, compararemos la solución obtenida de forma numérica con el resultado analítico y discutiremos la comparativa.
+Para ello, analizaremos en primer lugar de forma teórica todos los instrumentos mencionados y obtendremos las ecuaciones del movimiento y los resultados del mismo de forma analítica. Posteriormente, resolveremos numéricamente las ecuaciones de movimiento utilizando algoritmos de simulación e integración numérica en Python. En cada caso, compararemos la solución obtenida de forma numérica con el resultado analítico y discutiremos los resultados.
 
 El informe se organiza de la siguiente manera. En primer lugar, la Sección \ref{sec:espectrometro} presenta los cálculos y la simulación del movimiento de isótopos de hidrógeno en un espectrómetro de masas. Seguidamente, la Sección \ref{sec:selector} describe el comportamiento de esos mismos iones en este caso en un selector de velocidades. A continuación, la Sección \ref{sec:frecuencia} se dedica al estudio de la variación de la frecuencia de ciclotrón con la velocidad de la partícula (un electrón) a medida que esta se aproxima a cotas relativistas. La Sección \ref{sec:ciclotron} estudia la trayectoria de un protón al ser acelerado en un ciclotrón. Por último, la Sección \ref{sec:conclusion} presenta las conclusiones sobre este trabajo.
 
 \section{Espectrómetro de Masas}
 \label{sec:espectrometro}
 
+En este primer apartado de la práctica estudiaremos el movimiento de una carga en un espectrómetro de masas. Dicho instrumento toma iones procedentes de una fuente e inicialmente en reposo y los acelera mediante un campo eléctrico, una vez abandonan dicho campo eléctrico entran en una región en la que existe un campo magnético perpendicular a su velocidad que los desvía hasta que colisionan contra una superficie. Los iones seguirán trayectorias con radios de curvatura diferentes según su relación carga/masa y por ello tendrán puntos de incidencia distintos lo cual permite diferenciar unos de otros. La Figura \ref{fig:espetrometro} muestra una representación gráfica de este instrumento.
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{example-image-a}
+    \caption{...}
+    \label{fig:espetrometro}
+\end{figure}
+
 \subsection{Cálculos Analíticos}
+
+En primer lugar, calcularemos el campo eléctrico $E~[V\cdot m^{-1}]$ entre las placas sabiendo que existe entre ellas una diferencia de potencial $\Delta V~[V]$ y una separación de $LE~[m]$
+
+\begin{equation}
+    E = \displaystyle\frac{\Delta V}{LE}~[V\cdot m^{-1}]~,
+\end{equation}
+
+conociendo el campo eléctrico podemos determinar la aceleración $a~[m\cdot s^{-2}]$ que sufren los iones debido a la fuerza eléctrica $F_e~[N]$ que se les aplica
+
+\begin{equation}
+    F_e = ma \Rightarrow qE = ma \Rightarrow a = \displaystyle\frac{qE}{m}~[m\cdot s^{-2}]~.
+\end{equation}
+
+Si queremos conocer la velocidad final $v~[m\cdot s^{-1}]$ con la que abandonan los iones el campo eléctrico basta con plantear las ecuaciones de movimiento para determinar en primer lugar el tiempo que tarda el ion en dicho tramo y posteriormente emplearlo para determinar la velocidad final teniendo en cuenta la aceleración uniforme a la que se somete el ion en la región
+
+\begin{equation}
+    x = x_0 + v_0t + \displaystyle\frac{1}{2}at^2 \Rightarrow LE = \displaystyle\frac{1}{2}at^2 \Rightarrow t = \sqrt{\displaystyle\frac{2LE}{a}}~[s]~,
+\end{equation}
+
+\begin{equation}
+    v = v_0 + at \Rightarrow v = a\sqrt{\displaystyle\frac{2LE}{a}} \Rightarrow v = \sqrt{2aLE}~[m\cdot s^{-1}]~.
+\end{equation}
 
 \subsection{Simulación}
 
