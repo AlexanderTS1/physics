@@ -372,49 +372,246 @@ Para ello, analizaremos en primer lugar de forma teórica todos los instrumentos
 
 El informe se organiza de la siguiente manera. En primer lugar, la Sección \ref{sec:espectrometro} presenta los cálculos y la simulación del movimiento de isótopos de hidrógeno en un espectrómetro de masas. Seguidamente, la Sección \ref{sec:selector} describe el comportamiento de esos mismos iones en este caso en un selector de velocidades. A continuación, la Sección \ref{sec:frecuencia} se dedica al estudio de la variación de la frecuencia de ciclotrón con la velocidad de la partícula (un electrón) a medida que esta se aproxima a cotas relativistas. La Sección \ref{sec:ciclotron} estudia la trayectoria de un protón al ser acelerado en un ciclotrón. Por último, la Sección \ref{sec:conclusion} presenta las conclusiones sobre este trabajo.
 
+\newpage
+
 \section{Espectrómetro de Masas}
 \label{sec:espectrometro}
 
-En este primer apartado de la práctica estudiaremos el movimiento de una carga en un espectrómetro de masas. Dicho instrumento toma iones procedentes de una fuente e inicialmente en reposo y los acelera mediante un campo eléctrico, una vez abandonan dicho campo eléctrico entran en una región en la que existe un campo magnético perpendicular a su velocidad que los desvía hasta que colisionan contra una superficie. Los iones seguirán trayectorias con radios de curvatura diferentes según su relación carga/masa y por ello tendrán puntos de incidencia distintos lo cual permite diferenciar unos de otros. La Figura \ref{fig:espetrometro} muestra una representación gráfica de este instrumento.
+En este primer apartado de la práctica estudiaremos el movimiento de una carga en un espectrómetro de masas. En dicho instrumento (ver Figura \ref{fig:espetrometro}), iones procedentes de una fuente e inicialmente en reposo y los acelera mediante un campo eléctrico, una vez abandonan dicho campo eléctrico entran en una región en la que existe un campo magnético perpendicular a su velocidad que los desvía hasta que colisionan contra una superficie. Los iones seguirán trayectorias con radios de curvatura diferentes según su relación carga/masa y por ello tendrán puntos de incidencia distintos lo cual permite diferenciar unos de otros.
 
-\begin{figure}
+\begin{figure}[!htb]
     \includegraphics[width=\linewidth]{example-image-a}
-    \caption{...}
+    \caption{Representación esquemática del espectrómetro de masas con el campo eléctrico $E$, el campo magnético $B$, la distancia entre las placas $LE$ y la distancia de simulación considerada $LB$. En rojo se muestra la trayectoria seguida por un ion cualquiera.}
     \label{fig:espetrometro}
 \end{figure}
+
+Para resolver este problema necesitamos encontrar por lo tanto la posición $x$ a la que llegarán los tres iones propuestos. Para el cálculo tanto analítico como simulado emplearemos los siguientes datos de entrada:
+
+\begin{itemize}
+    \item La carga $q = 1.6\cdot10^{-19}~[C]$ y las masa $m_1 = 1.66\cdot10^{-27}~[kg], m_2 = 3.32\cdot10^{-27}~[kg]$ y $m_3 = 4.98\cdot10^{-27}~[kg]$ de los tres iones $^1H^+$, $^2H^+$ y $^3H+$.
+    \item La diferencia de potencial entre las placas $V = 15~[V]$.
+    \item La distancia entre las placas $LE = 1\cdot 10^{-3}~[m]$.
+    \item El campo magnético $B = 1\cdot10^{-2}~[T]$.
+\end{itemize}
 
 \subsection{Cálculos Analíticos}
 
 En primer lugar, calcularemos el campo eléctrico $E~[V\cdot m^{-1}]$ entre las placas sabiendo que existe entre ellas una diferencia de potencial $\Delta V~[V]$ y una separación de $LE~[m]$
 
 \begin{equation}
-    E = \displaystyle\frac{\Delta V}{LE}~[V\cdot m^{-1}]~,
+E = \displaystyle\frac{\Delta V}{LE}~[V\cdot m^{-1}]~,
 \end{equation}
 
 conociendo el campo eléctrico podemos determinar la aceleración $a~[m\cdot s^{-2}]$ que sufren los iones debido a la fuerza eléctrica $F_e~[N]$ que se les aplica
 
 \begin{equation}
-    F_e = ma \Rightarrow qE = ma \Rightarrow a = \displaystyle\frac{qE}{m}~[m\cdot s^{-2}]~.
+F_e = ma \Rightarrow qE = ma \Rightarrow a = \displaystyle\frac{qE}{m}~[m\cdot s^{-2}]~.
 \end{equation}
 
 Si queremos conocer la velocidad final $v~[m\cdot s^{-1}]$ con la que abandonan los iones el campo eléctrico basta con plantear las ecuaciones de movimiento para determinar en primer lugar el tiempo que tarda el ion en dicho tramo y posteriormente emplearlo para determinar la velocidad final teniendo en cuenta la aceleración uniforme a la que se somete el ion en la región
 
 \begin{equation}
-    x = x_0 + v_0t + \displaystyle\frac{1}{2}at^2 \Rightarrow LE = \displaystyle\frac{1}{2}at^2 \Rightarrow t = \sqrt{\displaystyle\frac{2LE}{a}}~[s]~,
+x = x_0 + v_0t + \displaystyle\frac{1}{2}at^2 \Rightarrow LE = \displaystyle\frac{1}{2}at^2 \Rightarrow t = \sqrt{\displaystyle\frac{2LE}{a}}~[s]~,
 \end{equation}
 
 \begin{equation}
-    v = v_0 + at \Rightarrow v = a\sqrt{\displaystyle\frac{2LE}{a}} \Rightarrow v = \sqrt{2aLE}~[m\cdot s^{-1}]~.
+v = v_0 + at \Rightarrow v = a\sqrt{\displaystyle\frac{2LE}{a}} \Rightarrow v = \sqrt{2aLE}~[m\cdot s^{-1}]~.
 \end{equation}
 
+Una vez el ion abandona el campo eléctrico, se ve sometido a una aceleración causada por el campo magnético la cual hace que describa un movimiento circular cuyo radio podemos determinar
+
+\begin{equation}
+F_m = ma_c \Rightarrow qvB = m \displaystyle\frac{v^2}{r} \Rightarrow r = \displaystyle\frac{mv}{qB}~[m],
+\end{equation}
+
+y por lo tanto, el tiempo que tardan los iones en recorrer el semicírculo esos
+
+\begin{equation}
+t = \displaystyle\frac{v}{a} + \pi \displaystyle\frac{r}{v} = \displaystyle\frac{v}{qB} + \pi \displaystyle\frac{r}{v}~[s].
+\end{equation}
+
+\subsubsection{Ión $^1H^+$}
+
+El primer ión tiene una carga $q_1 = 1.6\cdot 10^{-19}$ y una masa $m_1 = 1\cdot 10^{-3} / 6.022\cdot 10^{23} = 1.66\cdot 10^{-27}~[kg]$. El campo eléctrico es fijo y común para todos los iones $E = \Delta V / LE = 15 / 10\cdot 10^{-2} = 1.5\cdot 10^2~[V\cdot m^{-1}]$.
+
+La aceleración de este ión es
+
+\begin{equation}
+a_1 = \displaystyle\frac{q_1E}{m_1} = \displaystyle\frac{1.6\cdot 10^{-19}\cdot 1.5\cdot 10^{2}}{1.66\cdot 10^{-27}} = 1.44 \cdot 10^{10}~[m\cdot s^{-2}]~,
+\end{equation}
+
+y por lo tanto la velocidad al salir de la región de campo eléctrico será
+
+\begin{equation}
+    v_1 = \sqrt{2a_1LE} = \sqrt{2\cdot 1.44\cdot 10^{10} \cdot 10^{-3}} = 5.37 \cdot 10^4~[m\cdot s^{-1}]~.
+\end{equation}
+
+Conociendo la velocidad podemos calcular tanto el radio de la curva que describirá en el seno de la región de campo magnético así como el tiempo que tardará en describir el semicírculo
+
+\begin{equation}
+r_1 = \displaystyle\frac{m_1v_1}{q_1B} = \displaystyle\frac{1.66\cdot 10^{-27} \cdot 5.37\cdot 10^4}{1.6\cdot 10^{-19}\cdot 1 \cdot 10^{-2}} = 5.55 \cdot 10^{-2}~[m].
+\end{equation}
+
+\begin{equation}
+t_1 = \displaystyle\frac{v_1}{a_1} + \pi \displaystyle\frac{r_1}{v_1} = \displaystyle\frac{5.37 \cdot 10^4}{1.44 \cdot 10^{10}} + \pi \displaystyle\frac{5.55 \cdot 10^{-2}}{5.37 \cdot 10^4} = 6.98 \cdot 10^{-6}~[s]~.
+\end{equation}
+
+La posición en el eje $x$ en la que se producirá el impacto es simplemente el diámetro de la trayectoria circular $x = 2\cdot5.55 \cdot 10^{-2} = 1.11 \cdot 10^-1~[m]$.
+
+\subsubsection{Ión $^2H^+$}
+
+El segundo ión tiene una carga $q_2 = 1.6\cdot 10^{-19}$ y una masa $m_2 = 2\cdot 10^{-3} / 6.022\cdot 10^{23} = 3.32\cdot 10^{-27}~[kg]$. El campo eléctrico es fijo y común para todos los iones $E = \Delta V / LE = 15 / 10\cdot 10^{-2} = 1.5\cdot 10^2~[V\cdot m^{-1}]$.
+
+La aceleración de este ión es
+
+\begin{equation}
+a_2 = \displaystyle\frac{qE}{m} = \displaystyle\frac{1.6\cdot 10^{-19}\cdot 1.5\cdot 10^{2}}{3.32\cdot 10^{-27}} = 7.23 \cdot 10^{9}~[m\cdot s^{-2}]~,
+\end{equation}
+
+y por lo tanto la velocidad al salir de la región de campo eléctrico será
+
+\begin{equation}
+v_2 = \sqrt{2a_2LE} = \sqrt{2\cdot 7.23 \cdot 10^{9} \cdot 10^{-3}} = 3.80 \cdot 10^3~[m\cdot s^{-1}]~.
+\end{equation}
+
+Conociendo la velocidad podemos calcular tanto el radio de la curva que describirá en el seno de la región de campo magnético así como el tiempo que tardará en describir el semicírculo
+
+\begin{equation}
+r_2 = \displaystyle\frac{mv}{qB} = \displaystyle\frac{3.32\cdot 10^{-27} \cdot (3.80\cdot 10^3)}{1.6\cdot 10^{-19}\cdot 1 \cdot 10^{-2}} = 7.90\cdot 10^{-3}~[m].
+\end{equation}
+
+\begin{equation}
+t_2 = \displaystyle\frac{v}{a} + \pi \displaystyle\frac{r}{v} = \displaystyle\frac{3.80 \cdot 10^3}{7.23 \cdot 10^{9}} + \pi \displaystyle\frac{7.90 \cdot 10^{-3}}{3.80 \cdot 10^3} = 6.98 \cdot 10^{-6}~[s]~.
+\end{equation}
+
+La posición en el eje $x$ en la que se producirá el impacto es simplemente el diámetro de la trayectoria circular $x = 2\cdot7.90 \cdot 10^{-3} = 1.6 \cdot 10^-2~[m]$.
+
+\subsubsection{Ión $^3H^+$}
+
+El tercer ión tiene una carga $q_3 = 1.6\cdot 10^{-19}$ y una masa $m_3 = 3\cdot 10^{-3} / 6.022\cdot 10^{23} = 4.98\cdot 10^{-27}~[kg]$. El campo eléctrico es fijo y común para todos los iones $E = \Delta V / LE = 15 / 10\cdot 10^{-2} = 1.5\cdot 10^2~[V\cdot m^{-1}]$.
+
+La aceleración de este ión es
+
+\begin{equation}
+a_3 = \displaystyle\frac{qE}{m} = \displaystyle\frac{1.6\cdot 10^{-19}\cdot 1.5\cdot 10^{2}}{4.98\cdot 10^{-27}} = 4.81 \cdot 10^{9}~[m\cdot s^{-2}]~,
+\end{equation}
+
+y por lo tanto la velocidad al salir de la región de campo eléctrico será
+
+\begin{equation}
+v_3 = \sqrt{2a_2LE} = \sqrt{2\cdot 4.81 \cdot 10^{9} \cdot 10^{-3}} = 3.10 \cdot 10^3~[m\cdot s^{-1}]~.
+\end{equation}
+
+Conociendo la velocidad podemos calcular tanto el radio de la curva que describirá en el seno de la región de campo magnético así como el tiempo que tardará en describir el semicírculo
+
+\begin{equation}
+r_3 = \displaystyle\frac{mv}{qB} = \displaystyle\frac{4.98\cdot 10^{-27} \cdot 3.10\cdot 10^3}{1.6\cdot 10^{-19}\cdot 1 \cdot 10^{-2}} = 9.64\cdot 10^{-3}~[m].
+\end{equation}
+
+\begin{equation}
+t_3 = \displaystyle\frac{v}{a} + \pi \displaystyle\frac{r}{v} = \displaystyle\frac{3.10 \cdot 10^3}{4.81 \cdot 10^{9}} + \pi \displaystyle\frac{9.64 \cdot 10^{-3}}{3.10 \cdot 10^3} = 1.04 \cdot 10^{-5}~[s]~.
+\end{equation}
+
+La posición en el eje $x$ en la que se producirá el impacto es simplemente el diámetro de la trayectoria circular $x = 2\cdot9.64 \cdot 10^{-3} = 1.92 \cdot 10^{-2}~[m]$.
+
 \subsection{Simulación}
+
+\begin{figure}[!htb]
+    \includegraphics[width=\linewidth]{espectrometro_simulacion}
+    \caption{....}
+    \label{fig:espectrometro_simulacion}
+\end{figure}
+
+\clearpage
 
 \section{Selector de Velocidades}
 \label{sec:selector}
 
+En el segundo apartado de la práctica estudiaremos el movimiento de uno de los iones ya mencionados en la sección anterior pero esta vez en el seno de otro instrumento: el selector de velocidades. En este caso, los iones procedentes de una fuente entran con una velocidad inicial al selector, dentro del cual existe tanto un campo eléctrico (perpendicular a la dirección de entrada) y un campo magnético (perpendicular tanto al campo eléctrico como a la dirección de entrada). Según el valor de los campos y la energía cinética del ion, la partícula en el interior se desviará en mayor o menor medida o bien no se desviará y realizará un movimiento rectilíneo consiguiendo salir del selector por una pequeña apertura en el extremo opuesto. De esta forma, eligiendo los valores adecuados para los campos se puede seleccionar aquellas partículas con una velocidad determinada. La Figura \ref{fig:selector} muestra un equema de dicho instrumento.
+
+\begin{figure}[!htb]
+    \includegraphics[width=\linewidth]{example-image-b}
+    \caption{Representación esquemática del selector de velocidades de longitud $L$ con un campo eléctrico $E$ y magnético $B$ y una separación entre placas $2H$.}
+    \label{fig:selector}
+\end{figure}
+
+Para resolver este problema fijaremos un campo eléctrico y variaremos el campo magnético hasta conseguir de forma experimental que la partícula salga por la rendija. Para que esto ocurra, la fuerza magnética debe compensar la fuerza eléctrica hasta cierto punto para que la partícula no sufra una desviación que le impida salir por la rendija. Para el cálculo tanto analítico como simulado emplearemos los siguientes datos de entrada:
+
+\begin{itemize}
+    \item La carga de uno de los iones anteriores $q = 1.6\cdot10^{-19}~[C]$ y su masa $m_1 = 1.66\cdot10^{-27}~[kg]$ para $^1H^+$.
+    \item La energía cinética del ion al entrar en el selector $E_c = 30 [eV]$.
+    \item La diferencia de potencial entre las placas $V = 25~[V]$.
+    \item La distancia entre las placas horizonales $2H = 4\cdot 10^{-1}~[m]$.
+    \item La longitud del selector $L = 2~[m]$.
+    \item La apertura final del detector $2dy$ siendo $dy = 5\cdot10^{-2}H~[m]$.
+\end{itemize}
+
+\subsection{Cálculos Analíticos}
+
+Dado que la fuerza total que actúa sobre la partícula viene dada por la fuerza de Lorent
+
+\begin{equation}
+    F = q(E + v \times B)~[N],
+\end{equation}
+
+para conseguir que la partícula siga una trayectoria rectilínea y por lo tanto sea capaz de alcanzar la rendija es necesario que la fuerza ejercida por el campo eléctrico sea compensada por la fuerza realizada por el campo eléctrico
+
+\begin{equation}
+    F_e = F_m \Rightarrow qE = qvB,
+\end{equation}
+
+de lo cual deducimos que la velocidad del protón es
+
+\begin{equation}
+    v = \displaystyle\frac{E}{B}~[m\cdot s].
+\end{equation}
+
+Así pues, ajustando los valores de ambos campos podemos hacer que únicamente las partículas con una determinada velocidad de entrada $v$ sigan una trayectoria rectilínea. Aquellas con una velocidad menor se verán más influenciadas por la fuerza eléctrica y por lo tanto se desviarán hacia arriba mientras que aquellas con una velocidad mayor sufrirán una fuerza magnética más intensa y se desviarán hacia abajo. Si esta desviación es demasiado pronunciada, no conseguirán alcanzar la rendija.
+
+Para el caso que nos ocupa, el ión $^1H^+$, sabemos que su masa es de $m = 1.66\cdot 10^{-27}~[kg]$ y su carga es $q = 1.6 \cdot 10^{-19}~[C]$. La energía cinética de dicha partícula la hemos fijado en $30~[eV]$ ($30\cdot 1.6\cdot 10^{-19}~[J]$) por lo que a partir de la misma podemos obtener su velocidad
+
+\begin{equation}
+    E_c = \displaystyle\frac{1}{2}mv^2 \Rightarrow v = \sqrt{\displaystyle\frac{2E_c}{m}} = 7.6\cdot 10^4~[m\cdot s^{-1}]~.
+\end{equation}
+
+Dado que el campo eléctrico lo hemos fijado con una diferencia de potencial de $V = 25~[V]$ y una distancia entre las placas horizontales de $2H = 4\cdot 10^{-1}~[m]$
+
+\begin{equation}
+    V = Ed \Rightarrow E = \displaystyle\frac{V}{2H} = \displaystyle\frac{25}{2\cdot 4\cdot 10^{-1}} = 6.25~[V\cdot m^-1]~,
+\end{equation}
+
+el campo magnético que necesitaremos para seleccionar dicha velocidad es
+
+\begin{equation}
+    v = \displaystyle\frac{E}{B} \Rightarrow B = \displaystyle\frac{E}{v} = \displaystyle\frac{6.25}{7.6\cdot 10^4} = 8.21 \cdot 10^{-4}~[T]~.
+\end{equation}
+
+\subsection{Simulación}
+
+\begin{figure}[!htb]
+    \includegraphics[width=\linewidth]{selector_simulacion}
+    \caption{....}
+    \label{fig:selector_simulacion}
+\end{figure}
+
+\clearpage
+
+\section{Ciclotrón}
+\label{sec:ciclotron}
+
+En esta sección de la práctica trataremos el movimiento de protones en un ciclotrón (ver Figura \ref{fig:ciclotron}), un instrumento en el que una partícula cargada es acelerada inicialmente desde el reposo mediante la acción de un campo eléctrico existente en la región de separación entre los dos semicírculos denominados $Ds$ del ciclotrón. En los semicírculos existe un campo magnético que les produce un movimiento circular cuyo radio depende de la velocidad con la que provengan de la región del campo eléctrico que los ha acelerado. Ese movimiento circular les hace volver a la región del campo eléctrico que varía de manera periódica para acelerar los protones hacia la $D$ opuesta. Con el tiempo y tras varios pasos por la región del campo eléctrico y por las $D$ las partículas son capaces de ganar grandes cantidades de energía y alcanzar velocidades tremendamente elevadas.
+
+\begin{figure}[!htb]
+    \includegraphics[width=\linewidth]{example-image-c}
+    \caption{Representación esquemática del ciclotrón con un campo magnético $B$, radio $R$ y distancia $d$.}
+    \label{fig:ciclotron}
+\end{figure}
+
 \subsection{Cálculos Analíticos}
 
 \subsection{Simulación}
+
+\clearpage
 
 \section{Frecuencia de Ciclotrón Relativista}
 \label{sec:frecuencia}
@@ -423,12 +620,7 @@ Si queremos conocer la velocidad final $v~[m\cdot s^{-1}]$ con la que abandonan 
 
 \subsection{Simulación}
 
-\section{Ciclotrón}
-\label{sec:ciclotron}
-
-\subsection{Cálculos Analíticos}
-
-\subsection{Simulación}
+\clearpage
 
 \section{Conclusión}
 \label{sec:conclusion}
