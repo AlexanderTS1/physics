@@ -664,9 +664,43 @@ En esta sección de la práctica trataremos el movimiento de protones en un cicl
     \label{fig:ciclotron}
 \end{figure}
 
+Para resolver este problemas fijaremos tanto un campo eléctrico $E$ entre las Ds del ciclotrón, así como un campo magnético $B$ en las mismas. Definiremos también la distancia entre las Ds y su radio. Calcularemos el período del movimiento circular, así como el tiempo que tarda la partícula en atravesar la región de campo eléctrico y la energía que ganará cada vez que pase entre las Ds. Para el cálculo tanto analítico como simulado utilizaremos los siguientes datos de entrada:
+
+\begin{itemize}
+    \item Masa $m = 1.66\cdot 10^{-27}~[kg]$ y carga $q = 1.6\cdot 10^{-19}~[C]$ del protón.
+    \item Campo magnético $B = 1\cdot 10^{-1}~[T]$ en las Ds.
+    \item Diferencia de potencial $V = 5\cdot 10^3~[V]$ entre las Ds.
+    \item Distancia entre las Ds $d = 1\cdot 10^{-2}~[m]$.
+    \item Radio de las Ds $r = 2.5\cdot 10^{-1}~[m]$.
+\end{itemize}
+
+\newpage
+
 \subsection{Cálculos Analíticos}
 
+Para poder obtener el período del movimiento circular no relativista que ocurre en las Ds del ciclotrón deberemos en primer lugar calcular el radio de curvatura de la trayectoria descrita. Para ello sabemos que es la fuerza magnética la que provoca la aceleración que induce el movimiento circular en la partícula, por lo tanto
 
+\begin{equation}
+F_m = ma_c \Rightarrow qvB = m \displaystyle\frac{v^2}{r} \Rightarrow r = \displaystyle\frac{mv}{qB}~[m]~,
+\end{equation}
+
+así que podemos utilizar esta expresión para determinar el período (el cual no depende de la velocidad)
+
+\begin{equation}
+T = \displaystyle\frac{2\pi r}{v} = \displaystyle\frac{2\pi mv}{qBv} = \displaystyle\frac{2\pi m}{qB}~[s]~.
+\end{equation}
+
+El tiempo que tarda un protón en reposo en atravesar la zona de las Ds podemos obtenerlo teniendo en cuenta que únicamente la fuerza eléctrica provoca una aceleración sobre el mismo
+
+\begin{equation}
+F_e = ma \Rightarrow qE = ma \Rightarrow a = \displaystyle\frac{qE}{m}~[m\cdot s^{-2}]~.
+\end{equation}
+
+La fuerza eléctrica provoca un movimiento uniformemente acelerado (teniendo en cuenta que el protón en reposo se encuentra equidistante a ambas Ds, la distancia que tendrá que recorrer será $0.5d$)
+
+\begin{equation}
+x = x_0 + v_0t + \displaystyle\frac{1}{2}at^2 \Rightarrow \displaystyle\frac{d}{2} = \displaystyle\frac{1}{2}at^2 \Rightarrow t = \sqrt{\displaystyle\frac{md}{qE}}~[s]~,
+\end{equation}
 
 \subsection{Simulación}
 
