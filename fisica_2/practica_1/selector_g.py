@@ -1,6 +1,7 @@
 import numpy as np
 import math
 import random
+import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.mlab as mlab
@@ -142,6 +143,12 @@ z3=odeint(selector,z03,t,args=(par,),atol=abserr, rtol=relerr)
 
 
 
+matplotlib.rc('xtick', labelsize=32) 
+matplotlib.rc('ytick', labelsize=32) 
+plt.rc('text', usetex=False)
+plt.rc('font', family='serif')
+plt.rc('font', size='48')
+
 # Definicion del grafico 
 # Cambiar los limites de acuerdo a lo que se necesite
 # asi como los titulos de los ejes y los labels
@@ -149,14 +156,14 @@ z3=odeint(selector,z03,t,args=(par,),atol=abserr, rtol=relerr)
 ax = plt.axes(xlim=(-0.1,L+0.1), ylim=(-0.02-H,H+0.02))
 
 
-line1, = ax.plot(z[:,0],z[:,2], linewidth=1,
-                 label='v=v0')
+line1, = ax.plot(z[:,0],z[:,2], linewidth=4,
+                 label='v=v0 [m]')
 
-line2, = ax.plot(z2[:,0],z2[:,2], linewidth=1,
-                 label='v=1.1*v0')
+line2, = ax.plot(z2[:,0],z2[:,2], linewidth=4,
+                 label='v=1.1*v0 [m]')
 
-line3, = ax.plot(z3[:,0],z3[:,2], linewidth=1,
-                 label='v=0.9*v0')
+line3, = ax.plot(z3[:,0],z3[:,2], linewidth=4,
+                 label='v=0.9*v0 [m]')
 
 
 fontP = FontProperties()
@@ -195,8 +202,8 @@ ax.add_patch(arrow)
 ax.add_patch(arrow2)
 ax.add_patch(circle1)
 ax.add_patch(circle2)
-ax.text(0.2*L,-0.55*H, "B",fontsize=20)
-ax.text(0.2*L, 0.52*H, "E", fontsize=20)
+ax.text(0.2*L,-0.55*H, "B",fontsize=30)
+ax.text(0.2*L, 0.52*H, "E", fontsize=30)
 
 
 plt.show()

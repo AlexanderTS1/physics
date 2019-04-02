@@ -540,7 +540,7 @@ tf=18e-6  # tiempo de simulación considerado
     \label{fig:espectrometro_simulacion}
 \end{figure}
 
-\clearpage
+\newpage
 
 \section{Selector de Velocidades}
 \label{sec:selector}
@@ -578,7 +578,7 @@ para conseguir que la partícula siga una trayectoria rectilínea y por lo tanto
     F_e = F_m \Rightarrow qE = qvB,
 \end{equation}
 
-de lo cual deducimos que la velocidad del protón es
+de lo cual deducimos que la velocidad del ión que será seleccionado (capaz de alcanzar la rendija sin desviarse significativamente) será
 
 \begin{equation}
     v = \displaystyle\frac{E}{B}~[m\cdot s].
@@ -592,13 +592,13 @@ Para el caso que nos ocupa, el ión $^1H^+$, sabemos que su masa es de $m = 1.66
     E_c = \displaystyle\frac{1}{2}mv^2 \Rightarrow v = \sqrt{\displaystyle\frac{2E_c}{m}} = 7.6\cdot 10^4~[m\cdot s^{-1}]~.
 \end{equation}
 
-Dado que el campo eléctrico lo hemos fijado con una diferencia de potencial de $V = 25~[V]$ y una distancia entre las placas horizontales de $2H = 4\cdot 10^{-1}~[m]$
+Dado que hemos fijado una diferencia de potencial de $V = 25~[V]$ y una distancia entre las placas horizontales de $2H = 4\cdot 10^{-1}~[m]$, podemos calcular el campo eléctrico $E$ como
 
 \begin{equation}
-    V = Ed \Rightarrow E = \displaystyle\frac{V}{2H} = \displaystyle\frac{25}{2\cdot 4\cdot 10^{-1}} = 6.25~[V\cdot m^-1]~,
+    V = Ed \Rightarrow E = \displaystyle\frac{V}{2H} = \displaystyle\frac{25}{2\cdot 4\cdot 10^{-1}} = 6.25~[V\cdot m^{-1}]~.
 \end{equation}
 
-el campo magnético que necesitaremos para seleccionar dicha velocidad es
+Por lo tanto, el campo magnético que necesitaremos para compensar la fuerza eléctrica con el objetivo de seleccionar la velocidad $v$ dada es
 
 \begin{equation}
     v = \displaystyle\frac{E}{B} \Rightarrow B = \displaystyle\frac{E}{v} = \displaystyle\frac{6.25}{7.6\cdot 10^4} = 8.21 \cdot 10^{-4}~[T]~.
@@ -606,9 +606,48 @@ el campo magnético que necesitaremos para seleccionar dicha velocidad es
 
 \subsection{Simulación}
 
+Durante la simulación, hemos variado el campo magnético sin conocer el valor analítico hasta conseguir que el ión atraviese la rendija utilizando los valores de energía cinética y de campo eléctrico (diferencia de potencial y distancia entre las placas) seleccionados anteriormente (ver Código \ref{listing:datos_selector}). Finalmente, llegamos a la conclusión de que el valor analítico $B = 8.21\cdot 10^{-4}~[T]$ permite al ión alcanzar la rendija sin desviarse tal y como se muestra en la Figura \ref{fig:selector_simulacion}.
+
+\newpage
+
+\begin{code}
+    \begin{minted}{python}
+# Datos de entrada
+# El programa calcula la trayectoria en un
+# selector de velocidad de un ion con una
+# dada velocidad, y la del mismo ion pero
+# con una velocidad 10 % mayor y 10% menor
+
+# Masa del ion
+m=1.0e-3 / 6.022e23  
+#Carga del ion
+q=1.6e-19   
+# 2*H es la distancia entre las placas horizontales
+H=0.2
+# Diferencia de potencial entre ambas placas  
+dV=25     
+E=dV/2./H   # Campo eléctrico uniforme
+# Campo magnético
+B=8.21e-4  
+# Distancia horizontal del selector
+L=2.0  
+# Energía cinética del ion que entra
+Ec=30*1.6e-19  
+#Velocidad del ion que entra al selector
+vx0=np.sqrt(2*Ec/m)  
+# 2*dy es el tamaño de la apertura
+dy=0.05 * H 
+
+#tiempo final de simulacion
+tf=10.0           
+    \end{minted}
+    \caption{Datos de simulación de selector de velocidad.}
+    \label{listing:datos_selector}
+\end{code}
+
 \begin{figure}[!htb]
     \includegraphics[width=\linewidth]{selector_simulacion}
-    \caption{....}
+    \caption{Gráfica de simulación de selector de velocidad con $v_0 = 7.6\cdot 10^4~[m\cdot s^{-1}]$, $E = 6.25~[V\cdot m^{-1}]$ y $B = 8.21\cdot 10^{-4}~[T]$ tal y como calculamos de forma analítica. Como podemos observar, el ión es capaz de alcanzar la rendija. La simulación también muestra el resultado de utilizar un $90\%$ de la velocidad inicial (el campo eléctrico desvía el ión hacia arriba) y utilizar un $110\%$ de la misma (el campo magnético desvía el ión hacia abajo).}
     \label{fig:selector_simulacion}
 \end{figure}
 
