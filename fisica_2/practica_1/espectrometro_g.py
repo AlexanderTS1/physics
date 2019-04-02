@@ -1,6 +1,7 @@
 import numpy as np
 import math
 import random
+import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.mlab as mlab
@@ -121,6 +122,11 @@ z=odeint(espectrometro,z0,t,args=(par,),atol=abserr, rtol=relerr)
 z2=odeint(espectrometro2,z0,t,args=(par2,),atol=abserr, rtol=relerr)
 z3=odeint(espectrometro3,z0,t,args=(par3,),atol=abserr, rtol=relerr)
 
+matplotlib.rc('xtick', labelsize=24) 
+matplotlib.rc('ytick', labelsize=24) 
+plt.rc('text', usetex=False)
+plt.rc('font', family='serif')
+plt.rc('font', size='32')
 
 fig, ax = plt.subplots()
 
@@ -132,14 +138,14 @@ ax=plt.axes(xlim=(-0.2*LB,LB),ylim=(-0.2*LE,LB))
 # Cambiar los labels de acuerdo a lo calculado
 
 line1, = ax.plot(z[:,0],z[:,2],'--', linewidth=2,
-                 label='m= 1 [g/mol]')
+                 label=r'$^1H^+ (1 [g/mol])$ -- m_1 = ' + str(m) + r' [kg]', )
 line2, = ax.plot(z2[:,0],z2[:,2], '--', linewidth=2,
-                 label='m= 2 [g/mol]')
+                 label=r'$^2H^+ (1 [g/mol])$ -- m_2 = ' + str(m2) + r' [kg]')
 line3, = ax.plot(z3[:,0],z3[:,2], '--', linewidth=2,
-                 label='m= 3 [g/mol]')
+                 label=r'$^3H^+ (1 [g/mol])$ -- m_3 = ' + str(m3) + r' [kg]')
 
 
-ax.legend(loc='upper center')
+ax.legend(loc='upper center', fontsize=24)
 
 
 
@@ -175,17 +181,14 @@ ax.add_patch(circle3)
 ax.add_patch(circle4)
 ax.add_patch(circle5)
 ax.add_patch(circle6)
-ax.text(-0.05*LB,LE+0.38*LB, "B",fontsize=20)
-ax.text(0.96*LB,LE+0.38*LB, "B",fontsize=20)
-ax.text(0.1*LB, 0.3*LE, "E", fontsize=20)
-ax.text(-0.12*LB, 0.3*LE, "E", fontsize=20)
+ax.text(-0.05*LB,LE+0.38*LB, "B",fontsize=30)
+ax.text(0.96*LB,LE+0.38*LB, "B",fontsize=30)
+ax.text(0.1*LB, 0.3*LE, "E", fontsize=30)
+ax.text(-0.12*LB, 0.3*LE, "E", fontsize=30)
 
 #labels de los ejes x e y 
-ax.set_ylabel("y [m]")
-ax.set_xlabel("x [m]")
-
-
-
+ax.set_ylabel("y [m]", fontsize=32)
+ax.set_xlabel("x [m]", fontsize=32)
 
 
 # Esta parte agrega un grafico pequeño para ver mejor la posicion donde llegan los iones
@@ -200,18 +203,13 @@ line6, = ax.plot(z3[:,0],z3[:,2], '--', linewidth=2)
 
 #intervalos de los ejes x e y para la grafica pequeña.
 #CAMBIAR
-ax.set_xlim(0.05,0.2)
+ax.set_xlim(0.10,0.2)
 ax.set_ylim(0.10,0.12)
 
 #Donde pone los ticks y titulos de los ejes de la grafica pequeña
-plt.xticks([0.05,0.1,0.15,0.2])
+plt.xticks([0.1,0.15,0.2])
 plt.yticks([0.10,0.11,0.12])
-ax.set_ylabel("y [m]")
-ax.set_xlabel("x [m]")
-
-
-
-
-
+ax.set_ylabel("y [m]", fontsize=32)
+ax.set_xlabel("x [m]", fontsize=32)
 
 plt.show()

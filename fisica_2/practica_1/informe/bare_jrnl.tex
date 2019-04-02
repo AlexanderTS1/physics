@@ -13,12 +13,12 @@
 \usepackage[spanish]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{url}
-%\usepackage{minted}
-%\setminted{fontsize=\small,baselinestretch=1}
+\usepackage{minted}
+\setminted{fontsize=\small,baselinestretch=1}
 \usepackage{listings}
 \usepackage{subcaption}
-%\renewcommand\listingscaption{Código}
-%\newenvironment{code}{\captionsetup{type=listing}}{\par\addvspace{\baselineskip}}
+\renewcommand\listingscaption{Código}
+\newenvironment{code}{\captionsetup{type=listing}}{\par\addvspace{\baselineskip}}
 \usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{scopes}
@@ -443,26 +443,24 @@ a_1 = \displaystyle\frac{q_1E}{m_1} = \displaystyle\frac{1.6\cdot 10^{-19}\cdot 
 y por lo tanto la velocidad al salir de la región de campo eléctrico será
 
 \begin{equation}
-    v_1 = \sqrt{2a_1LE} = \sqrt{2\cdot 1.44\cdot 10^{10} \cdot 10^{-3}} = 5.37 \cdot 10^3~[m\cdot s^{-1}]~.
+    v_1 = \sqrt{2a_1LE} = \sqrt{2\cdot 1.44\cdot 10^{10} \cdot 10^{-1}} = 5.37 \cdot 10^4~[m\cdot s^{-1}]~.
 \end{equation}
 
 Conociendo la velocidad podemos calcular tanto el radio de la curva que describirá en el seno de la región de campo magnético así como el tiempo que tardará en describir el semicírculo
 
 \begin{equation}
-r_1 = \displaystyle\frac{m_1v_1}{q_1B} = \displaystyle\frac{1.66\cdot 10^{-27} \cdot 5.37\cdot 10^3}{1.6\cdot 10^{-19}\cdot 1 \cdot 10^{-2}} = 5.57 \cdot 10^{-3}~[m].
+r_1 = \displaystyle\frac{m_1v_1}{q_1B} = \displaystyle\frac{1.66\cdot 10^{-27} \cdot 5.37\cdot 10^4}{1.6\cdot 10^{-19}\cdot 1 \cdot 10^{-2}} = 5.57 \cdot 10^{-2}~[m].
 \end{equation}
 
 \begin{equation}
-t_1 = \displaystyle\frac{v_1}{a_1} + \pi \displaystyle\frac{r_1}{v_1} = \displaystyle\frac{5.37 \cdot 10^3}{1.44 \cdot 10^{10}} + \pi \displaystyle\frac{5.57 \cdot 10^{-3}}{5.37 \cdot 10^3} = 3.63 \cdot 10^{-6}~[s]~.
+t_1 = \displaystyle\frac{v_1}{a_1} + \pi \displaystyle\frac{r_1}{v_1} = \displaystyle\frac{5.37 \cdot 10^4}{1.44 \cdot 10^{10}} + \pi \displaystyle\frac{5.57 \cdot 10^{-2}}{5.37 \cdot 10^4} = 6.99 \cdot 10^{-6}~[s]~.
 \end{equation}
 
-La posición en el eje $x$ en la que se producirá el impacto es simplemente el diámetro de la trayectoria circular $x = 2\cdot5.57 \cdot 10^{-3} = 1.11 \cdot 10^-2~[m]$.
+La posición en el eje $x$ en la que se producirá el impacto es simplemente el diámetro de la trayectoria circular $x_1 = 2\cdot5.57 \cdot 10^{-2} = 1.11 \cdot 10^-1~[m]$.
 
 \subsubsection{Ión $^2H^+$}
 
-El segundo ión tiene una carga $q_2 = 1.6\cdot 10^{-19}$ y una masa $m_2 = 2\cdot 10^{-3} / 6.022\cdot 10^{23} = 3.32\cdot 10^{-27}~[kg]$. El campo eléctrico es fijo y común para todos los iones $E = \Delta V / LE = 15 / 10\cdot 10^{-2} = 1.5\cdot 10^2~[V\cdot m^{-1}]$.
-
-La aceleración de este ión es
+El segundo ión tiene una carga $q_2 = 1.6\cdot 10^{-19}$ y una masa $m_2 = 2\cdot 10^{-3} / 6.022\cdot 10^{23} = 3.32\cdot 10^{-27}~[kg]$. La aceleración de este ión es
 
 \begin{equation}
 a_2 = \displaystyle\frac{qE}{m} = \displaystyle\frac{1.6\cdot 10^{-19}\cdot 1.5\cdot 10^{2}}{3.32\cdot 10^{-27}} = 7.23 \cdot 10^{9}~[m\cdot s^{-2}]~,
@@ -471,26 +469,24 @@ a_2 = \displaystyle\frac{qE}{m} = \displaystyle\frac{1.6\cdot 10^{-19}\cdot 1.5\
 y por lo tanto la velocidad al salir de la región de campo eléctrico será
 
 \begin{equation}
-v_2 = \sqrt{2a_2LE} = \sqrt{2\cdot 7.23 \cdot 10^{9} \cdot 10^{-3}} = 3.80 \cdot 10^3~[m\cdot s^{-1}]~.
+v_2 = \sqrt{2a_2LE} = \sqrt{2\cdot 7.23 \cdot 10^{9} \cdot 10^{-1}} = 3.80 \cdot 10^4~[m\cdot s^{-1}]~.
 \end{equation}
 
 Conociendo la velocidad podemos calcular tanto el radio de la curva que describirá en el seno de la región de campo magnético así como el tiempo que tardará en describir el semicírculo
 
 \begin{equation}
-r_2 = \displaystyle\frac{mv}{qB} = \displaystyle\frac{3.32\cdot 10^{-27} \cdot (3.80\cdot 10^3)}{1.6\cdot 10^{-19}\cdot 1 \cdot 10^{-2}} = 7.90\cdot 10^{-3}~[m].
+r_2 = \displaystyle\frac{mv}{qB} = \displaystyle\frac{3.32\cdot 10^{-27} \cdot 3.80\cdot 10^4}{1.6\cdot 10^{-19}\cdot 1 \cdot 10^{-2}} = 7.90\cdot 10^{-2}~[m].
 \end{equation}
 
 \begin{equation}
-t_2 = \displaystyle\frac{v}{a} + \pi \displaystyle\frac{r}{v} = \displaystyle\frac{3.80 \cdot 10^3}{7.23 \cdot 10^{9}} + \pi \displaystyle\frac{7.90 \cdot 10^{-3}}{3.80 \cdot 10^3} = 6.98 \cdot 10^{-6}~[s]~.
+t_2 = \displaystyle\frac{v}{a} + \pi \displaystyle\frac{r}{v} = \displaystyle\frac{3.80 \cdot 10^4}{7.23 \cdot 10^{9}} + \pi \displaystyle\frac{7.90 \cdot 10^{-2}}{3.80 \cdot 10^4} = 1.18 \cdot 10^{-5}~[s]~.
 \end{equation}
 
-La posición en el eje $x$ en la que se producirá el impacto es simplemente el diámetro de la trayectoria circular $x = 2\cdot7.90 \cdot 10^{-3} = 1.6 \cdot 10^-2~[m]$.
+La posición en el eje $x$ en la que se producirá el impacto es simplemente el diámetro de la trayectoria circular $x_2 = 2\cdot7.90 \cdot 10^{-2} = 1.58 \cdot 10^-1~[m]$.
 
 \subsubsection{Ión $^3H^+$}
 
-El tercer ión tiene una carga $q_3 = 1.6\cdot 10^{-19}$ y una masa $m_3 = 3\cdot 10^{-3} / 6.022\cdot 10^{23} = 4.98\cdot 10^{-27}~[kg]$. El campo eléctrico es fijo y común para todos los iones $E = \Delta V / LE = 15 / 10\cdot 10^{-2} = 1.5\cdot 10^2~[V\cdot m^{-1}]$.
-
-La aceleración de este ión es
+El tercer ión tiene una carga $q_3 = 1.6\cdot 10^{-19}$ y una masa $m_3 = 3\cdot 10^{-3} / 6.022\cdot 10^{23} = 4.98\cdot 10^{-27}~[kg]$. La aceleración de este ión es
 
 \begin{equation}
 a_3 = \displaystyle\frac{qE}{m} = \displaystyle\frac{1.6\cdot 10^{-19}\cdot 1.5\cdot 10^{2}}{4.98\cdot 10^{-27}} = 4.81 \cdot 10^{9}~[m\cdot s^{-2}]~,
@@ -499,26 +495,48 @@ a_3 = \displaystyle\frac{qE}{m} = \displaystyle\frac{1.6\cdot 10^{-19}\cdot 1.5\
 y por lo tanto la velocidad al salir de la región de campo eléctrico será
 
 \begin{equation}
-v_3 = \sqrt{2a_2LE} = \sqrt{2\cdot 4.81 \cdot 10^{9} \cdot 10^{-3}} = 3.10 \cdot 10^3~[m\cdot s^{-1}]~.
+v_3 = \sqrt{2a_3LE} = \sqrt{2\cdot 4.81 \cdot 10^{9} \cdot 10^{-1}} = 3.10 \cdot 10^4~[m\cdot s^{-1}]~.
 \end{equation}
 
 Conociendo la velocidad podemos calcular tanto el radio de la curva que describirá en el seno de la región de campo magnético así como el tiempo que tardará en describir el semicírculo
 
 \begin{equation}
-r_3 = \displaystyle\frac{mv}{qB} = \displaystyle\frac{4.98\cdot 10^{-27} \cdot 3.10\cdot 10^3}{1.6\cdot 10^{-19}\cdot 1 \cdot 10^{-2}} = 9.64\cdot 10^{-3}~[m].
+r_3 = \displaystyle\frac{mv}{qB} = \displaystyle\frac{4.98\cdot 10^{-27} \cdot 3.10\cdot 10^4}{1.6\cdot 10^{-19}\cdot 1 \cdot 10^{-2}} = 9.64\cdot 10^{-2}~[m].
 \end{equation}
 
 \begin{equation}
-t_3 = \displaystyle\frac{v}{a} + \pi \displaystyle\frac{r}{v} = \displaystyle\frac{3.10 \cdot 10^3}{4.81 \cdot 10^{9}} + \pi \displaystyle\frac{9.64 \cdot 10^{-3}}{3.10 \cdot 10^3} = 1.04 \cdot 10^{-5}~[s]~.
+t_3 = \displaystyle\frac{v}{a} + \pi \displaystyle\frac{r}{v} = \displaystyle\frac{3.10 \cdot 10^4}{4.81 \cdot 10^{9}} + \pi \displaystyle\frac{9.64 \cdot 10^{-2}}{3.10 \cdot 10^4} = 1.62 \cdot 10^{-5}~[s]~.
 \end{equation}
 
-La posición en el eje $x$ en la que se producirá el impacto es simplemente el diámetro de la trayectoria circular $x = 2\cdot9.64 \cdot 10^{-3} = 1.92 \cdot 10^{-2}~[m]$.
+La posición en el eje $x_3$ en la que se producirá el impacto es simplemente el diámetro de la trayectoria circular $x_3 = 2\cdot9.64 \cdot 10^{-2} = 1.93 \cdot 10^{-2}~[m]$.
 
 \subsection{Simulación}
 
+Los valores arrojados por la simulación (ejecutada con los parámetros antes mencionados y mostrados en el Código \ref{listing:datos_espectrometro}) son $x^s_1 = 1.11\cdot 10^{-1}~[m]$, $x^s_2 = 1.58\cdot 10^{-1}~[m]$, $x^s_3 = 1.93\cdot 10^{-1}~[m]$ tal y como se puede observar en la Figura \ref{fig:espectrometro_simulacion}. Así pues, la simulación confirma nuestra solución analítica y viceversa puesto que los valores obtenidos en el cálculo de la sección anterior son también $x_1 = 1.11\cdot 10^{-1}~[m]$, $x_2 = 1.58\cdot 10^{-1}~[m]$, $x_3 = 1.93\cdot 10^{-1}~[m]$.
+
+\bigskip
+
+\begin{code}
+    \begin{minted}{python}
+m=1.0e-3 / 6.022e23  #masa de la primer ion
+q=1.6e-19  #carga del primer ion
+m2=2.0e-3 / 6.022e23 #masa del segundo ion
+q2=1.6e-19  #carga del segundo ion
+m3=3.0e-3 / 6.022e23 #masa del tercer ion
+q3=1.6e-19  #carga del tercer ion
+Bf=1.0e-2 #Campo magnético usado
+LE=10.0e-2  #Distancia entre las placas
+dV=15.0  #Diferencia de potencial
+LB=0.25  #Distancia horizontal considerada
+tf=18e-6  # tiempo de simulación considerado 
+    \end{minted}
+    \caption{Datos de simulación.}
+    \label{listing:datos_espectrometro}
+\end{code}
+
 \begin{figure}[!htb]
-    %\includegraphics[width=\linewidth]{espectrometro_simulacion}
-    \caption{....}
+    \includegraphics[width=\linewidth]{espectrometro_simulacion}
+    \caption{Gráfica de simulación de espectrómetro de masa para los iones de hidrógeno $^1H^+$, $^2H^+$ y $^3H+$. El detalle muestra los puntos de impacto $x^s_1 = 1.11\cdot 10^{-1}~[m]$, $x^s_2 = 1.58\cdot 10^{-1}~[m]$, $x^s_3 = 1.93\cdot 10^{-1}~[m]$.}
     \label{fig:espectrometro_simulacion}
 \end{figure}
 
