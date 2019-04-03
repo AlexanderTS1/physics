@@ -998,10 +998,10 @@ En esta sección de la práctica trataremos el movimiento de protones en un cicl
 Para resolver este problemas fijaremos tanto un campo eléctrico $E$ entre las Ds del ciclotrón, así como un campo magnético $B$ en las mismas. Definiremos también la distancia entre las Ds y su radio. Calcularemos el período del movimiento circular, así como el tiempo que tarda la partícula en atravesar la región de campo eléctrico y la energía que ganará cada vez que pase entre las Ds. Para el cálculo tanto analítico como simulado utilizaremos los siguientes datos de entrada:
 
 \begin{itemize}
-    \item Masa $m = 1.66\cdot 10^{-27}~[kg]$ y carga $q = 1.6\cdot 10^{-19}~[C]$ del protón.
+    \item Masa $m = 1.67\cdot 10^{-27}~[kg]$ y carga $q = 1.60\cdot 10^{-19}~[C]$ del protón.
     \item Campo magnético $B = 1\cdot 10^{-1}~[T]$ en las Ds.
     \item Diferencia de potencial $V = 5\cdot 10^3~[V]$ entre las Ds.
-    \item Distancia entre las Ds $d = 1\cdot 10^{-2}~[m]$.
+    \item Distancia entre las Ds $d = 2\cdot 10^{-2}~[m]$.
     \item Radio de las Ds $r = 2.5\cdot 10^{-1}~[m]$.
 \end{itemize}
 
@@ -1024,13 +1024,19 @@ T = \displaystyle\frac{2\pi r}{v} = \displaystyle\frac{2\pi mv}{qBv} = \displays
 El tiempo que tarda un protón en reposo en atravesar la zona de las Ds podemos obtenerlo teniendo en cuenta que únicamente la fuerza eléctrica provoca una aceleración sobre el mismo
 
 \begin{equation}
-F_e = ma \Rightarrow qE = ma \Rightarrow a = \displaystyle\frac{qE}{m}~[m\cdot s^{-2}]~.
+F_e = ma \Rightarrow qE = ma \Rightarrow a = \displaystyle\frac{qE}{m}~[m\cdot s^{-2}]~,
+\end{equation}
+
+teniendo en cuenta que $V = Ed$
+
+\begin{equation}
+a = \displaystyle\frac{qE}{m} = \displaystyle\frac{qV}{md}~[m\cdot s^{-2}]~.
 \end{equation}
 
 La fuerza eléctrica provoca un movimiento uniformemente acelerado (teniendo en cuenta que el protón en reposo se encuentra equidistante a ambas Ds, la distancia que tendrá que recorrer será $0.5d$)
 
 \begin{equation}
-x = x_0 + v_0t + \displaystyle\frac{1}{2}at^2 \Rightarrow \displaystyle\frac{d}{2} = \displaystyle\frac{1}{2}at^2 \Rightarrow t = \sqrt{\displaystyle\frac{md}{qE}}~[s]~.
+x = x_0 + v_0t + \displaystyle\frac{1}{2}at^2 \Rightarrow \displaystyle\frac{d}{2} = \displaystyle\frac{1}{2}at^2 \Rightarrow t = \sqrt{\displaystyle\frac{md^2}{qV}}~[s]~.
 \end{equation}
 
 Esta aceleración provocada en el ión al atravesar el campo eléctrico incrementa su energía cinética en una cantidad igual al producto de su carga por la diferencia de potencial entre las Ds del ciclotrón
@@ -1039,9 +1045,94 @@ Esta aceleración provocada en el ión al atravesar el campo eléctrico incremen
 \Delta E_c = \displaystyle\frac{1}{2}mv_f^2 - \displaystyle\frac{1}{2}mv_0^2 = qV~[J]~.
 \end{equation}
 
+Para el caso que nos ocupa, un protón tendrá el siguiente período de movimiento circular no relativista
+
+\begin{equation}
+T = \displaystyle\frac{2\pi m}{qB} = \displaystyle\frac{2\pi 1.67\cdot10^{-27}}{1.60\cdot 10^{-19}\cdot 2.00\cdot 10^{-1}} = 6.56\cdot 10^{-7}~[s]~.
+\end{equation}
+
+El tiempo que tarda un protón en reposo en atravesar la zona entre las dos Ds es de
+
+\begin{equation}
+t = \sqrt{\displaystyle\frac{md^2}{qV}} = \sqrt{\displaystyle\frac{1.67\cdot 10^{-27}\cdot (1.00\cdot 10^{-2})^2}{1.60\cdot 10^{-19}\cdot 5\cdot 10^3}} = 2.89\cdot 10^{-8}~[s]~.
+\end{equation}
+
+Cada vez que pasa entre las Ds, el protón gana energía cinética dada la aceleración uniforme sufrida
+
+\begin{equation}
+\Delta E_c = qV = 1.60\cdot 10^{-19} \cdot 5\cdot 10^3 = 8\cdot 10^{-16}~[J]~,
+\end{equation}
+
+al partir del reposo únicamente recorre la mitad de la distancia por lo que gana la mitad de la energía $\Delta_0 E_c = 0.5 \Delta E_c = 4\cdot 10^{-16}~[J]$.
+
 \subsection{Simulación}
 
+En primer lugar, simularemos las condiciones anteriores (ver Código \ref{listing:ciclotron_datos}) para la aceleración de un protón en reposo. La Figura \ref{fig:ciclotron_simulacion} muestra el resultado de esta simulación (tanto la trayectoria seguida por el protón como la evolución de la energía cinética del mismo).
+
+\bigskip
+
+\begin{code}
+    \begin{minted}{python}
+m=1.67e-27 # masa del ion
+q=1.60e-19 #carga del ion
+Bf=1e-1 # Campo magnético existente en las Ds
+dV=5e3 # Diferencia de potencial entre las Ds
+dE=2e-2 # Separacion entre las Ds 
+Ef=dV/dE #Campo electrico entre las Ds
+omega=qm*Bf #frecuencia angular del voltaje
+Rc=2.5e-1 #Radio de las Ds del ciclotron
+tf=49e-7 # tiempo final de simulacion
+    \end{minted}
+    \caption{Datos para simulación de ciclotrón.}
+    \label{listing:ciclotron_datos}
+\end{code}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{ciclotron_simulacion.png}
+    \caption{Resultado de la simulación del protón en el ciclotrón mostrando su trayectoria hasta escapar del ciclotrón (arriba) y la evolución de la energía cinética (abajo).}
+    \label{fig:ciclotron_simulacion}
+\end{figure}
+
 \clearpage
+
+Como podemos comprobar, el protón atraviesa la región entre las Ds en un total de cuatro ocasiones además de la mitad del recorrido que realiza desde el reposo. De acuerdo a nuestro análisis teórico, la energía cinética alcanzada por el protón debería de ser de $4\Delta E_c + \Delta_0 E_c = 4\cdot 8\cdot 10^{-16} + 4\cdot 10^{-16} = 3.6\cdot 10^{-15}~[J]$. Este cálculo analítico coincide con el resultado simulado mostrado en la Figura \ref{fig:ciclotron_simulacion}.
+
+A continuación comprobaremos el efecto de la distancia de separación entre las Ds en el protón y su evolución. De forma analítica demostramos que esta distancia afecta al tiempo que tarda el protón en atravesar la región de separación pero que no tiene ningún efecto sobre el período del movimiento circular ni sobre la energía cinética ganada al atravesar la región antes mencionada. Las Figuras \ref{fig:ciclotron_simulacion_d4} y \ref{fig:ciclotron_simulacion_d8} muestran el resultado de la simulación cuando incrementamos la distancia de separación de $2\cdot 10^-2~[m]$ a $4\cdot 10^{-2}~[m]$ y $8\cdot 10^{-2}~[m]$ respectivamente.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{ciclotron_simulacion_d4.png}
+    \caption{Resultado de la simulación del protón en el ciclotrón mostrando su trayectoria hasta escapar del ciclotrón (arriba) y la evolución de la energía cinética (abajo). En este caso, la distancia de separación entre las Ds ha sido aumentada de de $2\cdot 10^-2~[m]$ a $4\cdot 10^{-2}~[m]$.}
+    \label{fig:ciclotron_simulacion_d4}
+\end{figure}
+
+\newpage
+
+\begin{figure}[!tb]
+    \centering
+    \includegraphics[width=\linewidth]{ciclotron_simulacion_d8.png}
+    \caption{Resultado de la simulación del protón en el ciclotrón mostrando su trayectoria hasta escapar del ciclotrón (arriba) y la evolución de la energía cinética (abajo).}
+    \label{fig:ciclotron_simulacion_d8}
+\end{figure}
+
+Como podemos observar, efectivamente la distancia de separación no tiene efecto sobre la energía cinética máxima alcanzada ni sobre el período del movimiento circular descrito por el protón. Sí que tiene un efecto sobre el movimiento del mismo puesto que, si la distancia es suficientemente grande, el tiempo que el protón emplea en atravesar la región del campo eléctrico no es despreciable respecto al tiempo que pasa en las Ds por lo que se produce un desfase entre el voltaje de la fuente alterna y el movimiento del ión, lo cual provoca a su vez que el ión no siempre se acelere en la región de campo eléctrico sino que como este se opone en ocasiones a su movimiento (fuera de fase) se frena y no se consigue el efecto deseado de acelerar la partícula constantemente. La Figura \ref{fig:ciclotron_simulacion_d4} muestra un caso en el que la distancia no es lo suficientemente grande como para provocar ese desfase, mientras que en el caso de la Figura \ref{fig:ciclotron_simulacion_d8} sí que ocurre este fenómeno.
+
+\clearpage
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{ciclotron_simulacion_w150.png}
+    \caption{Resultado de la simulación del protón en el ciclotrón mostrando su trayectoria hasta escapar del ciclotrón (arriba) y la evolución de la energía cinética (abajo).}
+    \label{fig:ciclotron_simulacion_w150}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{ciclotron_simulacion_w50.png}
+    \caption{Resultado de la simulación del protón en el ciclotrón mostrando su trayectoria hasta escapar del ciclotrón (arriba) y la evolución de la energía cinética (abajo).}
+    \label{fig:ciclotron_simulacion_w50}
+\end{figure}
 
 
 \section{Conclusión}
