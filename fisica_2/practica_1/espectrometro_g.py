@@ -122,11 +122,11 @@ z=odeint(espectrometro,z0,t,args=(par,),atol=abserr, rtol=relerr)
 z2=odeint(espectrometro2,z0,t,args=(par2,),atol=abserr, rtol=relerr)
 z3=odeint(espectrometro3,z0,t,args=(par3,),atol=abserr, rtol=relerr)
 
-matplotlib.rc('xtick', labelsize=24) 
-matplotlib.rc('ytick', labelsize=24) 
+matplotlib.rc('xtick', labelsize=32) 
+matplotlib.rc('ytick', labelsize=32) 
 plt.rc('text', usetex=False)
 plt.rc('font', family='serif')
-plt.rc('font', size='32')
+plt.rc('font', size='40')
 
 fig, ax = plt.subplots()
 
@@ -138,19 +138,14 @@ ax=plt.axes(xlim=(-0.2*LB,LB),ylim=(-0.2*LE,LB))
 # Cambiar los labels de acuerdo a lo calculado
 
 line1, = ax.plot(z[:,0],z[:,2],'--', linewidth=2,
-                 label=r'$^1H^+ (1 [g/mol])$ -- m_1 = ' + str(m) + r' [kg]', )
+        label=r'$^1H^+ m_1$ = ' + "{:.2e}".format(m) + r' [kg]', )
 line2, = ax.plot(z2[:,0],z2[:,2], '--', linewidth=2,
-                 label=r'$^2H^+ (1 [g/mol])$ -- m_2 = ' + str(m2) + r' [kg]')
+        label=r'$^2H^+ m_2$ = ' "{:.2e}".format(m2) + r' [kg]')
 line3, = ax.plot(z3[:,0],z3[:,2], '--', linewidth=2,
-                 label=r'$^3H^+ (1 [g/mol])$ -- m_3 = ' + str(m3) + r' [kg]')
+        label=r'$^3H^+ m_3$ = ' + "{:.2e}".format(m3) + r' [kg]')
 
 
 ax.legend(loc='upper center', fontsize=24)
-
-
-
-
-
 
 # Create distintos rectangulos, flechas y circulo para el dibujo
 rect = patches.Rectangle((-0.2*LB,0),0.4*LB,LE,linewidth=2,edgecolor='r',facecolor='none')
@@ -194,12 +189,12 @@ ax.set_xlabel("x [m]", fontsize=32)
 # Esta parte agrega un grafico pequeño para ver mejor la posicion donde llegan los iones
 # These are in unitless percentages of the figure size. (0,0 is bottom left)
 # CAMBIAR
-left, bottom, width, height = [0.6, 0.2, 0.25, 0.2]
+left, bottom, width, height = [0.58, 0.21, 0.33, 0.25]
 ax = fig.add_axes([left, bottom, width, height])
 
-line4, = ax.plot(z[:,0],z[:,2], '--', linewidth=2)
-line5, = ax.plot(z2[:,0],z2[:,2], '--', linewidth=2)
-line6, = ax.plot(z3[:,0],z3[:,2], '--', linewidth=2)
+line4, = ax.plot(z[:,0],z[:,2], '--', linewidth=4)
+line5, = ax.plot(z2[:,0],z2[:,2], '--', linewidth=4)
+line6, = ax.plot(z3[:,0],z3[:,2], '--', linewidth=4)
 
 #intervalos de los ejes x e y para la grafica pequeña.
 #CAMBIAR

@@ -350,7 +350,7 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-TODO
+En esta primera práctica de la asignatura Física II del Grado en Física (curso académico 2018-2019) estudiaremos el movimiento de cargas en campos electromagnéticos. Para ello consideraremos diferentes partículas (iones de hidrógeno, electrones y protones) en diversos instrumentos típicos y estudiados en la parte teórica de la asignatura: el espectrómetro de masas, el selector de velocidades y el ciclotrón. Para cada caso desarrollaremos las ecuaciones analíticas que nos permitan resolver el movimiento de dichas partículas de forma teórica para posteriormente ejecutar los programas de simulación proporcionados con el objetivo de contrastar los resultados teóricos con los generados numéricamente. Además, exploraremos el efecto de variar ciertos parámetros en cada uno de los instrumentos también tanto de forma teórica como simulada.
 
 El código Python que implementa esta práctica así las modificaciones realizadas a sus rutinas de visualización y las fuentes \LaTeX de este informe se encuentran disponibles online en el repositorio \url{https://github.com/Blitzman/physics/tree/master/fisica_2/practica_1}.
 \end{abstract}
@@ -932,7 +932,7 @@ tf=12e-8  #tiempo de simulacion
 
 \clearpage
 
-Como podemos comprobar, los valores simulados para el período $T^s_1 = 6.563\cdot 10^{-8}~[s]$, $T^s_2 = 6.576\cdot 10^{-8}~[s]$, $T^s_3 = 6.690\cdot 10^{-8}~[s]$, $T^s_4 = 6.807\cdot 10^{-8}~[s]$ y $T^s_5 = 6.963\cdot 10^{-8}~[s]$ son prácticamente similares a los obtenidos de forma teórica. La Figura \ref{fig:relativista_norelativista} muestra la comparativa de la variación de la frecuencia dependiendo de la velocidad para todos los casos anteriormente analizados tanto de forma teórica como de manera simulada.
+Como podemos comprobar, los valores simulados para el período $T^s_1 = 6.563\cdot 10^{-8}~[s]$, $T^s_2 = 6.576\cdot 10^{-8}~[s]$, $T^s_3 = 6.690\cdot 10^{-8}~[s]$, $T^s_4 = 6.807\cdot 10^{-8}~[s]$ y $T^s_5 = 6.963\cdot 10^{-8}~[s]$ son prácticamente similares a los obtenidos de forma teórica. La Figura \ref{fig:relativista_norelativista} muestra la comparativa de la variación de la frecuencia dependiendo de la velocidad para todos los casos anteriormente analizados tanto de forma teórica como de manera simulada. La Figura \ref{fig:relativista_norelativista_energia} muestra esta misma evolución pero en este caso en función de la energía cinética en lugar de la velocidad.
 
 \begin{figure}[!htb]
     \begin{tikzpicture}
@@ -977,8 +977,53 @@ Como podemos comprobar, los valores simulados para el período $T^s_1 = 6.563\cd
         \legend{No relativista (Teórico), Relativista (Teórico), Relativista (Simulado)}
         \end{axis}
     \end{tikzpicture}
-    \caption{Variación de la frecuencia de ciclotrón $f~[Hz]$ en función de la velocidad $v~[m\cdot s^{-1}]$ del protón según los valores teóricos y simulados estudiados tanto para el caso relativista como para el no relativista.}
+    \caption{Variación de la frecuencia de ciclotrón $f~[Hz]$ en función de la energía cinética $E_c~[J]$ del protón según los valores teóricos y simulados estudiados tanto para el caso relativista como para el no relativista.}
     \label{fig:relativista_norelativista}
+\end{figure}
+
+\begin{figure}[!htb]
+    \begin{tikzpicture}
+        \begin{axis}[
+            xlabel={Energía Cinética $[J]$},
+            ylabel={Frecuencia $[Hz]$},
+            ymin=1.4e7, ymax=1.54e7,
+            enlargelimits=true,
+            ytick={1.4e7,1.42e7,1.44e7,1.46e7,1.48e7,1.50e7, 1.52e7, 1.54e7},
+            legend pos=south west,
+            ymajorgrids=true,
+            grid style=dashed,
+        ]
+
+        \addplot[
+            color=blue,
+            mark=none,
+            ]
+            coordinates {
+            (8.365e-24, 1.524e7)(3.353e-13, 1.524e7)(3.072e-12, 1.524e7)(5.552e-12, 1.524e7)(8.875e-12, 1.524e7)
+        };
+
+        \addplot[
+                smooth,
+                color=red,
+                mark=square,
+                ]
+                coordinates {
+                (8.365e-24, 1.524e7)(3.353e-13, 1.521e7)(3.072e-12, 1.494e7)(5.552e-12, 1.470e7)(8.875e-12, 1.436e7)
+                };
+
+        \addplot[
+            only marks,
+            color=green,
+            mark=*,
+            ]
+            coordinates {
+            (8.365e-24, 1.524e7)(3.353e-13, 1.521e7)(3.072e-12, 1.495e7)(5.552e-12, 1.469e7)(8.875e-12, 1.436e7)
+            };
+        \legend{No relativista (Teórico), Relativista (Teórico), Relativista (Simulado)}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Variación de la frecuencia de ciclotrón $f~[Hz]$ en función de la velocidad $v~[m\cdot s^{-1}]$ del protón según los valores teóricos y simulados estudiados tanto para el caso relativista como para el no relativista.}
+    \label{fig:relativista_norelativista_energia}
 \end{figure}
 
 
