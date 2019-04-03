@@ -382,8 +382,8 @@ El informe se organiza de la siguiente manera. En primer lugar, la Sección \ref
 En este primer apartado de la práctica estudiaremos el movimiento de una carga en un espectrómetro de masas. En dicho instrumento (ver Figura \ref{fig:espetrometro}), iones procedentes de una fuente e inicialmente en reposo y los acelera mediante un campo eléctrico, una vez abandonan dicho campo eléctrico entran en una región en la que existe un campo magnético perpendicular a su velocidad que los desvía hasta que colisionan contra una superficie. Los iones seguirán trayectorias con radios de curvatura diferentes según su relación carga/masa y por ello tendrán puntos de incidencia distintos lo cual permite diferenciar unos de otros.
 
 \begin{figure}[!htb]
-    \includegraphics[width=\linewidth]{example-image-a}
-    \caption{Representación esquemática del espectrómetro de masas con el campo eléctrico $E$, el campo magnético $B$, la distancia entre las placas $LE$ y la distancia de simulación considerada $LB$. En rojo se muestra la trayectoria seguida por un ion cualquiera.}
+    \includegraphics[width=\linewidth]{espectrometro.png}
+    \caption{Representación esquemática del espectrómetro de masas con el campo eléctrico $E$, el campo magnético $B$, la distancia entre las placas $LE$ y la distancia de simulación considerada $LB$. En azul se muestra la trayectoria seguida por un ion cualquiera.}
     \label{fig:espetrometro}
 \end{figure}
 
@@ -550,7 +550,7 @@ tf=18e-6  # tiempo de simulación considerado
 En el segundo apartado de la práctica estudiaremos el movimiento de uno de los iones ya mencionados en la sección anterior pero esta vez en el seno de otro instrumento: el selector de velocidades. En este caso, los iones procedentes de una fuente entran con una velocidad inicial al selector, dentro del cual existe tanto un campo eléctrico (perpendicular a la dirección de entrada) y un campo magnético (perpendicular tanto al campo eléctrico como a la dirección de entrada). Según el valor de los campos y la energía cinética del ion, la partícula en el interior se desviará en mayor o menor medida o bien no se desviará y realizará un movimiento rectilíneo consiguiendo salir del selector por una pequeña apertura en el extremo opuesto. De esta forma, eligiendo los valores adecuados para los campos se puede seleccionar aquellas partículas con una velocidad determinada. La Figura \ref{fig:selector} muestra un equema de dicho instrumento.
 
 \begin{figure}[!htb]
-    \includegraphics[width=\linewidth]{example-image-b}
+    \includegraphics[width=\linewidth]{selector.png}
     \caption{Representación esquemática del selector de velocidades de longitud $L$ con un campo eléctrico $E$ y magnético $B$ y una separación entre placas $2H$.}
     \label{fig:selector}
 \end{figure}
@@ -990,7 +990,7 @@ Como podemos comprobar, los valores simulados para el período $T^s_1 = 6.563\cd
 En esta sección de la práctica trataremos el movimiento de protones en un ciclotrón (ver Figura \ref{fig:ciclotron}), un instrumento en el que una partícula cargada es acelerada inicialmente desde el reposo mediante la acción de un campo eléctrico existente en la región de separación entre los dos semicírculos denominados $Ds$ del ciclotrón. En los semicírculos existe un campo magnético que les produce un movimiento circular cuyo radio depende de la velocidad con la que provengan de la región del campo eléctrico que los ha acelerado. Ese movimiento circular les hace volver a la región del campo eléctrico que varía de manera periódica para acelerar los protones hacia la $D$ opuesta. Con el tiempo y tras varios pasos por la región del campo eléctrico y por las $D$ las partículas son capaces de ganar grandes cantidades de energía y alcanzar velocidades tremendamente elevadas.
 
 \begin{figure}[!htb]
-    \includegraphics[width=\linewidth]{example-image-c}
+    \includegraphics[width=1\linewidth]{ciclotron.png}
     \caption{Representación esquemática del ciclotrón con un campo magnético $B$, radio $R$ y distancia $d$.}
     \label{fig:ciclotron}
 \end{figure}
