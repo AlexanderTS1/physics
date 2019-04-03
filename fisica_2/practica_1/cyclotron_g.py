@@ -1,6 +1,7 @@
 import numpy as np
 import math
 import random
+import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.mlab as mlab
@@ -21,12 +22,12 @@ from mpl_toolkits.axes_grid1 import host_subplot
 
 #Datos de entrada del programa
 
-m=1  # masa del ion
-q=1   #carga del ion
+m=1.67e-27  # masa del ion
+q=1.60e-19   #carga del ion
 qm=q/m      # Relacion carga masa
-Bf=10    # Campo magnético existente en las Ds
-dV=10   # Diferencia de potencial alterna existente entre las Ds
-dE=0.05      # Separacion entre las Ds 
+Bf=1e-1    # Campo magnético existente en las Ds
+dV=5e3   # Diferencia de potencial alterna existente entre las Ds
+dE=2e-2      # Separacion entre las Ds 
 # dE debe ser pequeño para que el tiempo que el ion pasa entre las Ds sea 
 # despreciable frente al tiempo que el ion recorre en las Ds
 
@@ -36,9 +37,9 @@ omega=qm*Bf #frecuencia angular del voltaje entre las Ds
 # con el movimiento del ion
 
 
-Rc=1.0      #Radio de las Ds del ciclotron
+Rc=2.5e-1      #Radio de las Ds del ciclotron
 
-tf=3.0   # tiempo final de simulacion
+tf=49e-7   # tiempo final de simulacion
 
 
 par=[qm,Ef,Bf,dE,Rc,omega]
@@ -90,6 +91,12 @@ relerr = 1.0e-6
 z=odeint(ciclotron,z0,t,args=(par,),atol=abserr, rtol=relerr)
 
 
+matplotlib.rc('xtick', labelsize=16) 
+matplotlib.rc('ytick', labelsize=16) 
+plt.rc('text', usetex=False)
+plt.rc('font', family='serif')
+plt.rc('font', size='20')
+
 plt.close('all')
 
 
@@ -97,9 +104,10 @@ plt.close('all')
 # Modificar los limites de los ejes a gusto, así como los titulos
 
 f0 = figure(num = 0, figsize = (5, 10))#, dpi = 100)
-f0.suptitle("Cyclotron", fontsize=12)
 ax01 = subplot2grid((2, 2), (0, 0),colspan=2)
 ax02 = subplot2grid((2, 2), (1, 0),colspan=2)
+ax01.grid(True)
+ax02.grid(True)
 
 # Limites de la grafica del ciclotron
 ax01.set_xlim(-1.5*Rc,1.5*Rc)
@@ -109,8 +117,8 @@ ax01.set_ylim(-1.2*Rc,1.2*Rc)
 # Modificarlo para ver la grafica
 ax02.set_xlim(0,tf)
 
-ax02.set_xlabel("time")
-ax02.set_ylabel("Kinetic Energy")
+ax02.set_xlabel("Tiempo [s]")
+ax02.set_ylabel("Energía Cinética [J]")
 
 # La primera linea corresponde a la trayectoria del ion en el ciclotron
 # la segunda linea corresponde a la grafica de la energía cinetica en funcion del tiempo
@@ -158,8 +166,8 @@ ax01.add_patch(circle3)
 ax01.add_patch(circle4)
 ax01.add_patch(circle5)
 
-ax01.text(-0.65*Rc,0.3*Rc, "B",fontsize=20)
-ax01.text(-0.65*Rc,-0.3*Rc, "B",fontsize=20)
+ax01.text(-0.65*Rc,0.3*Rc, "B",fontsize=32)
+ax01.text(-0.65*Rc,-0.3*Rc, "B",fontsize=32)
 
 
 ax01.add_patch(pac)
@@ -177,8 +185,8 @@ ax01.add_patch(line10)
 
 #plt.figure()   #Anade un nuevo grfico y lo activa
 #plot(t[0:nt],z[0:nt,0], "r")
-ax01.set_xlabel("x")
-ax01.set_ylabel("y")
+ax01.set_xlabel("x [m]")
+ax01.set_ylabel("y [m]")
 #ax02.set_title("Grafico")
 
 

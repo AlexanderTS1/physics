@@ -352,7 +352,7 @@
 \begin{abstract}
 TODO
 
-El código Python que implementa los modelos matemáticos así como las rutinas de visualización para la resolución de este ejercicio se adjunta con este informe y además puede ser consultado en el siguiente repositorio online \footnote{\url{https://github.com/Blitzman/physics}}.
+El código Python que implementa esta práctica así las modificaciones realizadas a sus rutinas de visualización y las fuentes \LaTeX de este informe se encuentran disponibles online en el repositorio \url{https://github.com/Blitzman/physics/tree/master/fisica_2/practica_1}.
 \end{abstract}
 
 
@@ -1102,41 +1102,55 @@ A continuación comprobaremos el efecto de la distancia de separación entre las
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=\linewidth]{ciclotron_simulacion_d4.png}
+    \includegraphics[width=0.9\linewidth]{ciclotron_simulacion_d4.png}
     \caption{Resultado de la simulación del protón en el ciclotrón mostrando su trayectoria hasta escapar del ciclotrón (arriba) y la evolución de la energía cinética (abajo). En este caso, la distancia de separación entre las Ds ha sido aumentada de de $2\cdot 10^-2~[m]$ a $4\cdot 10^{-2}~[m]$.}
     \label{fig:ciclotron_simulacion_d4}
 \end{figure}
 
-\newpage
-
 \begin{figure}[!tb]
     \centering
-    \includegraphics[width=\linewidth]{ciclotron_simulacion_d8.png}
-    \caption{Resultado de la simulación del protón en el ciclotrón mostrando su trayectoria hasta escapar del ciclotrón (arriba) y la evolución de la energía cinética (abajo).}
+    \includegraphics[width=0.9\linewidth]{ciclotron_simulacion_d8.png}
+    \caption{Resultado de la simulación del protón en el ciclotrón mostrando su trayectoria tras describir varios curvas en el ciclotrón (arriba) y la evolución de la energía cinética (abajo). En este caso, la distancia de separación entre las Ds ha sido aumentada de de $2\cdot 10^-2~[m]$ a $8\cdot 10^{-2}~[m]$.}
     \label{fig:ciclotron_simulacion_d8}
 \end{figure}
 
 Como podemos observar, efectivamente la distancia de separación no tiene efecto sobre la energía cinética máxima alcanzada ni sobre el período del movimiento circular descrito por el protón. Sí que tiene un efecto sobre el movimiento del mismo puesto que, si la distancia es suficientemente grande, el tiempo que el protón emplea en atravesar la región del campo eléctrico no es despreciable respecto al tiempo que pasa en las Ds por lo que se produce un desfase entre el voltaje de la fuente alterna y el movimiento del ión, lo cual provoca a su vez que el ión no siempre se acelere en la región de campo eléctrico sino que como este se opone en ocasiones a su movimiento (fuera de fase) se frena y no se consigue el efecto deseado de acelerar la partícula constantemente. La Figura \ref{fig:ciclotron_simulacion_d4} muestra un caso en el que la distancia no es lo suficientemente grande como para provocar ese desfase, mientras que en el caso de la Figura \ref{fig:ciclotron_simulacion_d8} sí que ocurre este fenómeno.
 
-\clearpage
+Por último, estudiaremos el efecto que produce la variación de la frecuencia de voltaje alterno respecto al valor óptimo establecido para la simulación. En concreto, analizaremos las situaciones en las que la frecuencia de voltaje alterno es un $50\%$ mayor y un $50\%$ menor del valor óptimo. El resultado de la simulación para una frecuencia un $50\%$ mayor se muestra en la Figura \ref{fig:ciclotron_simulacion_w150} mientras que la simulación para la frecuencia un $50\%$ menor queda representada en la Figura \ref{fig:ciclotron_simulacion_w50}.
+
+En ambos casos ocurre un problema similar a cuando incrementamos suficientemente la distancia entre las Ds: existe un desfase entre la frecuencia del voltaje alterno y el movimiento del ión de forma que no siempre se acelera al atravesar la región de campo eléctrico sino que en ocasiones se frena e incluso llega a invertir el sentido de su trayectoria.
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=\linewidth]{ciclotron_simulacion_w150.png}
-    \caption{Resultado de la simulación del protón en el ciclotrón mostrando su trayectoria hasta escapar del ciclotrón (arriba) y la evolución de la energía cinética (abajo).}
+    \includegraphics[width=0.9\linewidth]{ciclotron_simulacion_w150.png}
+    \caption{Resultado de la simulación del protón en el ciclotrón mostrando su trayectoria (arriba) y la evolución de la energía cinética del mismo (abajo). La frecuencia de voltaje alterno es un $150\%$ de la frecuencia óptima previamente establecida.}
     \label{fig:ciclotron_simulacion_w150}
 \end{figure}
 
+En el caso de la Figura \ref{fig:ciclotron_simulacion_w150} en el que la frecuencia del voltaje es un $150\%$ respecto a la frecuencia óptima podemos observar cómo la energía cinética oscila de forma que el protón es frenado en ocasiones por lo que su trayectoria no sigue el movimiento circular esperado en el ciclotrón.
+
+Por otro lado, en la situación mostrada en la Figura \ref{fig:ciclotron_simulacion_w50} en la que disminuímos la frecuencia de voltaje hasta un $50\%$ de la óptima, podemos observar cómo tras describir la primera curva el protón entra de nuevo en la región de campo eléctrico y es frenado e incluso invierte el sentido de su movimiento regresando a la D de la cual proviene. En este caso tampoco se produce el comportamiento esperado en un ciclotrón.
+
+En definitiva, todas las simulaciones realizadas constatan la importancia de elegir tanto una distancia adecuada para las Ds como una frecuencia de voltaje alterno óptima para producir el comportamiento deseado en el protón y en general en cualquier ión que se deje en reposo en el centro del ciclotrón.
+
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=\linewidth]{ciclotron_simulacion_w50.png}
-    \caption{Resultado de la simulación del protón en el ciclotrón mostrando su trayectoria hasta escapar del ciclotrón (arriba) y la evolución de la energía cinética (abajo).}
+    \includegraphics[width=0.9\linewidth]{ciclotron_simulacion_w50.png}
+    \caption{Resultado de la simulación del protón en el ciclotrón mostrando su trayectoria hasta escapar del ciclotrón (arriba) y la evolución de la energía cinética del mismo (abajo). La frecuencia de voltaje alterno es un $50\%$ de la frecuencia óptima previamente establecida.}
     \label{fig:ciclotron_simulacion_w50}
 \end{figure}
 
+Por último, otra posibilidad a comentar es el hecho de que los iones dentro del ciclotrón (en nuestro caso el protón) alcancen velocidades relativistas. En la Sección \ref{sec:frecuencia} estudiamos el efecto de la velocidad sobre la frecuencia de ciclotrón y determinamos que, para situaciones relativistas, el período aumentaba con la velocidad (ya que la masa relativista aumentaba respecto a la masa invariante) y por lo tanto la frecuencia de ciclotrón disminuye. De la misma forma, el radio de curvatura era proporcional a la masa de la partícula por lo que este aumentaba conforme aumentaba la velocidad de la misma. Este hecho conlleva una problemática y es que al variar el período del movimiento circular manteniendo la frecuencia de voltaje alterno fija eventualmente se producirá un desfase entre dicha frecuencia y el movimiento del protón que provocará problemas como los sucedidos en las simulaciones anteriores. Dos posibles soluciones a esta eventualidad pueden ser o bien variar la frecuencia de voltaje alterno para mantener la fase con la trayectoria del protón o bien aumentar con cada paso por la región de campo eléctrico la intensidad del campo magnético en las Ds para compensar el incremento de masa relativista provocado por el aumento de velocidad gracias a la fuerza eléctrica y así mantener el período y la frecuencia de ciclotrón constantes a lo largo de toda la trayectoria.
 
 \section{Conclusión}
 \label{sec:conclusion}
+En esta primera práctica de la asignatura hemos presentado un estudio del movimiento de varios tipos de cargas en campos electromagnéticos producidos por diversos instrumentos utilizados en la actualidad. Para cada uno de ellos hemos llevado a cabo una solución analítica que posteriormente ha sido contrastada con simulaciones en las que hemos explorado el efecto de varios de los parámetros que rigen dicho instrumental.
+
+Gracias a la realización de esta práctica y de su informe hemos consolidado en gran medida el conocimiento sobre campos electromagnéticos y su efecto sobre diferentes partículas así como de otros tantos valores (frecuencias, períodos, radios de curvatura y energías).
+
+\clearpage
+
+El código Python que implementa esta práctica así como las fuentes \LaTeX de este informe se encuentran disponibles online en el repositorio \url{https://github.com/Blitzman/physics/tree/master/fisica_2/practica_1}.
 
 
 \end{document}
