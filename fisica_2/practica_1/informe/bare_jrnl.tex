@@ -23,6 +23,8 @@
 \usepackage{tikz}
 \usetikzlibrary{scopes}
 \usetikzlibrary{babel}
+\usepackage{pgfplots}
+\usepackage{amsmath}
 
 % *** MISC UTILITY PACKAGES ***
 %
@@ -651,7 +653,336 @@ tf=10.0
     \label{fig:selector_simulacion}
 \end{figure}
 
+\newpage
+
+\section{Frecuencia de Ciclotrón Relativista}
+\label{sec:frecuencia}
+
+En este apartado se pide estudiar el movimiento de partículas relativistas en campos
+magnéticos, es decir, teniendo en cuenta el efecto que tiene la teoría de la relatividad
+especial sobre el movimiento. En definitiva, deberemos comprobar cómo varía la frecuencia del movimiento circular de una partícula que se mueve en un campo magnético homogéneo en función de su velocidad cuando se aproxima a la velocidad de la luz $c \simeq 3\cdot 10^8~[m\cdot s^{-1}]$.
+
+Para resolver este problema elegiremos una partícula, en nuestro caso el protón, y escogeremos para la misma una serie de valores para la velocidad (entre $1\cdot 10^2~[m\cdot s^{-1}]$ y $1\cdot 10^84[m\cdot s^{-1}]$) así como el campo magnético fijo. De esta forma, los datos de entrada serán los siguientes:
+
+\begin{itemize}
+    \item Masa $m = 1.673\cdot 10^{-27}~[kg]$ y carga $q = 1.602\cdot 10^{-19}~[C]$ de la partícula (protón).
+    \item Velocidades de la partícula $1\cdot 10^2~[m\cdot s^{-1}]$, $0.2\cdot 10^8~[m\cdot s^{-1}]$, $0.6\cdot 10^8~[m\cdot s^{-1}]$, $0.8\cdot 10^8~[m\cdot s^{-1}]$ y $1\cdot 10^8~[m\cdot s^{-1}]$.
+    \item Campo magnético $B = 1~[T]$.
+\end{itemize}
+
+\subsection{Cálculos Analíticos}
+
+En primer lugar, trataremos de obtener el radio de la curva que describe el protón en el seno de un campo magnético (por ejemplo, dentro del selector de velocidades o en las Ds de un ciclotrón tal y como veremos en la siguiente sección). Dicho campo magnético provoca la aparición de una fuerza magnética sobre la partícula ya que esta se desplaza con velocidad perpendicular al mismo. Esta fuerza hace que describa un movimiento circular cuyo radio podemos determinar como en el caso del espectrómetro de masas para velocidades no relativistas
+
+\begin{equation}
+F_m = ma_c \Rightarrow qvB = m \displaystyle\frac{v^2}{r} \Rightarrow r = \displaystyle\frac{mv}{qB}~[m]~.
+\end{equation}
+
+Para el caso de velocidades relativistas, la fórmula es idéntica pero reemplazando la masa invariante $m$ por la masa relativista $m\gamma$ siendo la constante
+
+\begin{equation}
+\gamma = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{v^2}{c^2})}},
+\end{equation}
+
+por lo tanto el radio de curvatura en el caso relativista es
+
+\begin{equation}
+r_\gamma = \displaystyle\frac{m\gamma v}{qB} = \displaystyle\frac{mv}{qB\sqrt{(1-\displaystyle\frac{v^2}{c^2})}}~[m]~.
+\end{equation}
+
+El período se puede calcular para el caso no relativista como
+
+\begin{equation}
+T = \displaystyle\frac{2\pi r}{v} = \displaystyle\frac{2\pi mv}{qBv} = \displaystyle\frac{2\pi m}{qB}~[s]~.
+\end{equation}
+
+Como podemos comprobar, no depende de la velocidad. El análogo relativista sí que depende de la misma puesto que la masa lo hace
+
+\begin{equation}
+T_\gamma = \displaystyle\frac{2\pi m\gamma}{qB} = \displaystyle\frac{2\pi m}{qB\sqrt{(1-\displaystyle\frac{v^2}{c^2})}} ~[s]~.
+\end{equation}
+
+La frecuencia en ambos casos es la inversa del período
+
+\begin{equation}
+    f = \displaystyle\frac{1}{T} = \displaystyle\frac{qB}{2\pi m}~[Hz]~.
+\end{equation}
+
+\begin{equation}
+    f_\gamma = \displaystyle\frac{1}{T_\gamma} = \displaystyle\frac{qB\sqrt{(1-\displaystyle\frac{v^2}{c^2})}}{2\pi m}~[Hz]~.
+\end{equation}
+
+\subsubsection{$v_1 = 1.0\cdot 10^2~[m\cdot s^{-1}]$}
+
+Para la primera velocidad seleccionada estamos ante un caso no relativista. Dada la escasa velocidad, la constante $\gamma$ se aproxima a $1.00$ por lo que la masa relativista es prácticamente igual a la masa invariante
+
+\begin{equation}
+\gamma_1 = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{v_1^2}{c^2})}} = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{(1.0\cdot 10^2)^2}{(3\cdot 10^8)^2})}} \simeq 1.000
+\end{equation}
+
+Su radio de curvatura es por lo tanto
+
+\begin{equation}
+r_1 = \displaystyle\frac{mv_1}{qB} = \displaystyle\frac{1.673\cdot 10^{-27}\cdot 1.000\cdot 10^2}{1.602\cdot 10^{-19}\cdot 1.000} = 1.044\cdot 10^{-6}~[m]~.
+\end{equation}
+
+Su período es
+
+\begin{equation}
+T_1 = \displaystyle\frac{2\pi m}{qB} = \displaystyle\frac{2\pi \cdot 1.673\cdot 10^{-27}}{1.602\cdot 10^{-19}\cdot 1.000} = 6.562\cdot 10^{-8}~[s]~,
+\end{equation}
+
+y por lo tanto la frecuencia es
+
+\begin{equation}
+f_1 = \displaystyle\frac{1}{T_1} = \displaystyle\frac{1}{6.562\cdot 10^{-8}} = 1.524\cdot 10^7~[Hz]~.
+\end{equation}
+
+\subsubsection{$v_2 = 0.2\cdot 10^8~[m\cdot s^{-1}]$}
+
+Para la segunda velocidad seleccionada nos encontramos ante un caso relativista. La velocidad cercana a la velocidad de la luz hace que la constante $\gamma$ sea superior a $1.00$ por lo que la masa relativista es mayor que la masa invariante 
+
+\begin{equation}
+\gamma_2 = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{v_2^2}{c^2})}} = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{(0.2\cdot 10^8)^2}{(3\cdot 10^8)^2})}} \simeq 1.002
+\end{equation}
+
+Su radio de curvatura es por lo tanto
+
+\begin{equation}
+r_2 = \displaystyle\frac{m\gamma_2v_2}{qB} = \displaystyle\frac{1.67\cdot 10^{-27}\cdot 1.002 \cdot 0.200\cdot 10^8}{1.603\cdot 10^{-19}\cdot 1.000} = 2.093\cdot 10^{-1}~[m]~.
+\end{equation}
+
+Su período es
+
+\begin{equation}
+T_2 = \displaystyle\frac{2\pi m\gamma_2}{qB} = \displaystyle\frac{2\pi \cdot 1.67\cdot 10^{-27}\cdot 1.002}{1.6\cdot 10^{-19}\cdot 1.000} = 6.575\cdot 10^{-8}~[s]~,
+\end{equation}
+
+y por lo tanto la frecuencia es
+
+\begin{equation}
+f_2 = \displaystyle\frac{1}{T_2} = \displaystyle\frac{1}{6.575\cdot 10^{-8}} = 1.521\cdot 10^7~[Hz]~.
+\end{equation}
+
+
+\subsubsection{$v_3 = 0.6\cdot 10^8~[m\cdot s^{-1}]$}
+
+Para la tercera velocidad, la constante $\gamma$ es todavía mayor
+
+\begin{equation}
+\gamma_3 = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{v_3^2}{c^2})}} = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{(0.600\cdot 10^8)^2}{(3.000\cdot 10^8)^2})}} \simeq 1.020
+\end{equation}
+
+Su radio de curvatura es por lo tanto
+
+\begin{align}
+r_3 = \displaystyle\frac{m\gamma_3v_3}{qB} = \displaystyle\frac{1.673\cdot 10^{-27}\cdot 1.020 \cdot 0.600\cdot 10^8}{1.602\cdot 10^{-19}\cdot 1.000} = \\
+= 6.391\cdot 10^{-1}~[m]~.
+\end{align}
+
+Su período es
+
+\begin{equation}
+    T_3 = \displaystyle\frac{2\pi m\gamma_3}{qB} = \displaystyle\frac{2\pi \cdot 1.673\cdot 10^{-27}\cdot 1.020}{1.602\cdot 10^{-19}\cdot 1.000} = 6.693\cdot 10^{-8}~[s]~,
+\end{equation}
+
+y por lo tanto la frecuencia es
+
+\begin{equation}
+f_3 = \displaystyle\frac{1}{T_3} = \displaystyle\frac{1}{6.693\cdot 10^{-8}} = 1.494\cdot 10^7~[Hz]~.
+\end{equation}
+
+\subsubsection{$v_4 = 0.8\cdot 10^8~[m\cdot s^{-1}]$}
+
+En el caso de la cuarta velocidad, $\gamma$ continúa creciendo
+
+\begin{equation}
+\gamma_4 = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{v_4^2}{c^2})}} = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{(0.8\cdot 10^8)^2}{(3\cdot 10^8)^2})}} \simeq 1.037
+\end{equation}
+
+Su radio de curvatura es por lo tanto
+
+\begin{align}
+r_4 = \displaystyle\frac{m\gamma_4v_4}{qB} = \displaystyle\frac{1.673\cdot 10^{-27}\cdot 1.037 \cdot 0.800\cdot 10^8}{1.602\cdot 10^{-19}\cdot 1.000} = \\
+= 8.664\cdot 10^{-1}~[m]~.
+\end{align}
+
+Su período es
+
+\begin{equation}
+T_4 = \displaystyle\frac{2\pi m\gamma_4}{qB} = \displaystyle\frac{2\pi \cdot 1.673\cdot 10^{-27}\cdot 1.037}{1.602\cdot 10^{-19}\cdot 1.000} = 6.804\cdot 10^{-8}~[s]~,
+\end{equation}
+
+y por lo tanto la frecuencia es
+
+\begin{equation}
+f_4 = \displaystyle\frac{1}{T_4} = \displaystyle\frac{1}{6.804\cdot 10^{-8}} = 1.470\cdot 10^7~[Hz]~.
+\end{equation}
+
+\subsubsection{$v_5 = 1.0\cdot 10^8~[m\cdot s^{-1}]$}
+
+La quinta velocidad posee la constante $\gamma$ más elevada
+
+\begin{equation}
+\gamma_5 = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{v_5^2}{c^2})}} = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{(1.0\cdot 10^8)^2}{(3\cdot 10^8)^2})}} \simeq 1.061
+\end{equation}
+
+Su radio de curvatura es por lo tanto
+
+\begin{align}
+r_5 = \displaystyle\frac{m\gamma_5v_5}{qB} = \displaystyle\frac{1.673\cdot 10^{-27}\cdot 1.061 \cdot 1.000\cdot 10^8}{1.602\cdot 10^{-19}\cdot 1.000} = \\
+= 1.108~[m]~.
+\end{align}
+
+Su período es
+
+\begin{equation}
+T_5 = \displaystyle\frac{2\pi m\gamma_5}{qB} = \displaystyle\frac{2\pi \cdot 1.673\cdot 10^{-27}\cdot 1.061}{1.602\cdot 10^{-19}\cdot 1.000} = 6.962\cdot 10^{-8}~[s]~,
+\end{equation}
+
+y por lo tanto la frecuencia es
+
+\begin{equation}
+f_5 = \displaystyle\frac{1}{T_5} = \displaystyle\frac{1}{6.962\cdot 10^{-8}} = 1.436\cdot 10^7~[Hz]~.
+\end{equation}
+
+\subsection{Simulación}
+
+La simulación del movimiento del protón con velocidad no relativista y velociades relativista se muestra en las Figuras \ref{fig:freqrelt0}, \ref{fig:freqrelt1}, \ref{fig:freqrelt2}, \ref{fig:freqrelt3}, \ref{fig:freqrelt4} respectivamente para las velocidades $1\cdot 10^2~[m\cdot s^{-1}]$, $0.2\cdot 10^8~[m\cdot s^{-1}]$, $0.6\cdot 10^8~[m\cdot s^{-1}]$, $0.8\cdot 10^8~[m\cdot s^{-1}]$ y $1\cdot 10^8~[m\cdot s^{-1}]$. El código proporcionado ha sido modificado para encontrar los dos mínimos más próximos en la simulación y calcular el período dados los instantes temporales de dichos valores. En todas las figuras antes mencionadas se muestra el período estimado $T^s$ así como la línea que une los dos instantes temporales utilizados para su cálculo. El Código \ref{listing:datos_frecuencia} muestra los datos empleados en el programa de simulación.
+
+\bigskip
+
+\begin{code}
+    \begin{minted}{python}
+m=1.673e-27  # masa del ion
+q=1.602e-19   # Carga del ion
+B=1.0  # Campo magnético
+#Ecr=(np.random.rand())*40+10
+#Ec=round(Ecr,2)
+vx0=1.0e2  # velocidad del ion
+tf=12e-8  #tiempo de simulacion
+    \end{minted}
+    \caption{Datos de simulación para estudio de frecuencias a velocidades relativistas. El valor \mintinline{python}{vx0} cambiará según la velocidad a estudiar.}
+    \label{listing:datos_frecuencia}
+\end{code}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{freq_rel_t_0.png}
+    \caption{Variación de la coordenada del protón para velocidad no relativista $v = 1\cdot 10^2~[m\cdot s^{-1}]$.}
+    \label{fig:freqrelt0}
+\end{figure}
+
+\newpage
+
+\hfill
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{freq_rel_t_1.png}
+    \caption{Variación de la coordenada del protón para velocidad relativista $v = 0.2\cdot 10^8~[m\cdot s^{-1}]$.}
+    \label{fig:freqrelt1}
+\end{figure}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{freq_rel_t_2.png}
+    \caption{Variación de la coordenada del protón para velocidad relativista $v = 0.6\cdot 10^8~[m\cdot s^{-1}]$.}
+    \label{fig:freqrelt2}
+\end{figure}
+
+\hfill
+
+\newpage
+
+\hfill
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{freq_rel_t_3.png}
+    \caption{Variación de la coordenada del protón para velocidad relativista $v = 0.8\cdot 10^8~[m\cdot s^{-1}]$.}
+    \label{fig:freqrelt3}
+\end{figure}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\hfill
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{freq_rel_t_4.png}
+    \caption{Variación de la coordenada del protón para velocidad relativista $v = 1.0\cdot 10^8~[m\cdot s^{-1}]$.}
+    \label{fig:freqrelt4}
+\end{figure}
+
+\hfill
+
 \clearpage
+
+Como podemos comprobar, los valores simulados para el período $T^s_1 = 6.563\cdot 10^{-8}~[s]$, $T^s_2 = 6.576\cdot 10^{-8}~[s]$, $T^s_3 = 6.690\cdot 10^{-8}~[s]$, $T^s_4 = 6.807\cdot 10^{-8}~[s]$ y $T^s_5 = 6.963\cdot 10^{-8}~[s]$ son prácticamente similares a los obtenidos de forma teórica. La Figura \ref{fig:relativista_norelativista} muestra la comparativa de la variación de la frecuencia dependiendo de la velocidad para todos los casos anteriormente analizados tanto de forma teórica como de manera simulada.
+
+\begin{figure}[!htb]
+    \begin{tikzpicture}
+        \begin{axis}[
+            xlabel={Velocidad $[m\cdot s^{-1}]$},
+            ylabel={Frecuencia $[Hz]$},
+            xmin=0.0, xmax=1.0e8,
+            ymin=1.4e7, ymax=1.54e7,
+            enlargelimits=true,
+            xtick={0,0.2e8, 0.4e8, 0.6e8, 0.8e8, 1.0e8},
+            ytick={1.4e7,1.42e7,1.44e7,1.46e7,1.48e7,1.50e7, 1.52e7, 1.54e7},
+            legend pos=south west,
+            ymajorgrids=true,
+            grid style=dashed,
+        ]
+         
+        \addplot[
+            color=blue,
+            mark=none,
+            ]
+            coordinates {
+            (0, 1.524e7)(0.2e8, 1.524e7)(0.6e8, 1.524e7)(0.8e8, 1.524e7)(1.0e8, 1.524e7)
+            };
+
+        \addplot[
+                smooth,
+                color=red,
+                mark=square,
+                ]
+                coordinates {
+                (0, 1.524e7)(0.2e8, 1.521e7)(0.6e8, 1.494e7)(0.8e8, 1.470e7)(1.0e8, 1.436e7)
+                };
+        \addplot[
+                smooth,
+                only marks,
+                color=green,
+                mark=*,
+                ]
+                coordinates {
+                (0, 1.524e7)(0.2e8, 1.521e7)(0.6e8, 1.495e7)(0.8e8, 1.469e7)(1.0e8, 1.436e7)
+                };
+        \legend{No relativista (Teórico), Relativista (Teórico), Relativista (Simulado)}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Variación de la frecuencia de ciclotrón $f~[Hz]$ en función de la velocidad $v~[m\cdot s^{-1}]$ del protón según los valores teóricos y simulados estudiados tanto para el caso relativista como para el no relativista.}
+    \label{fig:relativista_norelativista}
+\end{figure}
+
+
+\newpage
 
 \section{Ciclotrón}
 \label{sec:ciclotron}
@@ -699,181 +1030,19 @@ F_e = ma \Rightarrow qE = ma \Rightarrow a = \displaystyle\frac{qE}{m}~[m\cdot s
 La fuerza eléctrica provoca un movimiento uniformemente acelerado (teniendo en cuenta que el protón en reposo se encuentra equidistante a ambas Ds, la distancia que tendrá que recorrer será $0.5d$)
 
 \begin{equation}
-x = x_0 + v_0t + \displaystyle\frac{1}{2}at^2 \Rightarrow \displaystyle\frac{d}{2} = \displaystyle\frac{1}{2}at^2 \Rightarrow t = \sqrt{\displaystyle\frac{md}{qE}}~[s]~,
+x = x_0 + v_0t + \displaystyle\frac{1}{2}at^2 \Rightarrow \displaystyle\frac{d}{2} = \displaystyle\frac{1}{2}at^2 \Rightarrow t = \sqrt{\displaystyle\frac{md}{qE}}~[s]~.
+\end{equation}
+
+Esta aceleración provocada en el ión al atravesar el campo eléctrico incrementa su energía cinética en una cantidad igual al producto de su carga por la diferencia de potencial entre las Ds del ciclotrón
+
+\begin{equation}
+\Delta E_c = \displaystyle\frac{1}{2}mv_f^2 - \displaystyle\frac{1}{2}mv_0^2 = qV~[J]~.
 \end{equation}
 
 \subsection{Simulación}
 
 \clearpage
 
-\section{Frecuencia de Ciclotrón Relativista}
-\label{sec:frecuencia}
-
-Para resolver este problema elegiremos una partícula, en nuestro caso el protón, y escogeremos para la misma una serie de valores para la velocidad (entre $1\cdot 10^2~[m\cdot s^{-1}]$ y $1\cdot 10^84[m\cdot s^{-1}]$) así como el campo magnético fijo del ciclotrón. De esta forma, los datos de entrada serán los siguientes:
-
-\begin{itemize}
-    \item Masa $m = 1.67\cdot 10^{-27}~[kg]$ y carga $q = 1.6\cdot 10^{-19}~[C]$ de la partícula (protón).
-    \item Velocidades de la partícula $1\cdot 10^2~[m\cdot s^{-1}]$, $0.2\cdot 10^8~[m\cdot s^{-1}]$, $0.6\cdot 10^8~[m\cdot s^{-1}]$, $0.8\cdot 10^8~[m\cdot s^{-1}]$ y $1\cdot 10^8~[m\cdot s^{-1}]$.
-    \item Campo magnético $B = 1~[T]$.
-\end{itemize}
-
-\subsection{Cálculos Analíticos}
-
-En primer lugar, trataremos de obtener el radio de la curva que describe el protón en el ciclotrón una vez abandona el campo eléctrico y se ve sometido a una aceleración causada por el campo magnético en cada una de las Ds. Dicho campo magnético provoca la aparición de una fuerza magnética sobre la partícula ya que esta se desplaza con velocidad perpendicular al mismo. Esta fuerza hace que describa un movimiento circular cuyo radio podemos determinar como en el caso del espectrómetro de masas para velocidades no relativistas
-
-\begin{equation}
-F_m = ma_c \Rightarrow qvB = m \displaystyle\frac{v^2}{r} \Rightarrow r = \displaystyle\frac{mv}{qB}~[m]~.
-\end{equation}
-
-Para el caso de velocidades relativistas, la fórmula es idéntica pero reemplazando la masa invariante $m$ por la masa relativista $m\gamma$ siendo la constante
-
-\begin{equation}
-\gamma = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{v^2}{c^2})}},
-\end{equation}
-
-por lo tanto el radio de curvatura en el caso relativista es
-
-\begin{equation}
-r_\gamma = \displaystyle\frac{m\gamma v}{qB} = \displaystyle\frac{mv}{qB\sqrt{(1-\displaystyle\frac{v^2}{c^2})}}~[m]~.
-\end{equation}
-
-El período se puede calcular para el caso no relativista como
-
-\begin{equation}
-T = \displaystyle\frac{2\pi r}{v} = \displaystyle\frac{2\pi mv}{qBv} = \displaystyle\frac{2\pi m}{qB}~[s]~.
-\end{equation}
-
-Como podemos comprobar, no depende de la velocidad. El análogo relativista sí que depende de la misma puesto que la masa lo hace
-
-\begin{equation}
-T_\gamma = \displaystyle\frac{2\pi m\gamma}{qB} = \displaystyle\frac{2\pi m}{qB\sqrt{(1-\displaystyle\frac{v^2}{c^2})}} ~[s]~.
-\end{equation}
-
-La frecuencia en ambos casos es la inversa del período
-
-\begin{equation}
-    f = \displaystyle\frac{1}{T} = \displaystyle\frac{qB}{2\pi m}~[Hz]~.
-\end{equation}
-
-\begin{equation}
-    f_\gamma = \displaystyle\frac{1}{T_\gamma} = \displaystyle\frac{qB\sqrt{(1-\displaystyle\frac{v^2}{c^2})}}{2\pi m}~[Hz]~.
-\end{equation}
-
-\subsubsection{$v_1 = 1.0\cdot 10^2~[m\cdot s^{-1}]$}
-
-Para la primera velocidad seleccionada estamos ante un caso no relativista. Dada la escasa velocidad, la constante $\gamma$ se aproxima a $1.00$ por lo que la masa relativista es prácticamente igual a la masa invariante
-
-\begin{equation}
-\gamma_1 = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{v_1^2}{c^2})}} = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{(1.0\cdot 10^2)^2}{(3\cdot 10^8)^2})}} \simeq 1.00
-\end{equation}
-
-Su radio de curvatura es por lo tanto
-
-\begin{equation}
-r_1 = \displaystyle\frac{mv_1}{qB} = \displaystyle\frac{1.67\cdot 10^{-27}\cdot 1.0\cdot 10^2}{1.6\cdot 10^{-19}\cdot 1} = 1.04\cdot 10^{-6}~[m]~.
-\end{equation}
-
-Su período es
-
-\begin{equation}
-T_1 = \displaystyle\frac{2\pi m}{qB} = \displaystyle\frac{2\pi \cdot 1.67\cdot 10^{-27}}{1.6\cdot 10^{-19}\cdot 1.0} = 6.56\cdot 10^{-8}~[s]~,
-\end{equation}
-
-y por lo tanto la frecuencia es
-
-\begin{equation}
-f_1 = \displaystyle\frac{1}{T_1} = \displaystyle\frac{1}{6.56\cdot 10^{-8}} = 1.52\cdot 10^7~[Hz]~.
-\end{equation}
-
-\subsubsection{$v_2 = 0.2\cdot 10^8~[m\cdot s^{-1}]$}
-
-Para la segunda velocidad seleccionada nos encontramos ante un caso relativista. La velocidad cercana a la velocidad de la luz hace que la constante $\gamma$ sea superior a $1.00$ por lo que la masa relativista es mayor que la masa invariante 
-
-\begin{equation}
-\gamma_2 = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{v_2^2}{c^2})}} = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{(0.2\cdot 10^8)^2}{(3\cdot 10^8)^2})}} \simeq 1.002
-\end{equation}
-
-Su radio de curvatura es por lo tanto
-
-\begin{equation}
-r_2 = \displaystyle\frac{m\gamma_2v_2}{qB} = \displaystyle\frac{1.67\cdot 10^{-27}\cdot 1.002 \cdot 0.2\cdot 10^8}{1.6\cdot 10^{-19}\cdot 1} = 2.09\cdot 10^{-1}~[m]~.
-\end{equation}
-
-\subsubsection{$v_3 = 0.6\cdot 10^8~[m\cdot s^{-1}]$}
-
-Para la tercera velocidad, la constante $\gamma$ es todavía mayor
-
-\begin{equation}
-\gamma_3 = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{v_3^2}{c^2})}} = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{(0.6\cdot 10^8)^2}{(3\cdot 10^8)^2})}} \simeq 1.020
-\end{equation}
-
-Su radio de curvatura es por lo tanto
-
-\begin{equation}
-r_3 = \displaystyle\frac{m\gamma_3v_3}{qB} = \displaystyle\frac{1.67\cdot 10^{-27}\cdot 1.020 \cdot 0.6\cdot 10^8}{1.6\cdot 10^{-19}\cdot 1} = 6.39\cdot 10^{-1}~[m]~.
-\end{equation}
-
-\subsubsection{$v_4 = 0.8\cdot 10^8~[m\cdot s^{-1}]$}
-
-En el caso de la cuarta velocidad, $\gamma$ continúa creciendo
-
-\begin{equation}
-\gamma_4 = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{v_4^2}{c^2})}} = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{(0.8\cdot 10^8)^2}{(3\cdot 10^8)^2})}} \simeq 1.037
-\end{equation}
-
-Su radio de curvatura es por lo tanto
-
-\begin{equation}
-r_4 = \displaystyle\frac{m\gamma_4v_4}{qB} = \displaystyle\frac{1.67\cdot 10^{-27}\cdot 1.037 \cdot 0.8\cdot 10^8}{1.6\cdot 10^{-19}\cdot 1} = 8.66\cdot 10^{-1}~[m]~.
-\end{equation}
-
-\subsubsection{$v_5 = 1.0\cdot 10^8~[m\cdot s^{-1}]$}
-
-La quinta velocidad posee la constante $\gamma$ más elevada
-
-\begin{equation}
-\gamma_5 = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{v_5^2}{c^2})}} = \displaystyle\frac{1}{\sqrt{(1-\displaystyle\frac{(1.0\cdot 10^8)^2}{(3\cdot 10^8)^2})}} \simeq 1.061
-\end{equation}
-
-Su radio de curvatura es por lo tanto
-
-\begin{equation}
-r_5 = \displaystyle\frac{m\gamma_5v_5}{qB} = \displaystyle\frac{1.67\cdot 10^{-27}\cdot 1.061 \cdot 1.0\cdot 10^8}{1.6\cdot 10^{-19}\cdot 1} = 1.11 ~[m]~.
-\end{equation}
-
-\subsection{Simulación}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{freq_rel_1.png}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{freq_rel_2.png}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{freq_rel_3.png}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{freq_rel_4.png}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{freq_rel_5.png}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{freq_relativista_relativistas.png}
-\end{figure}
-
-\clearpage
 
 \section{Conclusión}
 \label{sec:conclusion}

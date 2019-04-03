@@ -21,12 +21,12 @@ fig.set_dpi(100)
 
 # Datos a modificar 
 
-m=1.67e-27  # masa del ion
-q=1.6e-19   # Carga del ion
+m=1.673e-27  # masa del ion
+q=1.602e-19   # Carga del ion
 B=1.0  # Campo magnético
 #Ecr=(np.random.rand())*40+10
 #Ec=round(Ecr,2)
-vx0=1.0e8  # velocidad del ion
+vx0=1.0e2  # velocidad del ion
 tf=12e-8  #tiempo de simulacion. Debe ser 2 o 3 veces superior al periodo del ion
 # para poder ver varios ciclos
 
@@ -71,23 +71,36 @@ abserr = 1.0e-8
 relerr = 1.0e-6
 z=odeint(circulo,z0,t,args=(par,),atol=abserr, rtol=relerr)
 
-min_ = 0.0
-last_t_ = 0.0
+min_ = min(z[:,2])
+print("El mínimo es " + str(min_))
 
-for i in range(len(t[:])):
+minimums_ = []
+minimums_t_ = []
+for i in range(len(t)):
+    if abs(z[i, 2] - min_) < 1.0e-10:
+        minimums_.append(z[i, 2])
+        minimums_t_.append(t[i])
 
-    if (abs(z[i, 2] - min_) < 1e-12):
-        print("Encontrado siguiente mínimo")
-        print("min = " + str(min_))
-        print("z = " + str(z[i, 2]))
-        print("En t = " + str(t[i]))
+print("mins = " + str(minimums_))
+print("t = " + str(minimums_t_))
 
-    if (z[i, 2] < min_):
-        min_ = z[i, 2]
-        last_t_ = t[i]
+z_0_ = min(minimums_)
+t_0_ = min(minimums_t_)
+z_1_ = max(minimums_)
+t_1_ = max(minimums_t_)
+
+print(z_0_)
+print(t_0_)
+print(z_1_)
+print(t_1_)
+
+T = t_1_ - t_0_
+
+print("T = " + str(T))
 
 line1, = ax.plot(t[:],z[:,2],'-', label=r"v = " + str(vx0/1e8) + r" $\cdot 10^8 [ms^{-1}]$", linewidth=2)
-
+ax.plot([t_0_, t_1_], [z_0_, z_1_], 'ro-')
+ax.annotate("T = " + "{:.3e}".format(T), (t_0_*1.2, z_0_*0.95))
 ax.legend(loc='upper right')
 
 ax.ticklabel_format(axis='y', style='sci', scilimits=(-2,2))
