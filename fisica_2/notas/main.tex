@@ -154,6 +154,69 @@ podemos deducir que la FEM inducida en el circuito es
 \mathcal{E} = -\displaystyle\frac{d\phi_m}{dt} = -Blv~[V]
 \end{equation}
 
+\subsection{Generadores y Motores}
+
+Un generador de corriente alterna se puede construir mediante una bobina giratoria en el seno de un campo magnético uniforme. Los extremos de la bobina se conectan a un anillo deslizante que gira con la bobina. Cuando la bobina gira por acción mecánica, el flujo magnético a través de ella varía y por lo tanto se induce una FEM en ella. El ángulo formado entre el campo magnético $\mathbf{\vec{B}}$ y la normal de la superficie de la bobina $\mathbf{\hat{n}}$ viene dado por
+
+\begin{marginfigure}%
+    \includegraphics[width=\linewidth]{helix}
+    \caption{Generador de corriente alterna en el que una bobina girando con velocidad angular constante en el seno de un campo magnético genera una FEM inducida sinusoidal.}
+    \label{fig:generadorac}
+\end{marginfigure}
+
+\begin{equation}
+\theta = \omega t~[deg]~,
+\end{equation}
+
+por lo tanto, el flujo magnético que atraviesa la bobina depende del tiempo y de la velocidad angular de rotación de la misma como sigue
+
+\begin{equation}
+\phi_m = NBA\cos{\omega t} = NBA\cos{2\pi f}~[Wb]~.
+\end{equation}
+
+Podemos deducir entonces que la FEM producida por la bobina es 
+
+\begin{equation}
+\mathcal{E} = - \displaystyle\frac{d\phi_m}{dt} = \omega NBA\sin{\omega t} = \mathcal{E}_{max} \sin{\omega t} ~[V]~,
+\end{equation}
+
+donde
+
+\begin{equation}
+\mathcal{E}_{max} = \omega NBA~[V]~.
+\end{equation}
+
+\subsection{Inductancia}
+
+El flujo magnético generado a través de una bobina por una corriente que circula por la misma es proporcional a la intensidad de corriente según una constante $L~[H]$ \sidenote{La unidad del sistema internacional para la inductancia $L$ es el Henry $[H]$.}
+
+\begin{equation}
+\phi_m = LI~[Wb]~,
+\end{equation}
+
+esta constante se denomina autoinducción y depende de la geometría de la bobina. Para el caso de un solenoide enrollado determinamos anteriormente que el flujo máximo venía dado por $NBA$, por lo que desarrollando esta igualdad
+
+\begin{equation}
+\phi_m = NBA = N(\mu_0 nI)A = \mu_0 n^2 IAl~[H]~,
+\end{equation}
+
+ya que el campo magnético es conocido $B=\mu_0 nI$ y el número de vueltas de la bobina también $N=nl$. La constante de proporcionalidad respecto a la intensidad de corriente es la autoinducción y únicamente depende de factores geométricos
+
+\begin{equation}
+L = \phi_m / I = \mu_0 n^2 Al~[H]~.
+\end{equation}
+
+
+\clearpage
+
+\section{Ondas Electromagnéticas}
+
+\clearpage
+
+\section{Óptica}
+
+\clearpage
+
 \subsection{Sidenotes}\label{sec:sidenotes}
 One of the most prominent and distinctive features of this style is the
 extensive use of sidenotes.  There is a wide margin to provide ample room
