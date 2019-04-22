@@ -36,6 +36,8 @@
 % for units.
 \usepackage{units}
 
+\usepackage[americanvoltage]{circuitikz}
+
 % The fancyvrb package lets us customize the formatting of verbatim
 % environments.  We use a slightly smaller font.
 \usepackage{fancyvrb}
@@ -205,6 +207,62 @@ ya que el campo magnético es conocido $B=\mu_0 nI$ y el número de vueltas de l
 \begin{equation}
 L = \phi_m / I = \mu_0 n^2 Al~[H]~.
 \end{equation}
+
+\subsection{Energía Magnética}
+
+De la misma forma que un condensador almacena energía eléctrica, un inductor almacena energía magnética. La energía almacenada en un inductor que transporta una corriente $I$ es
+
+\begin{equation}
+U_m = \displaystyle\frac{1}{2}LI^2~[J]~.
+\end{equation}
+
+Esa energía magnética puede ser expresada como
+
+\begin{equation}
+U_m = \displaystyle\frac{1}{2}LI^2 = \displaystyle\frac{1}{2}\mu_0n^2Al(\displaystyle\frac{B}{\mu_0 n})^2 = \displaystyle\frac{B}{\mu_0 n}^2Al~[J]~,
+\end{equation}
+
+y a partir de la misma podemos derivar la densidad de energía magnética $u_m$ como la energía por unidad de volumen $Al$
+
+\begin{equation}
+u_m = \displaystyle\frac{B^2}{2\mu_0}~[J\cdot m^{-3}]~.
+\end{equation}
+
+\subsection{Circuitos RL}
+
+\begin{marginfigure}%
+    \centering
+    \input{figuras/circuitorl.tikz}
+    \bigskip
+    \caption{Circuito RL básico.}
+    \label{fig:circuitorl}
+\end{marginfigure}
+
+Un circuito RL (ver Figura \ref{fig:circuitorl}) es todo aquel que contiene una resistencia y un inductor. La aplicación de la regla de las mallas de Kirchoff arroja la siguiente expresión para el circuito
+
+\begin{equation}
+\mathcal{E}_0 - IR - L\displaystyle\frac{dI}{dt} = 0
+\end{equation}
+
+En el instante inicial, la corriente es nula por lo que $IR$ es cero y la FEM de la batería es igual a la caída de potencial en el inductor. Cuando la corriente comienza a crecer, $IR$ crece y la variación de la corriente con el tiempo disminuye \sidenote{Cuando la inductancia $L$ no es despreciable, $I$ no puede saltar súbitamente de cero a un valor finito sino que $dI/dt$ es finita y por lo tanto la corriente es continua en el tiempo.} hasta que en un tiempo breve, la corriente alcanza un valor positivo $I$. Su variación con el tiempo podemos resolverla separando variables e integrando
+
+\begin{equation}
+\displaystyle\frac{dI}{dt} = \mathcal{E} - \displaystyle\frac{IR}{L} \rightarrow \displaystyle\frac{dI}{\mathcal{E}-IR} = \displaystyle\frac{dt}{L}
+\end{equation}
+
+\marginnote{Cuanto mayor es la autoinducción $L$ o menor es la resistencia $R$ del circuito, más tiempo es necesario para establecer una fracción determinada de la corriente final $I_0$.}
+
+\begin{equation}
+I(t) = \displaystyle\frac{\mathcal{E}}{R}(1 - e^{-\displaystyle\frac{R}{L}t}) = I_0 (1 - e^{-\displaystyle\frac{t}{\tau}})~[A]~,
+\end{equation}
+
+donde $I_0$ es el valor máximo o final de la corriente $\mathcal{E/R}~[A]$ cuando $t\rightarrow \infty$ y $\tau$ es la constante de tiempo o tiempo característico del circuito $L/R~[s]$.
+
+\begin{figure*}[h]
+    \includegraphics[width=\linewidth]{sine.pdf}%
+    \caption{Variación de la intensidad de corriente en función del tiempo en un circuito RL.}%
+    \label{fig:fullfig}%
+  \end{figure*}
 
 
 \clearpage
