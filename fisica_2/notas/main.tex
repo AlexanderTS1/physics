@@ -269,6 +269,36 @@ donde $I_0$ es el valor máximo o final de la corriente $\mathcal{E/R}~[A]$ cuan
 
 \section{Ondas Electromagnéticas}
 
+\subsection{Corriente de Desplazamiento}
+
+La Ley de Ampère relaciona la componente tangencial del campo magnético (integral lineal) alrededor de una curva cerrada $C$ con la corriente $I_S$ que atraviesa cualquier área $S$ limitada por dicha curva
+
+\begin{equation}
+\oint_C \mathbf{\vec{B}}\cdot d\mathbf{\vec{l}} = \mu_0 I_S~.
+\end{equation}
+
+
+\begin{marginfigure}%
+    \centering
+    \includegraphics[width=\linewidth]{helix}
+    \caption{Dos superficies $S_1$ y $S_2$ limitadas por la misma curva $C$. La corriente atraviesa la superficie $S_1$ pero no $S_2$. La ley de Ampère no es válida.}
+    \label{fig:amperecondensador}
+\end{marginfigure}
+
+Sin embargo, esta afirmación no es siempre cierta: no es válida cuando la corriente no es continua, como por ejemplo sucede al interrumpirse en la placa de un condensador (ver Figura \ref{fig:amperecondensador}).
+
+No obstante, Maxwell demostró que esta Ley sí puede generalizarse a todas las situaciones si sustituimos la corriente $I_S$ de la ecuación por la suma de dicha corriente $I_S$ y otro término $I_D$ conocido como corriente de desplazamiento de Maxwell y definido como
+
+\begin{equation}
+I_D = \mathcal{E}_0\displaystyle\frac{d\phi_E}{dt}~,
+\end{equation}
+
+siendo $\phi_e$ el flujo del campo eléctrico a través de la superficie limitada por la curva $C$ \sidenote{$\phi_e = \oint_S \mathbf{\vec{E}}\cdot d\mathbf{\vec{S}}$}. Así pues, la forma modificada de la Ley de Ampère, conocida como Ley de Ampère-Maxwell es
+
+\begin{equation}
+\oint_C \mathbf{\vec{B}}\cdot d\mathbf{\vec{l}} = \mu_0 (I_S + I_D) = \mu_0 I_S + \mu_0 \mathcal{E}_0\displaystyle\frac{d\phi_E}{dt}~.
+\end{equation}
+
 \clearpage
 
 \section{Óptica}
