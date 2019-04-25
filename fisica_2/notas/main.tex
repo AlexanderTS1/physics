@@ -299,6 +299,136 @@ siendo $\phi_e$ el flujo del campo eléctrico a través de la superficie limitad
 \oint_C \mathbf{\vec{B}}\cdot d\mathbf{\vec{l}} = \mu_0 (I_S + I_D) = \mu_0 I_S + \mu_0 \mathcal{E}_0\displaystyle\frac{d\phi_E}{dt}~.
 \end{equation}
 
+\subsection{Ecuaciones de Maxwell}
+
+Maxwell dedujo que las leyes fundamentales de la electricidad y el magnetismo podían resumirse de form matemática en lo que se conocen como las Leyes de Maxwell. Estas ecuaciones relacionan los campos eléctricos y magnéticos con sus fuentes: cargas en reposo, corrientes y campos variables.
+
+La primera de estas ecuaciones la Ley de Gauss para el campo eléctrico, la cual afirma que el flujo a través de una superficie cerrada es proporcional a la carga encerrada por la misma.
+
+\begin{equation}
+\oint_S \mathbf{\vec{E}}\cdot d\mathbf{\vec{S}} = \displaystyle\frac{Q_{int}}{\mathcal{E}_0}~[V\cdot m].
+\end{equation}
+
+La segunda ecuación es la Ley de Gauss del magnetismo, la cual implica la no existencia de monopolos magnéticos ya que en una superficie cerrada el número de líneas de campo que entran es igual a las que salen (el flujo es cero).
+
+\begin{equation}
+\oint_S \mathbf{\vec{B}}\cdot d\mathbf{\vec{S}} = 0~[Wb]~.
+\end{equation}
+
+La tercera ecuación es la Ley de Faraday, relacionando el flujo del campo magnético (a través de una superficie no cerrada) con el campo eléctrico.
+
+\begin{equation}
+\oint_C \mathbf{\vec{E}}\cdot d\mathbf{\vec{l}} = -\displaystyle\frac{d\phi_m}{dt} = -\displaystyle\frac{d}{dt}\int\mathbf{\vec{B}}\cdot d\mathbf{\vec{S}}~[V]~.
+\end{equation}
+
+La cuarta ecuación es la Ley de Ampère-Maxwell que expresa que la circulación de campo eléctrico es proporcional a la corriente y a la variación de flujo eléctrico.
+
+\begin{equation}
+\oint_C \mathbf{\vec{B}}\cdot d\mathbf{\vec{l}} = \mu_0 I_s + \mu_0 I_d = \mu_0 I_s + \mu_0 \epsilon_0 \displaystyle\frac{d}{dt}\oint_S \mathbf{\vec{E}}\cdot d\mathbf{\vec{S}}~.
+\end{equation}
+
+\subsection{Ecuación de Ondas Unidimensionales}
+
+Las ondas obedecen a una ecuación de derivadas parciales denominada ecuación de onda
+
+\begin{equation}
+v^2 \displaystyle\frac{\partial^2 y(x,t)}{\partial x^2} = \displaystyle\frac{\partial^2 y(x,t)}{\partial t^2}~,
+\end{equation}
+
+donde $y(x,t)$ es la función de onda y $v$ es la velocidad de la misma \sidenote{En el caso de las ondas electromagnéticas que nos ocupan, la velocidad de onda es $c = 1/\sqrt{\mu_0 \epsilon_0}$}. Esta ecuación tiene una solución general en
+
+\begin{equation}
+y(x,t) = y_1(x - vt) + y_2(x + vt)~,
+\end{equation}
+
+donde $y_1$ e $y_2$ son funciones de $x-vt$ y $x+vt$ respectivamente y pueden expresarse como una superposición de funciones de onda armónicas
+
+\begin{equation}
+y_1(x,t) = y_0 \sin{(k(x - \omega t) + \phi)}
+\end{equation}
+\begin{equation}
+y_2(x,t) = y_0 \sin{(k(x + \omega t) + \phi)}
+\end{equation}
+
+donde $y_0$ es la amplitud, $k = 2\pi / \lambda$ es el número de ondas, $\omega = 2\pi v$ es la frecuencia angular o velocidad de la onda y $\phi$ es la fase. Adicionalmente, $T = 2\pi/\omega~[s]$ es el período y se cumple la igualdad $\lambda v = c ~ [m\cdot s^{-1}]$.
+
+\subsection{Ondas Electromagnéticas}
+
+Las ondas electromagnéticas planas son una solución de las ecuaciones de Maxwell en forma de ondas transversales con los campos $\mathbf{\vec{E}}$ y $\mathbf{\vec{B}}$ perpendiculares entre sí y a la dirección de propagación. Tanto $\mathbf{\vec{E}}$ como $\mathbf{\vec{B}}$ obedecen a ecuaciones de onda semejantes a las expuestas anteriormente. Si suponemos que $\mathbf{\vec{E}}$ y $\mathbf{\vec{B}}$ son funciones del tiempo y de una sola coordenada espacial que tomaremos como $x$, nos encontramos ante una onda plana que se propaga paralelamente al eje $x$ siendo las componentes $x$ de los campos nulas, de modo que $\mathbf{\vec{E}}$ y $\mathbf{\vec{B}}$ son perpendiculares al eje $x$ y obedecen a las siguientes ecuaciones de onda
+
+\begin{equation}
+c^2 \displaystyle\frac{\partial^2 \mathbf{\vec{E}}}{\partial x^2} = \displaystyle\frac{\partial^2 \mathbf{\vec{E}}}{\partial t^2}
+\end{equation}
+
+\begin{equation}
+c^2 \displaystyle\frac{\partial^2 \mathbf{\vec{B}}}{\partial x^2} = \displaystyle\frac{\partial^2 \mathbf{\vec{B}}}{\partial t^2}
+\end{equation}
+
+\paragraph{Energía, Intensidad y Potencia}
+
+Como todo tipo de onda, las ondas electromagnéticas transportan energía y momento. La energía viene descrita por la intensidad, es decir, la potencia media por unidad de área incidente sobre una superficie perpendicular a la dirección de propagación.
+
+Si consideramos una onda propagándose en una región del espacio de forma cilíndrica con longitud $L$ y sección $A$, la energía electromagnética media $U_m$ dentro de esta región es igual a $u_m LA$ donde $u_m$ es la densidad de energía media y $LA$ es el volumen de la región cilíndrica. En el tiempo $\Delta t$ que emplea la onda en recorrer la longitud $L$, toda la energía pasa a través de una de las bases de la región cilíndrica. Dado que el tiempo $\Delta t$ es $L/c$, la potencia $P_m$ (energía por unidad de tiempo) que pasa por dicha base es
+
+\begin{equation}
+P_m = \displaystyle\frac{U_m}{\Delta t} = \displaystyle\frac{u_m LA}{L/c} = u_m Ac~,
+\end{equation}
+
+y por lo tanto, la intensidad (potencia media por unidad de área)
+
+\begin{equation}
+I = \displaystyle\frac{P_m}{A} = u_m c~.
+\end{equation}
+
+La densidad de energía de la onda $u$ es la suma de las densidades de energía eléctrica y magnética \sidenote{Cabe destacar que estas expresiones obedecen a una onda que se propaga en el vacío, de tratarse de otro medio las constantes $\epsilon_0$ y $\mu_0$ cambiarían.}
+
+\begin{equation}
+u_e = \displaystyle\frac{1}{2}\epsilon_0 E^2
+\end{equation}
+
+\begin{equation}
+u_{mag} = \displaystyle\frac{1}{2}\displaystyle\frac{B^2}{\mu_0}
+\end{equation}
+
+En una onda electromagnética en el vacío, $E = cB$ por lo que podemos expresar la densidad de energía magnética en función del campo eléctrico y viceversa
+
+\begin{equation}
+u_{mag} = \displaystyle\frac{B^2}{2\mu_0} = \displaystyle\frac{(E/c)^2}{2\mu_0} = \displaystyle\frac{E^2}{2\mu_0c^2} = \displaystyle\frac{1}{2}\epsilon_0 E^2
+\end{equation}
+
+para finalmente determinar la densidad de energía total de la onda
+
+\begin{equation}
+u = u_e + u_{mag} = \displaystyle\frac{1}{2}\epsilon_0 E^2 + \displaystyle\frac{1}{2}\displaystyle\frac{B^2}{\mu_0} = \epsilon_0E^2
+\end{equation}
+
+\paragraph{Vector de Poynting}
+
+El vector de Poynting $\mathbf{\vec{S}}$ apunta en la dirección de propagación de la onda electromagnética. El módulo medio del vector es la intensidad de la onda y su dirección es la dirección de propagación de la misma.
+
+\begin{equation}
+\mathbf{\vec{S}} = \displaystyle\frac{\mathbf{\vec{E}} \times \mathbf{\vec{B}}}{\mu_0}
+\end{equation}
+
+La intensidad (potencia por área) es el promedio temporal del módulo del vector de Poynting
+
+\begin{equation}
+I_{media} = \displaystyle\frac{1}{2}\displaystyle\frac{E_0B_0}{\mu_0} = \displaystyle\frac{1}{2}S_0
+\end{equation}
+
+\paragraph{Dirección de Propagación}
+
+\begin{marginfigure}%
+    \centering
+    \includegraphics[width=\linewidth]{helix}
+    \caption{Los vectores de campo eléctrico y campo magnético en una onda electromagnética. Los campos están en fase, perpendiculares entre sí y perpendiculares a la dirección de propagación de la onda.}
+    \label{fig:ondaelectromagnetica}
+\end{marginfigure}
+
+Las ondas electromagnéticas son ondas transversales y los campos eléctrico y magnético están en fase y sus módulos relacionados, en cada punto del espacio, por la expresión $E = cB$ \sidenote{En el vacío.} donde $c$ es la velocidad de la onda. La dirección de propagación de una onda electromagnética es la dirección del producto vectorial $\mathbf{\vec{E}}\times\mathbf{\vec{B}}$. El vector de Poynting por lo tanto, apunta en la dirección de propagación de la onda electromagnética.
+
+\paragraph{Momento y Presión}
+
 \clearpage
 
 \section{Óptica}
