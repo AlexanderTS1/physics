@@ -350,7 +350,7 @@ y_1(x,t) = y_0 \sin{(k(x - \omega t) + \phi)}
 y_2(x,t) = y_0 \sin{(k(x + \omega t) + \phi)}
 \end{equation}
 
-donde $y_0$ es la amplitud, $k = 2\pi / \lambda$ es el número de ondas, $\omega = 2\pi v$ es la frecuencia angular o velocidad de la onda y $\phi$ es la fase. Adicionalmente, $T = 2\pi/\omega~[s]$ es el período y se cumple la igualdad $\lambda v = c ~ [m\cdot s^{-1}]$.
+donde $y_0$ es la amplitud, $k = 2\pi / \lambda$ es el número de ondas, $\omega = 2\pi f$ es la frecuencia angular o velocidad de la onda y $\phi$ es la fase. Adicionalmente, $T = 2\pi/\omega~[s]$ es el período y se cumple la igualdad $\lambda v = c ~ [m\cdot s^{-1}]$. Además, $v = \lambda f$.
 
 \subsection{Ondas Electromagnéticas}
 
@@ -428,6 +428,20 @@ I_{media} = \displaystyle\frac{1}{2}\displaystyle\frac{E_0B_0}{\mu_0} = \display
 Las ondas electromagnéticas son ondas transversales y los campos eléctrico y magnético están en fase y sus módulos relacionados, en cada punto del espacio, por la expresión $E = cB$ \sidenote{En el vacío.} donde $c$ es la velocidad de la onda. La dirección de propagación de una onda electromagnética es la dirección del producto vectorial $\mathbf{\vec{E}}\times\mathbf{\vec{B}}$. El vector de Poynting por lo tanto, apunta en la dirección de propagación de la onda electromagnética.
 
 \paragraph{Momento y Presión}
+
+El módulo del momento transportado por una onda electromagnética es
+
+\begin{equation}
+p = \displaystyle\frac{U_m}{c}~,
+\end{equation}
+
+como la potencia ($P_m$) de una onda es la energía por unidad de tiempo y la intensidad ($I$) es dicha potencia por unidad de área, la intensidad dividida por $c$ es el momento transportado por la onda por unidad de tiempo y área. El momento por unidad de tiempo es una fuerza, por lo tanto la intensidad de la onda dividida por $c$ es una fuerza por unidad de área que recibe el nombre de presión de radiación $P_r$
+
+\marginnote{Considerando una onda electromagnética que incide sobre una superficie, si la superficie absorbe una energía $U$ de la onda electromagnética, también absorbe el momento $p$ y la presión ejercida sobre la misma es igual a la presión de radiación. Si la onda se refleja, el momento transferido es $2p$ ya que la onda transporta el momento en sentido opuesto.}
+
+\begin{equation}
+P_r = \displaystyle\frac{I}{c} = \displaystyle\frac{1}{2}\displaystyle\frac{E_0B_0}{\mu_0 c}~.
+\end{equation}
 
 \clearpage
 
