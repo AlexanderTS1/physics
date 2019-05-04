@@ -37,6 +37,9 @@
 \usepackage{units}
 
 \usepackage[americanvoltage]{circuitikz}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,positioning}
+\usetikzlibrary{decorations.markings}
 
 % The fancyvrb package lets us customize the formatting of verbatim
 % environments.  We use a slightly smaller font.
@@ -449,6 +452,16 @@ P_r = \displaystyle\frac{I}{c} = \displaystyle\frac{1}{2}\displaystyle\frac{E_0B
 
 \subsection{Propagación de la Luz}
 
+La propagación de la luz es gobernada por la ecuación de onda, aunque mucho antes de que Maxwell desarrollara su teoría de las ondas electromagnéticas, la propagación de la luz fue descrita empíricamente por dos principios atribuidos a Christian Hyugens y a Pierrre de Fermat.
+
+\paragraph{Principio de Hyugens}
+
+Cada punto de un frente de onda primario sirve como foco de ondas esféricas secundarias que avanzan con una velocidad y frecuencia igual a las de la onda primaria. El frente de onda primario al cabo de un cierto tiempo es envolvente de estas ondas elementales.
+
+\paragraph{Principio de Fermat}
+
+La trayectoria seguida por la luz para pasar de un punto a otro es aquella para la cual el tiempo de recorrido es un mínimo. O lo que es lo mismo, la luz tiende a recorrer el camino óptico por el que tarda el mínimo tiempo.
+
 \subsection{Reflexión y Refracción}
 
 La velocidad de la luz en un medio transparente como el aire, el agua o el vidrio es menor que la velocidad $c = 3\cdot 10^8~[m\cdot s^{-1}]$ en el vacío. Dichos medios se caracterizan por su índice de refracción $n$ \sidenote{Existen medios homogéneos e isótropos (en los que $n$ se mantiene constante en todo el medio), medios anisótropos (en los que $n$ depende de la dirección) y medios heterogéneos (en los que $n$ varía de un punto a otro).} que se define por el cociente entre la velocidad de la luz en el vacío y la velocidad de la luz en dicho medio
@@ -457,9 +470,25 @@ La velocidad de la luz en un medio transparente como el aire, el agua o el vidri
 n = \frac{c}{v}
 \end{equation}
 
-\subsection{Principio de Fermat}
+Cuando un haz de luz incide sobre una superficie de separación entre dos medios, parte de la luz se refleja y parte entra en el segundo medio. Si la luz incidente no es perpendicular entonces la luz que entra en el segundo medio no es paralela a la incidente. En este caso, se produce un cambio de dirección denominado refracción. El ángulo entre el rayo incidente y la normal se denomina ángulo de incidencia $\theta_1$, el rayo reflejado forma un ángulo $theta_1'$ con l anormal que es igual al de incidencia $\theta_1 = \theta_1'$ (ver Figura \ref{fig:snell}). Este fenómeno se conoce como Ley de la Reflexión.
 
-La trayectoria seguida por la luz para pasar de un punto a otro es aquella para la cual el tiempo de recorrido es un mínimo. O lo que es lo mismo, la luz tiende a recorrer el camino óptico por el que tarda el mínimo tiempo.
+\begin{marginfigure}%
+    \centering
+    \input{figuras/snell.tikz}
+    \bigskip
+    \caption{El ángulo de reflexión es igual al ángulo de incidencia $\theta_1$, el ángulo de refracción $\theta_2$ es menor que el ángulo de incidencia si la velocidad de la luz en el segundo medio es menor que en el primero.}
+    \label{fig:snell}
+\end{marginfigure}
+
+Por otro lado, cuando una onda cruza un límite en el cual su velocidad cambia se produce un efecto conocido como refracción. Si la velocidad se reduce, el ángulo de refracción es menor que el ángulo de incidencia (se aproxima a la normal); si por el contrario, la velocidad aumenta, el ángulo de refracción es mayor (y se aleja de la normal). Así pues, el ángulo de refracción $\theta_2$ depende del ángulo de incidencia y de la velocidad relativa. Este hecho se expresa en la Ley de Snell de la Refracción.
+
+\begin{equation}
+n_1 \sin{\theta_1} = n_2 \sin{\theta_2} \rightarrow \frac{1}{v_1}\sin{\theta_1} = \frac{1}{v_2}\sin{\theta_2}
+\end{equation}
+
+\paragraph{Reflexión Interna Total}
+
+A medida que cambia el ángulo de incidencia (dependiendo de si la velocidad del segundo medio es mayor o menor), el ángulo de refracción aumenta hasta que se alcanza un ángulo de incidencia crítico $\theta_c$ para el cual el ángulo de refracción es de $90~[deg]$. A partir de dicho ángulo, no existe rayo refractado por lo que toda la energía se refleja. A este fenómeno se le conoce como reflexión interna total. El ángulo $\theta_c$ puede hallarse simplemente haciendo $\theta_2 = 90~[deg]$.
 
 \clearpage
 
