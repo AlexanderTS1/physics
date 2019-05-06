@@ -75,6 +75,112 @@
 
 \section{Campo Eléctrico}
 
+\paragraph{Carga Eléctrica} \textbf{La carga eléctrica es una magnitud fundamental y responsable de la interacción electromagnética. Su unidad es el Culombio $[C]$ que se define como la cantidad de carga que fluye por un punto de un conductor en un segundo cuando la corriente en el mismo es de $1~[A]$.} Posee las siguientes características:
+
+\begin{itemize}
+    \item Dualidad: las cargas se dividen en positivas y negativas.
+    \item Conservación: la carga total de un sistema aislado se conserva.
+    \item Cuantización: múltiplo de la carga fundamental\sidenote{La carga fundamental es la del electrón $e = 1.6\cdot 10^{-19}~[C]$.}.
+\end{itemize}
+
+\subsection{Ley de Coulomb}
+
+\begin{marginfigure}%
+    \includegraphics[width=\linewidth]{helix}
+    \caption{Interacción entre dos cargas.}
+    \label{fig:leycoulomb}
+\end{marginfigure}
+
+\textbf{La fuerza ejercida por una carga puntual sobre otra está dirigida a lo largo de la línea que las une. Es repulsiva si las cargas tienen el mismo signo y atractiva si tienen signos opuestos. La fuerza varía inversamente proporcional al cuadrado de la distancia que separa las cargas y es proporcional al valor de cada una de ellas.}
+
+La fuerza ejercida por una carga puntual $q_1$ (en $r_1$) sobre otra carga puntual $q_2$ (en $r_2$) se define como:
+
+\begin{equation}
+    \vec{F}_{12} = K\displaystyle\frac{q_1q_2}{r_{12}^2}\hat{r}_{12}~[N],
+\end{equation}
+
+donde $K$ es la constante de Coulomb cuyo valor depende del medio en el que se produzca la interacción\sidenote{La constante dieléctrica $K = 1/r\pi\epsilon_0 = 9\cdot10^9~[N\cdot m^2 \cdot C^{-2}]$ siendo $\epsilon_0 = 8.85\cdot 10^{-12}~[C^2\cdot N^{-1}\cdot m^{-2}]$ la permitividad del vacío.  Si el medio es distinto al vacío, $K$ cambia dado que la permitividad del mismo $\epsilon$ cambia ($\epsilon_0 \neq \epsilon$) $K' = 1/4\pi\epsilon$.}, $r_{12}$ es el módulo del vector $\vec{r}_{12} = \vec{r}_2 - \vec{r}_1$ que apunta de $q_1$ a $q_2$, y $\hat{r}_{12} = \vec{r}_{12} / r_{12}$ es el vector unitario del mismo.
+
+\paragraph{Sistema de cargas} en el caso de un sistema de cargas, cada una de ellas ejerce una fuerza sobre las demás. La fuerza neta de cada carga es la suma vectorial de las fuerzas individuales. Esta es una consecuencia del principio de superposición de las fuerzas.
+
+\newpage
+
+\subsection{Campo Eléctrico}
+
+\textbf{La interacción entre cargas eléctricas no se produce de forma instantánea sino que el intermediario de la fuerza mutua es el campo eléctrico. Su unidad es el newton por culombio $[NC^{-1}]$. La forma de determinar si en una cierta región existe un campo eléctrico es colocar una carga de prueba positiva $q_0$ y comprobar la fuerza que experimenta}:
+
+\begin{equation}
+\vec{F}{q,q_0} = K\frac{q q_0}{r^2_{12}}\hat{r}_{12}~[N].
+\end{equation}
+
+Así pues, el campo eléctrico se define como la fuerza por unidad de carga positiva en un punto determinado:
+
+\begin{equation}
+\vec{E} = \frac{\vec{F}}{q_0} = K \frac{q}{r^2}{\vec{r}}~[N\cdot C^{-1}],
+\end{equation}
+
+cuya dirección y sentido coincide con el de la fuerza eléctrica. De hecho, la fuerza eléctrica ejercida por una carga testigo $q_0$ en cualquier punto está relacionada con el campo eléctrico en dicho punto de forma análoga $\vec{F} = q_0\vec{E}$.
+
+De forma general, el campo $\vec{E}$ en un punto $p$ en $r_p$ debido a una carga puntual $q_i$ situada en $r_i$ es:
+
+\begin{equation}
+\vec{E}_{ip} = K \frac{q_i}{r^2_{ip}}\hat{r}_{ip}~[N\cdot C^{-1}]
+\end{equation}
+
+\paragraph{Sistema de Cargas} el campo eléctrico cumple el principio de superposición por lo que el campo eléctrico resultante en un punto $p$ debido a una distribución de cargas puntuales $q_i$ se determina sumando los campos originados por cada carga $\vec{E}_p = \sum_i \vec{E}_{ip}$.
+
+\begin{marginfigure}%
+    \includegraphics[width=\linewidth]{helix}
+    \caption{Líneas de campo eléctrico para dos cargas iguales.}
+    \label{fig:lineascampoelectrico}
+\end{marginfigure}
+
+\paragraph{Líneas de Campo Eléctrico} la forma de representar gráficamente un campo eléctrico es mediante las denominadas líneas de campo. Las líneas de campo eléctrico se dibujan de forma que el vector $\vec{E}$ sea tangente a ellas en cada punto. Su sentido coincide con el de dicho vector y deben cumplir la siguientes reglas:
+
+\begin{itemize}
+    \item Salen de cargas positivas y entran en negativas.
+    \item Nunca se cortan.
+    \item El número es proporcional al valor de la carga.
+    \item Empiezan o terminan solo en cargas puntuales.
+    \item La densidad es proporcional al valor del campo.
+\end{itemize}
+
+\subsection{Movimiento de Cargas Puntuales}
+
+Cuando una carga eléctrica $q$ se coloca en el seno de un campo eléctrico $\vec{E}$, experimenta la acción de una fuerza eléctrica $\vec{F} = q\vec{E}$. Si la fuerza eléctrica es una única fuerza significativa que actúa sobre la partícula \sidenote{Si actúan varias fuerzas eléctricas se aplica el principio de superposición.}, podemos calcular la aceleración que experimenta dicha partícula mediante la Segunda Ley de Newton:
+
+\begin{equation}
+\vec{F} = m\vec{a} \rightarrow \vec{a} = \frac{\vec{F}}{m} = \frac{q\vec{E}}{m}~[m\cdot s^{-2}]~.
+\end{equation}
+
+\subsection{Dipolo Eléctrico}
+
+\textbf{Un sistema de dos cargas iguales y opuestas $q$ separadas una distancia pequeña $L$ se denomina dipolo eléctrico.} Su intensidad y su orientación se definen mediante el momento dipolar eléctrico, un vector que apunta de la carga negativa a la positiva y cuyo valor es
+
+\begin{marginfigure}%
+    \includegraphics[width=\linewidth]{helix}
+    \caption{Dipolo eléctrico.}
+    \label{fig:dipolo}
+\end{marginfigure}
+
+\begin{equation}
+\vec{p} = q\vec{L}~[C\cdot m],
+\end{equation}
+
+siendo $\vec{L}$ un vector cuyo origen está en la carga negativa y su extremo en la positiva. En la configuración de dipolo típica calculamos el campo eléctrico en cualquier punto de la mediatriz que une ambas cargas. En este caso, la distancia de cada carga a la mediatriz es $a$ y por lo tanto $\vec{p} = -2aq\hat{i}$ ya que el campo eléctrico sobre la mediatriz:
+
+\begin{equation}
+\vec{E} = K\frac{2aq}{(r^2 + a^2)^{3/2}}\hat{i} = K\frac{2aq}{r^3}\hat{i}~[N\cdot C^{-1}]~.
+\end{equation}
+
+Si aplicamos un campo eléctrico sobre un dipolo, no se ejerce una fuerza neta pero aparece un par de fuerzas que tiende a alinear el dipolo con el campo eléctrico, es decir, tiende a situar el momento dipolar $\vec{p}$ en la dirección del campo eléctrico $\vec{E}$. El momento del par de fuerzas es:
+
+\begin{equation}
+\vec{\tau} = \vec{L} \times q\vec{E} = q\vec{L} \times \vec{E} = \vec{p} \times \vec{E}~.
+\end{equation}
+
+Cuando el dipolo gira un ángulo $d\theta$, el campo eléctrico realiza un trabajo $dW = -\tau d\theta = -pE\sin{\theta}d\theta$. Igualando el trabajo con la variación de energía potencial $dU = -dW = pE\sin{\theta}d\theta$ e integrando $U = -pE\cos{\theta} + U_0$. Si tomamos como cero la energía potencial en $\theta = 90~[deg]$ entonces la energía potencial del dipolo es $U = -pE\cos{\theta} = -\vec{p}\cdot \vec{E}~[J]$.
+
 \clearpage
 
 \section{Corriente Continua}
