@@ -181,6 +181,105 @@ Si aplicamos un campo eléctrico sobre un dipolo, no se ejerce una fuerza neta p
 
 Cuando el dipolo gira un ángulo $d\theta$, el campo eléctrico realiza un trabajo $dW = -\tau d\theta = -pE\sin{\theta}d\theta$. Igualando el trabajo con la variación de energía potencial $dU = -dW = pE\sin{\theta}d\theta$ e integrando $U = -pE\cos{\theta} + U_0$. Si tomamos como cero la energía potencial en $\theta = 90~[deg]$ entonces la energía potencial del dipolo es $U = -pE\cos{\theta} = -\vec{p}\cdot \vec{E}~[J]$.
 
+\newpage
+
+\subsection{Distribuciones Continuas de Carga}
+
+A escala microscópica, la carga está cuantizada; sin embargo, en ocasiones se presentan situaciones en las que un gran número de cargas están tan próximas que la carga total puede considerarse distribuida en el espacio de forma continua. Para estas ocasiones se utiliza el concepto de densidad de carga continua. En este caso, se divide la distribución en pequeños elementos diferenciales de carga $dq$ de forma que el diferencial de campo eléctrico creado por cada una de ellas es
+
+\begin{equation}
+d\vec{E} = K\frac{dq}{r^2}\hat{r}~[N\cdot C^{-1}]~,
+\end{equation}
+
+así pues, el campo eléctrico total se calcula integrando
+
+\begin{equation}
+\vec{E} = \int K\frac{dq}{r^2}\hat{r}~[N\cdot C^{-1}]~.
+\end{equation}
+
+\paragraph{Distribución Lineal} en el caso de una distribución lineal, la densidad lineal de carga es $\lambda = dq / dl$ y su campo eléctrico en un punto dado se calcula integrando sobre la longitud $\vec{E} = \int_L K\lambda\frac{dl}{r^2}\hat{r}~[N\cdot C^{-1}]$.
+
+\paragraph{Distribución Superficial} en el caso de una distribución superficial, la densidad superficial de carga es $\sigma = dq / ds$ y su campo eléctrico en un punto dado se calcula integrando sobre la superficie $\vec{E} = \int_S K\sigma\frac{ds}{r^2}\hat{r}~[N\cdot C^{-1}]$.
+
+\paragraph{Distribución Volumétrica} en el caso de una distribución volumétrica, la densidad volumétrica de carga es $\rho = dq / dv$ y su campo eléctrico en un punto dado se calcula integrando sobre el volumen $\vec{E} = \int_V K\rho\frac{dv}{r^2}\hat{r}~[N\cdot C^{-1}]$.
+
+\subsection{Flujo Eléctrico}
+
+El flujo eléctrico es la magnitud matemática relacionada con el número de líneas de campo que atraviesa una superficie determinada. Las unidades del flujo son $[N\cdot m^2 \cdot C^{-1}]$ ya que, en su forma general el flujo se define como
+
+\marginnote{Por lo general, la superficie suele ser perpendicular a $\vec{E}$ por lo que $\vec{E}\hat{n} = E$ y por lo tanto la expresión se simplifica simplemente a $\phi = EA$. En otros casos, la superficie forma un ángulo determinado $\theta$ y la expresión queda $\phi = EA\cos{\theta}$.}
+
+\begin{equation}
+\phi = \int_S \vec{E}d\vec{S} = \int_S \vec{E}\hat{n}dS~[N\cdot m^2 \cdot C^{-1}]~.
+\end{equation}
+
+Para una superficie cerrada el flujo será negativo si las líneas de campo entran y positivo si las líneas salen
+
+\begin{equation}
+\phi = \oint_S \vec{E}d\vec{S} = \oint_S \vec{E}\hat{n}dS~[N\cdot m^2 \cdot C^{-1}]~.
+\end{equation}
+
+\subsection{Ley de Gauss}
+
+\begin{marginfigure}%
+    \includegraphics[width=\linewidth]{helix}
+    \caption{Superficie esférica con carga $q$.}
+    \label{fig:esferagauss}
+\end{marginfigure}
+
+La Ley de Gauss relaciona el flujo de campo eléctrico a través de una superficie cerrada y la carga encerrada en ella. Afirma que el flujo eléctrico neto a través de cualquier superficie cerrada es igual a la carga neta que se encuentre dentro de la misma dividida por la permitividad eléctrica:
+
+\begin{equation}
+\phi = \oint_S \vec{E}\hat{n}dS = 4\pi Kq = \frac{q}{\epsilon_0}~[N\cdot m^2 \cdot C^{-1}]~,
+\end{equation}
+
+todo ello con total independencia de la forma de la distribución, únicamente de la carga que se halle en su interior. Es válida para todas las superficies y distribuciones de carga.
+
+\subsection{Diferencia de Potencial}
+
+La fuerza ejercida por un campo eléctrico $\vec{E}$ sobre una carga puntual $q$ es $\vec{F} = q\vec{E}$. Cuando dicha carga experimenta un desplazamiento $d\vec{l}$, la variación de energía potencial electrostática es $dU = -q\vec{E}\cdot d\vec{l}$. Así pues, la variación de energía potencial por unidad de carga se denomina diferencia de potencial $dV$:
+
+\marginnote{Es importante destacar que el potencial es una magnitud escalar, al contrario que el campo eléctrico que es una magnitud vectorial.}
+
+\marginnote{Además, la función potencial es continua en todos los puntos excepto en aquellos en los que el campo eléctrico es infinito mientras que el campo eléctrico presenta discontinuidad en puntos donde existe carga superficial.}
+
+\begin{equation}
+dV = \frac{dU}{q} = -\vec{E}\cdot d\vec{l}~[V]~,
+\end{equation}
+
+de modo que, para un desplazamiento finito desde el punto $a$ al punto $b$, la variación de potencial es
+
+\begin{equation}
+\Delta V = V_b - V_a = \frac{\Delta U}{q} = -\int_a^b \vec{E}\cdot d\vec{l}~[V]~.
+\end{equation}
+
+\paragraph{Sobre el potencial y las líneas de campo:} las líneas de campo eléctrico señalan la dirección en la que el potencial eléctrico disminuye más rápidamente. Dado que $U = qV$, para una carga positiva, la región del espacio en la que existe menor energía potencial es también la de menor potencial eléctrico, motivo por el cual las cargas positivas se dirigen a las zonas con menor potencial eléctrico.
+
+\subsection{Potencial Debido a Un Sistema de Cargas}
+
+El potencial eléctrico en un punto $p$ a una distancia $r$ de una carga puntual $q$ puede calcularse a partir de la expresión $V_p - V_{ref} = -\int_{ref}^p \vec{E}\cdot d\vec{l}$. Teniendo en cuenta que el campo eléctrico debido a una carga puntual es $\vec{E} = kq/r^2 \hat{r}$, sutituyendo en la expresión anterior:
+
+\begin{equation}
+V_p - V_{ref} = -\int_{ref}^p \vec{E}\cdot d\vec{l} = -\int_{ref}^p \frac{kq}{r^2}\hat{r}\cdot d\vec{l} = -\int_{r_{ref}}^{r_p}\frac{kq}{r^2}dr~,
+\end{equation}
+
+poniendo $V_{ref} = 0$ e integrando a lo largo del camino desde un punto arbitrario de referencia:
+
+\begin{equation}
+V_p = -kq\int_{r_{ref}}^{r_p}\frac{1}{r^2}dr = \frac{kq}{r_p} - \frac{kq}{r_{ref}}~,
+\end{equation}
+
+dado que el punto de referencia es arbitrario, podemos elegir aquél que simplifique la ecuación y por lo tanto tomaremos el más lejano a la carga puntual $r_{ref} \rightarrow \infty$ y por lo tanto
+
+\begin{equation}
+V = \frac{kq}{r}~[V]~.
+\end{equation}
+
+El potencial en un punto debido a diversas cargas puntuales es igual a la suma de los potenciales debidos a cada carga por separado (principio de superposición):
+
+\begin{equation}
+V = \sum_i \frac{kq_i}{r_i}~[V]~.
+\end{equation}
 \clearpage
 
 \section{Corriente Continua}
