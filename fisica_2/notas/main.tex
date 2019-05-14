@@ -243,6 +243,10 @@ La fuerza ejercida por un campo eléctrico $\vec{E}$ sobre una carga puntual $q$
 
 \marginnote{Además, la función potencial es continua en todos los puntos excepto en aquellos en los que el campo eléctrico es infinito mientras que el campo eléctrico presenta discontinuidad en puntos donde existe carga superficial.}
 
+\marginnote{La variación de energía potencial se relaciona también con el trabajo que cuesta desplazar una carga de forma que $W= -\Delta U$. Por lo que $\Delta V = -W_{ab}/q$.}
+
+\marginnote{La variación de potencial se relaciona con el campo eléctrico ya que $dW = \vec{F}d\vec{r}$ por lo que $W = q\vec{E}\Delta\vec{r}$ y como $W = -q\Delta V$ entonces $\Delta V = -\vec{E}d\vec{r}$.}
+
 \begin{equation}
 dV = \frac{dU}{q} = -\vec{E}\cdot d\vec{l}~[V]~,
 \end{equation}
@@ -280,6 +284,137 @@ El potencial en un punto debido a diversas cargas puntuales es igual a la suma d
 \begin{equation}
 V = \sum_i \frac{kq_i}{r_i}~[V]~.
 \end{equation}
+
+\subsection{Relación General entre $\vec{E}$ y V}
+
+Las componentes cartesianas del campo eléctrico están relacionadas con las derivadas parciales del potencial respecto a $x$, $y$ o $z$ de la siguiente manera:
+
+\begin{equation}
+\vec{E} = -\vec{\nabla}V = -(\frac{\partial V}{\partial x}\hat{i} + \frac{\partial V}{\partial y}\hat{j} + \frac{\partial V}{\partial z}\hat{k})
+\end{equation}
+
+\subsection{Potencial en Distribuciones Continuas de Carga}
+
+El potencial debido a una distribución continua de carga puede calcularse eligiendo un elemento de carga $dq$ que puede considerarse como una carga puntual y tomando en consideración el principio de superposición e integrando tal y como hicimos con el campo eléctrico: \sidenote{Esta expresión supone que $V_\infty = 0$ y por ello no puede utilizarse cuando la carga se encuentra en el infinito, como es el caso de las distribuciones infinitas de carga.}
+
+\begin{equation}
+V = \int dV = \int \frac{k dq}{r}~[V]
+\end{equation}
+
+\subsection{Superficies Equipotenciales}
+
+Es el lugar geométrico de todos los puntos que se encuentran al mismo potencial. Cumplen la condición de encontrarse en un plano perpendicular al campo eléctrico. El trabajo para mover una partícula entre dos puntos a lo largo de una superficie equipotencial es nulo ya que $W_{ab} = -q\Delta V$ y $\Delta V = 0$.
+
+\subsection{Energía Potencial Electrostática}
+
+La energía potencial electrostática de un sistema de cargas puntuales es el trabajo necesario para llevar las cargas desde el infinito a sus posiciones finales:
+
+\begin{equation}
+U = \frac{1}{2}\sum_i q_iV_i ~[J]
+\end{equation}
+
+\subsection{Conductores}
+
+\textbf{Un conductor es un material que se caracteriza por tener cargas libres que pueden moverse en su interior.}
+
+Si sometemos un conductor a un campo eléctrico externo, su carga libre se redistribuye hasta anular el campo eléctrico en su interior. En estas condiciones se dice que el conductor está en equilibrio electrostático. El campo eléctrico $E'$ generado por las cargas redistribuidas anula al campo eléctrico externo $E_0$ ($E' = E_0$).
+
+\paragraph{Toda carga libre en un conductor se coloca en su superficie. } Suponiendo una superficie gaussiana justo en el interior de la superficie del conductor, como el campo eléctrico es nulo, también lo será en todos los puntos de la superficie gaussiana y por lo tanto, el flujo eléctrico también es nulo. Esto significa que la carga encerrada es nula y por lo tanto, de existir carga, debe estar en su superficie.
+
+\paragraph{El campo eléctrico en la superficie del conductor es perpendicular a dicha superficie y vale $\sigma / \epsilon_0$.} Tomamos como superficie gaussiana un cilindro con una cara en el exterior y otra en el interior del conductor. Si el conductor está en equilibrio, el campo eléctrico en la superficie debe ser perpendicular a la misma por lo que solo hay flujo a través de la cara superior del cilindro $\phi = ES = q / \epsilon_0$, $q = \sigma S$ por lo que $E = \sigma / \epsilon_0$.
+
+\subsection{Condensadores}
+
+\textbf{Un condensador es un dispositivo constituido por dos placas conductoras paralelas rellenas normalmente con un material dieléctrico no conductor.}
+
+La magnitud que caracteriza a un condensador es su capacidad, su unidad es el Faradio $[F] = [C/V]$. La capacidad se define como: \sidenote{En el caso de un condensador esférico $C = Q/V = Q/kQ/R = R/k = 4\pi\epsilon_0 R~[F]$.}
+
+\begin{equation}
+C = \frac{Q}{V}~[F]~,
+\end{equation}
+
+siendo $Q$ la carga almacenada en cada placa y $V$ la diferencia de potencial entre las mismas.
+
+\paragraph{Condensador de Placas Paralelas} en este caso, cada placa tiene un área $A$ y están separadas una distancia $d$. Situando una carga $+Q$ en una placa y una carga $-Q$ en la otra, cada placa contribuye con un campo eléctrico $E = \sigma/2\epsilon_0$, resultando así un campo total $E = \sigma /\epsilon_0$. Como el campo que existe entre las placas es uniforme, su diferencia de potencial es igual a $V = Ed$.
+
+\begin{equation}
+V = Ed = \frac{\sigma}{\epsilon_0}d = \frac{Qd}{\epsilon_0A}~[V]~,
+\end{equation}
+
+y por lo tanto su capacidad es
+
+\begin{equation}
+C = \frac{Q}{V} = \frac{Q}{Qd/\epsilon_0A} = \frac{\epsilon_0A}{d}~[F]~.
+\end{equation}
+
+\marginnote{Como $V$ es proporcional a $Q$, la capidad no depende ni de uno ni de otro. La capacidad depende de la geometría (del área de las placas y de la distancia de separación en el caso del condensador de placas paralelas).}
+
+\paragraph{Condensador de Placas Cilíndricas} en un condensador cilíndrico formado por dos conductores de longitud $L$, uno de ellos con radio $R_1$ y el otro de radio $R_2$, podemos obtener su capacidad $C = Q/V$ calculando en primer lugar el campo eléctrico utilizando la Ley de Gauss y posteriormente integrándolo entre $R_1$ y $R_2$ para obtener la diferencia de potencial $V = |V_{R_2} - V_{R_1}|$.
+
+\begin{equation}
+C = \frac{Q}{V} = \frac{2\pi\epsilon_0L}{\ln{R_2/R_1}}~[F]~.
+\end{equation}
+
+\subsection{Almacenamiento de la Energía Eléctrica}
+
+Inicialmente, el condensador se compone de dos conductores descargados. Durante el proceso de carga se transfiere una cierta carga $q$ por lo que su diferencia de potencial es $V = q/C$. Si se transfiere ahora una pequeña cantidad de carga $dq$ desde el conductor negativo (con potencial $V=0$) hacia el conductor positivo (con un potencial $V$), la energía potencial del condensador se incrementa
+
+\begin{equation}
+dU = V dq = \frac{q}{C}dq~[J]~,
+\end{equation}
+
+dicha energía potencial va aumentando por lo que su valor final se alcanza cuando la carta total es $Q$ y lo podemos calcular como la integral de los incrementos de energía
+
+\begin{equation}
+U = \int dU = \int_0^Q \frac{q}{C}dq = \frac{1}{C}\int_0^Q qdq = \frac{1}{2}\frac{Q^2}{C}~[J]~.
+\end{equation}
+
+Esta energía potencial es la energía almacenada en el condensador y dado que $C = Q/V$, podemos expresar esta energía de varios modos:
+
+\begin{equation}
+U = \frac{1}{2}\frac{Q^2}{C} = \frac{1}{2}QV = \frac{1}{2}CV^2~[J]~.
+\end{equation}
+
+Por otro lado, es posible relacionar la energía almacenada en el condensador con el campo eléctrico existente para obtener la energía del campo electrostático. Dado que la diferencia de potencial $V = Ed$ y la capacidad viene dada por $C = \epsilon_0 A/d$, la energía almacenada es
+
+\begin{equation}
+U = \frac{1}{2}CV^2 = \frac{1}{2}\frac{\epsilon_0A}{d}(Ed)^2 = \frac{1}{2}\epsilon_0E^2(Ad)~[J]~,
+\end{equation}
+
+como el producto $Ad$ es el volumen del espacio comprendido entre las placas, podemos determinar la energía por unidad de volumen (la densidad de energía $u_e$) como:
+
+\begin{equation}
+u_e = \frac{1}{2}\epsilon_0E^2~[J\cdot m^{-3}]~.
+\end{equation}
+
+\subsection{Dieléctricos}
+
+Un material no conductor se denomina dieléctrico. Cuando el espacio entre los conductores de un condensador se ve ocupado por un dieléctrico, la capacidad aumenta en un factor $k$ característico del dieléctrico (ya que el campo se debilita a causa de dicho material). Así pues, la diferencia de potencial se reduce y por lo tanto la relación $Q/V$ aumenta. 
+
+\begin{equation}
+E = \frac{E_0}{k}
+\end{equation}
+
+\begin{equation}
+C = kC_0
+\end{equation}
+
+Siendo $k$ la constante dieléctrica $\epsilon = k\epsilon_0$.
+
+\subsection{Asociación de Condensadores}
+
+En serie, las caídas de voltaje se suman por lo que:
+
+\begin{equation}
+\frac{1}{C_{eq}} = \sum_i \frac{1}{C_i}~[F]
+\end{equation}
+
+En paralelo, el voltaje en sus extremos es el mismo:
+
+\begin{equation}
+C_{eq} = \sum_i C_i~[F]
+\end{equation}
+
 \clearpage
 
 \section{Corriente Continua}
