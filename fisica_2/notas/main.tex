@@ -419,6 +419,41 @@ C_{eq} = \sum_i C_i~[F]
 
 \section{Corriente Continua}
 
+El flujo de cargas constituye la corriente eléctrica. Aunque normalmente asociamos estas corrientes al movimiento de cargas en el interior de cables conductores, el haz de electrones en un tubo de rayos catódicos también son corrientes eléctricas.
+
+\marginnote{Por convención, se elige la dirección del hilo como positiva y la corriente se define como positiva si las cargas positivas se mueven en esta dirección.}
+
+La corriente eléctrica se define como el flujo de cargas eléctricas que atraviesa por unidad de tiempo la sección transversal de un cable. Si $\Delta Q$ es la carga eléctrica que fluye a través del área transversal en un tiempo $\Delta t$, la intensidad de corriente, medida en amperios $[A] = [C/s]$ es
+
+\begin{equation}
+I = \frac{\Delta Q}{\Delta t}~[A]~.
+\end{equation}
+
+\subsection{Velocidad de Desplazamiento}
+
+En un conductor, los electrones adquieren en promedio una velocidad en el sentido opuesto al campo. Esta velocidad se denomina velocidad media y su módulo es la velocidad de deriva.
+
+Considerando una corriente por un cable conductor de sección transversal $A$. Siendo $n$ el número de portadores de carga por unidad de volumen (o densidad numérica). Suponiendo que cada partícula transporta una carga $q$ y se mueve con una velocidad de desplazamiento $v_d$. En el tiempo $\Delta t$, todas las partículas contenidas en el volumen $Av_d\Delta t$ pasan a través del área $A$. Así pues, el número de partículas en este volumen es $nAv_d\Delta t$ y la carga total es $\Delta Q = qnAv_d\Delta t$. Por lo tanto, la intensidad de corriente se relaciona con la velocidad de desplazamiento de la siguiente forma
+
+\begin{equation}
+I = \frac{\Delta Q}{\Delta t} = qnAv_d~[A]~.
+\end{equation}
+
+\subsection{Densidad de Corriente}
+
+La corriente por unidad de área es $qnv_d$ (al dividir $I$ entre $A$). El vector densidad de corriente $\vec{J}$ viene dado por
+
+\begin{equation}
+\vec{J} = qn\vec{v}_d~[A\cdot m^{-2}]~.
+\end{equation}
+
+La corriente a través de la superficie $S$ se define como el flujo del vector densidad de corriente $\vec{J}$ a través de la superficie
+
+\marginnote{Si $\vec{J}$ es uniforme y si la superficie es plana ($\hat{n}$) es constante, entonces la intensidad se puede expresar como $\vec{J}\cdot\hat{n}A = JA\cos{\theta}$.}
+
+\begin{equation}
+I = \int_S \vec{J}\cdot d\vec{A} = \int_s \vec{J}\cdot\hat{n}dA ~ [A]~.
+\end{equation}
 \clearpage
 
 \section{Campo Magnético}
