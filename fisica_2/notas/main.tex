@@ -454,6 +454,75 @@ La corriente a través de la superficie $S$ se define como el flujo del vector d
 \begin{equation}
 I = \int_S \vec{J}\cdot d\vec{A} = \int_s \vec{J}\cdot\hat{n}dA ~ [A]~.
 \end{equation}
+
+\subsection{Resistencia y Ley de Ohm}
+
+La corriente en un conductor viene impulsada por la fuerza $qE$ ejercida por el campo eléctrico $E$. Las cargas libres circulan por el conductor, en un metal por ejemplo al ser negativas se mueven en dirección opuesta a $E$. Si no existieran más fuerzas, las velocidades de las cargas libres aumentarían indefinidamente. Esto no ocurre porque los electrones libres interaccionan con los iones de la red del metal, produciendo fuerzas que se oponen a su movimiento produciendo una resistencia cuya unidad es el ohmio $[\Omega]$ y se define como $[V/A]$
+
+\begin{equation}
+R = \frac{V}{I}~[\Omega]
+\end{equation}
+
+En ciertos materiales, denominados óhmicos, la resistencia no depende de la caída del voltaje ni de la intensidad. La caída de potencial a través de una porción de dichos materiales es proporcional a la corriente $V = IR$.
+
+La resistencia de un conductor es proporcional a su longitud e inversamente proporcional a su área transversal:
+
+\begin{equation}
+R = \rho\frac{L}{A}~[\Omega]~,
+\end{equation}
+
+siendo $\rho$ una constante denominada resistividad del material conductor (cuya unidad es el $[\Omega\cdot m]$).
+
+La resistividad de cualquier material depende de la temperatura. Dada la resistividad $\rho_0$ a una temperatura de referencia $T_0$ y conociendo el coeficiente de temperatura de la resistividad $\alpha$ es posible determinar la resistividad $\rho$ a otra temperatura $T$
+
+\begin{equation}
+\alpha = \frac{(\rho - \rho_0)/\rho_0}{T - T_0}
+\end{equation}
+
+\subsection{Energía en Circuitos Eléctricos}
+
+\textbf{El mecanismo por el cual el incremento de energía interna del conductor da lugar a un aumento de su temperatura se denomina efecto Joule. El campo eléctrico realiza un trabajo sobre los electrones incrementando su energía cinética. Esta energía adicional pronto se convierte en energía térmica por las colisiones entre los electrones y los iones de la red cristalina.}
+
+La energía perdida por unidad de tiempo es la potencia $P$ disipada en el segmento conductor (velocidad con la que se disipa la energía potencial eléctrica):
+
+\begin{equation}
+P = IV~[W][J\cdot s^{-1}]
+\end{equation}
+
+Así pues, la potencia suministrada al dispositivo es el producto de la caída de potencial por la intensidad. En un conductor, la energía potencial se disipa como energía térmica debido a su resistencia
+
+\begin{equation}
+P = IV = I^2R = \frac{V^2}{R}~[W]
+\end{equation}
+
+\subsection{FEM y Baterías}
+
+\subsection{Asociaciones de Resistencias}
+
+\paragraph{Resistencias en Serie} cuando hay resistencias conectadas en serie y se aplica al conjunto una diferencia de potencial, todas ellas son recorridas por la misma corriente y por lo tanto la caída de potencial a través de las dos resistencias es la suma de las caídas de potencial a través de las resistencias individuales.
+
+\begin{equation}
+V = IR_1 + IR_2 = I(R_1 + R_2)~,
+\end{equation}
+
+por lo tanto, la resistencia equivalente es
+
+\begin{equation}
+R_{eq} = R_1 + R_2 + R_3 + \dots
+\end{equation}
+
+\paragraph{Resistencias en Paralelo} cuando hay resistencias conectadas en paralelo y se aplica al conjunto una diferencia de potencial, en todas las resistencias hay la misma caída de tension. La corriente se divide en tantas partes como resistencias en paralelo y por cada una de ellas circula la misma diferencia de potencial según su resistencia:
+
+\begin{equation}
+V = I_1R_1, V = I_2R_2~,
+\end{equation}
+
+por lo tanto, la resistencia equivalente es
+
+\begin{equation}
+\frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots
+\end{equation}
+
 \clearpage
 
 \section{Campo Magnético}
