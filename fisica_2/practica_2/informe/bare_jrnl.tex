@@ -25,6 +25,8 @@
 \usetikzlibrary{babel}
 \usepackage{pgfplots}
 \usepackage{amsmath}
+\usepackage[americanvoltage]{circuitikz}
+
 
 % *** MISC UTILITY PACKAGES ***
 %
@@ -368,13 +370,60 @@ El código Python que implementa esta práctica así las modificaciones realizad
 
 \section{Introducción}
 
-\IEEEPARstart{U}{na}
+\IEEEPARstart{E}{n} esta práctica estudiaremos mediante el uso de programas en el lenguaje Python la dinámica de circuitos RLC tanto con generador como sin él. Para ello, resolveremos las ecuaciones diferenciales que regulan dicha dinámica mediante el uso de algoritmos. Así pues, en la Sección \ref{sec:rlcnogenerador} estudiaremos el caso sin generador mientras que en la Sección \ref{sec:rlccongenerador} abordaremos la situación con generador.
 
 \section{Circuito RLC en Serie sin Generador}
 \label{sec:rlcnogenerador}
 
+El sistema que estudiaremos en esta primera sección es el mostrado en la Figura \ref{fig:rlc}. En este caso disponemos de: un condensador inicialmente cargado $C$, una resistencia $R$, una bobina $L$ y un interruptor abierto. A tiempo cero se cierra el interruptor y se estudia cómo evoluciona el sistema.
+
+\begin{figure}[!htb]
+    \centering
+    \begin{circuitikz}
+        \draw[ very thick](5,3)-- +(30:0.46);
+        \draw (0,0)
+          to[C=\(C\),i=$I$] (0,3) % The voltage source
+          to[R=\(R\),i=$I$] (5,3) % The resistor
+          to[short,-o](5,3)
+          (5.5,3)to[short,o-](6,3)
+          to[L=\(L\),i=$I$] (6,0) % The inductor
+          to (0,0); %Inductor One
+        \end{circuitikz}
+        \medskip
+        \caption{Circuito RLC en serie sin generador.}
+        \label{fig:rlc}
+\end{figure}
+
+De forma teórica, podemos afirmar que la carga $Q$ del condensador obedece a la siguiente ecuación diferencial:
+
+\begin{equation}
+L\frac{d^2Q}{dt} + R\frac{dQ}{dt} + \frac{Q}{C} = 0 ~,
+\end{equation}
+
+siendo esta ecuación totalmente análoga a la de un oscilador armónico amortiguado y que presenta las mismas soluciones. En el caso de la práctica, el programa \mintinline{c}{RCL.py} hace uso de la rutina \mintinline{c}{odeint} para resolver dicha ecuación diferencial para tres casos diferentes: amortiguado, subamortiguado y sobreamortiguado.
+
+A continuación analizaremos la dinámica de dichos circuitos en los tres casos usando el programa de integración proporcionado. Para ello emplearemos los siguientes valores para el condensador $C~[F]$, la bobina $L~[H]$ y el tiempo de simulación tal como se muestra en el Código \ref{listing:datos_rlc}.
+
+\bigskip
+
+\begin{code}
+    \begin{minted}{python}
+        C=75.0e-6  # Condensador
+        L=0.15 # Bobina
+        tf=1.0e-1 # Tiempo de simulación
+    \end{minted}
+    \caption{Datos de simulación para estudio de dinámica de circuito RLC sin generador.}
+    \label{listing:datos_rlc}
+\end{code}
+
+Por otro lado, la resistencia $R$ tendrá valores diferentes dependiendo de si el caso es amortiguado ($R=0~[\Omega]$), subamortiguado ($R^2 < 4L/C ~ [\Omega]$) y sobreamortiguado ($R^2 > 4L/C ~ [\Omega]$).
+
+Para todos los casos representaremos la carga y la intensidad en función del tiempo $Q = f(t)~[C]$ e $I = (f)~[A]$ respectivamente. Además, también representaremos la variación de la energía magnética $U_m~[J]$, la energía electrostática $U_e~[J]$ y la suma de las dos $U~[J]$.
+
 \subsection{Oscilador Amortiguado}
 \label{subsec:osciladoramortiguado}
+
+En esta sección estudiaremos el caso amortiguado, para el cual hemos elegido una resistencia de $R=0~[\Omega]$ y hemos ejecutado el programa \mintinline{c}{RLC.py} modificado para obtener las gráficas de evolución de la carga (ver Figura \ref{fig:cargaamortiguado}), de la intensidad (Figura \ref{fig:intensidadamortiguado}) y de las energías (Figura \ref{fig:energiaamortiguado}).
 
 \begin{figure}[!htb]
     \centering
@@ -394,8 +443,10 @@ El código Python que implementa esta práctica así las modificaciones realizad
     \centering
     \includegraphics[width=\linewidth,trim={40 70 70 70},clip]{energiaamortiguado.png}
     \caption{Evolución de las energías magnética $U_m$, electrostática $U_e$ y total $U$ en el caso amortiguado para $R=0~[\Omega]$.}
-    \label{fig:intensidadamortiguado}
+    \label{fig:energiaamortiguado}
 \end{figure}
+
+\clearpage
 
 \subsection{Oscilador Subamortiguado}
 \label{subsec:osciladorsubamortiguado}
@@ -420,6 +471,8 @@ El código Python que implementa esta práctica así las modificaciones realizad
     \caption{Evolución de las energías magnética $U_m$, electrostática $U_e$ y total $U$ en el caso subamortiguado para $R=0.1 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
     \label{fig:intensidadamortiguado}
 \end{figure}
+
+\clearpage
 
 \subsection{Oscilador Sobreamortiguado}
 \label{subsec:osciladorsobreamortiguado}
@@ -446,7 +499,7 @@ El código Python que implementa esta práctica así las modificaciones realizad
 \end{figure}
 
 \section{Circuito RLC en Serie con Generador}
-\label{sec:rlcnogenerador}
+\label{sec:rlccongenerador}
 
 \subsection{Estudio Teórico Mediante Método de Fasores}
 \label{subsec:estudioteorico}
@@ -456,9 +509,6 @@ El código Python que implementa esta práctica así las modificaciones realizad
 
 \section{Conclusión}
 \label{sec:conclusion}
-En esta primera práctica de la asignatura hemos presentado un estudio del movimiento de varios tipos de cargas en campos electromagnéticos producidos por diversos instrumentos utilizados en la actualidad. Para cada uno de ellos hemos llevado a cabo una solución analítica que posteriormente ha sido contrastada con simulaciones en las que hemos explorado el efecto de varios de los parámetros que rigen dicho instrumental.
-
-Gracias a la realización de esta práctica y de su informe hemos consolidado en gran medida el conocimiento sobre campos electromagnéticos y su efecto sobre diferentes partículas así como de otros tantos valores (frecuencias, períodos, radios de curvatura y energías).
 
 \clearpage
 
