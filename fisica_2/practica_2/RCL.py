@@ -80,6 +80,10 @@ def simular(args):
     um_ = 0.5 * L * np.square(z[:, 1])
     u_ = ue_ + um_
 
+    ur_ = np.zeros_like(u_)
+    for i in range(len(t)-1):
+        ur_[i+1] = ur_[i] + z[i,1] * z[i,1] * R
+
     # Definicion del grafico
     # Modificar los limites de acuerdo a las necesidades, así como los titulos de los ejes
     # está puesto para que grafique Q=f(t)  (z[0]->Q   z[1]->I)
@@ -113,6 +117,16 @@ def simular(args):
     ax.set_ylabel(r"\textbf{$U [J]$}")
     ax.set_xlabel(r"\textbf{$t [s]$}")
     ax.set_title(r"\textbf{Evolución de la Energía}")
+    plt.grid()
+    plt.show()
+
+    ax=plt.axes(xlim=(0,tf))
+    line1, = ax.plot(t[:],ur_,'-', linewidth=4, label=r"$U_R$")
+    ax.legend(loc='lower right')
+    ax.ticklabel_format(axis='y', style='sci', scilimits=(-2,2))
+    ax.set_ylabel(r"\textbf{$U_R [J]$}")
+    ax.set_xlabel(r"\textbf{$t [s]$}")
+    ax.set_title(r"\textbf{Evolución de la Energía Disipada}")
     plt.grid()
     plt.show()
 

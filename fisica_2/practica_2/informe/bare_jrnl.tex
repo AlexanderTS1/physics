@@ -468,14 +468,14 @@ De forma teórica, la frecuencia de oscilación es:
 f = \frac{1}{2\pi\sqrt{LC}} = \frac{1}{2\pi\sqrt{(0.15 \cdot 75.0 \cdot 10^{-6})}} = 47.45~[Hz]
 \end{equation}
 
-Atendiendo a la gráfica de la evolución de la carga $Q~[C]$ mostrada en la Figura \ref{fig:cargaamortiguado}, podemos determinar que el período de oscilación (tiempo transcurrido entre dos máximos) es aproximadamente de $0.021~[s]$ ya que el primer máximo lo encontramos en $t=0~[s]$ y el siguiente en $t\simeq 0.021~[s]$. Dado que la frecuencia es la inversa del período $f = 1/T$, la frecuencia obtenida a partir de la gráfica es $f = 1 / 0.021 = 47.62$, la cual, apreciando los errores de precisión al seleccionar los valores de la gráfica, coincide con la frecuencia teórica calculada.
+Atendiendo a la gráfica de la evolución de la carga $Q~[C]$ mostrada en la Figura \ref{fig:cargaamortiguado}, podemos determinar que el período de oscilación (tiempo transcurrido entre dos máximos) es aproximadamente de $T = 0.021~[s]$ ya que el primer máximo lo encontramos en $t=0.000~[s]$ y el siguiente en $t\simeq 0.021~[s]$. Dado que la frecuencia es la inversa del período $f = 1/T$, la frecuencia obtenida a partir de la gráfica es $f = 1 / 0.021 = 47.62$, la cual, apreciando los errores de precisión al seleccionar los valores de la gráfica, coincide con la frecuencia teórica calculada.
 
 \clearpage
 
 \subsection{Oscilador Subamortiguado}
 \label{subsec:osciladorsubamortiguado}
 
-Una vez analizado el caso del oscilador amortiguado, procederemos a estudiar la situación subamortiguada. Para ello, mantendremos los mismos valores de $C$, $L$ y $Q_0$ mientras que cambiaremos el valor para la resistencia $R$. Para darse la situación subamortiguada necesitamos la siguiente condición
+Analizado el caso del oscilador amortiguado, procederemos a estudiar la situación subamortiguada. Para ello, mantendremos los mismos valores de $C$, $L$ y $Q_0$ mientras que cambiaremos el valor para la resistencia $R$. Para darse la situación subamortiguada necesitamos la siguiente condición
 
 \begin{equation}
 R^2 < \frac{4L}{C}~[\Omega]~.
@@ -491,23 +491,25 @@ Una vez determinado un valor necesario de $R~[\Omega]$ para producir la subamort
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=\linewidth,trim={70 70 70 70},clip]{cargasubamortiguado.png}
-    \caption{Evolución de la carga $Q$ en el caso subamortiguado para $R=0.1 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
+    \includegraphics[width=\linewidth,trim={70 70 70 105},clip]{cargasubamortiguado.png}
+    \caption{Evolución de la carga $Q~[C]$ en el caso subamortiguado para $R=0.1 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
     \label{fig:cargasubamortiguado}
 \end{figure}
 
-En este caso podemos observar cómo, aunque se sigue produciendo oscilación con el mismo comportamiento que en el caso anterior, la amplitud de la misma disminuye con el tiempo lo cual provoca una disminución progresiva del valor absoluto de la carga, de la intensidad y por lo tanto una disminución de la energía del sistema a medida que transcurre el tiempo.
+En este caso podemos observar cómo, aunque se sigue produciendo oscilación con el mismo comportamiento que en el caso anterior, la amplitud de la misma disminuye con el tiempo lo cual provoca una disminución progresiva del valor absoluto de la carga, de la intensidad y por lo tanto una disminución de la energía del sistema a medida que transcurre el tiempo. Dicha energía se pierde progresivamente a causa principalmente de la resistencia.
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=\linewidth,trim={40 70 70 70},clip]{intensidadsubamortiguado.png}
-    \caption{Evolución de la intensidad $Q$ en el caso subamortiguado para $R=0.1 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
+    \includegraphics[width=\linewidth,trim={40 70 70 105},clip]{intensidadsubamortiguado.png}
+    \caption{Evolución de la intensidad $I~[A]$ en el caso subamortiguado para $R=0.1 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
     \label{fig:intensidadsubamortiguado}
 \end{figure}
 
+En este caso, la frecuencia de oscilación no cambia respecto al caso anterior ($f = 47.45~[Hz]$) dado que la misma únicamente depende de $L$ y de $C$. Como se puede comprobar en la Figura \ref{fig:cargaamortiguado}, de la misma forma que en la Figura \ref{fig:cargaamortiguado}, el período de oscilación entre los primeros dos máximos ($t = 0.000~[s]$ y $t \simeq 0.021~[s]$) es $T = 0.021~[s]$. Por lo tanto, la frecuencia es $f = 1/0.021 = 47.62~[Hz]$.
+
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=\linewidth,trim={40 70 70 70},clip]{energiasubamortiguado.png}
+    \includegraphics[width=\linewidth,trim={40 70 70 105},clip]{energiasubamortiguado.png}
     \caption{Evolución de las energías magnética $U_m$, electrostática $U_e$ y total $U$ en el caso subamortiguado para $R=0.1 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
     \label{fig:energiasubamortiguado}
 \end{figure}
@@ -517,26 +519,44 @@ En este caso podemos observar cómo, aunque se sigue produciendo oscilación con
 \subsection{Oscilador Sobreamortiguado}
 \label{subsec:osciladorsobreamortiguado}
 
+Por último, simularemos el caso sobreamortiguado. De nuevo, mantenemos los mismos valores para el condensador $C$, la bobina $L$ y para la carga inicial $Q_0$ y cambiaremos el valor de la resistencia $R$. Para conseguir una situación de sobreamortiguación debe cumplirse que
+
+\begin{equation}
+R^2 > \frac{4L}{C}~[\Omega]~,
+\end{equation}
+
+por lo que daremos un valor arbitrario a $R$ de 
+
+\begin{equation}
+R = 10 \cdot \sqrt{\frac{4L}{C}} = 0.1\cdot\sqrt{\frac{4\cdot 0.15}{75.00\cdot10^{-6}}} = 894.43~[\Omega]~.
+\end{equation}
+
+Determinado un valor necesario de $R~[\Omega]$ para producir la sobreamortiguación, ejecutamos de nuevo el programa \mintinline{c}{RLC.py} y obtenemos las gráficas de evolución de la carga $Q~[C]$ (Figura \ref{fig:cargasobreamortiguado}), de la intensidad (Figura \ref{fig:intensidadsobreamortiguado}) y de energía (Figura \ref{fig:energiasobreamortiguado}).
+
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth,trim={70 70 70 70},clip]{cargasobreamortiguado.png}
-    \caption{Evolución de la carga $Q$ en el caso subamortiguado para $R=10 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
+    \caption{Evolución de la carga $Q~[C]$ en el caso sobreamortiguado para $R=10 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
     \label{fig:cargasobreamortiguado}
 \end{figure}
+
+En esta situación podemos comprobar cómo una excesiva resistencia provoca pérdida de energía tal que ni tan siquiera se puede producir oscilación por lo que se produce una respuesta sobreamortiguada. La pérdida de energía debido a la resistencia provoca que la carga en el condensador no pueda oscilar e invertir la intensidad de la corriente. La solución a la ecuación característica del circuito $RLC$ en este caso da lugar a una corriente resultado de la superposición de dos exponenciales reales que decrecen hasta cero por lo que eventualmente dejará de existir corriente en el circuito y su energía será nula.
 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth,trim={40 70 70 70},clip]{intensidadsobreamortiguado.png}
-    \caption{Evolución de la intensidad $Q$ en el caso subamortiguado para $R=10 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
+    \caption{Evolución de la intensidad $I~[A]$ en el caso sobreamortiguado para $R=10 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
     \label{fig:intensidadsobreamortiguado}
 \end{figure}
 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth,trim={40 70 70 70},clip]{energiasobreamortiguado.png}
-    \caption{Evolución de las energías magnética $U_m$, electrostática $U_e$ y total $U$ en el caso subamortiguado para $R=10 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
+    \caption{Evolución de las energías magnética $U_m$, electrostática $U_e$ y total $U$ en el caso sobreamortiguado para $R=10 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$. Nota: la energía total $U$ coincide con la energía electrostática $U_e$.}
     \label{fig:energiasobreamortiguado}
 \end{figure}
+
+\clearpage
 
 \section{Circuito RLC en Serie con Generador}
 \label{sec:rlccongenerador}
