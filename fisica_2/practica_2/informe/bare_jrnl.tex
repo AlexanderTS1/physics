@@ -354,7 +354,7 @@
 \begin{abstract}
 En esta primera práctica de la asignatura Física II del Grado en Física (curso académico 2018-2019) estudiaremos el movimiento de cargas en campos electromagnéticos. Para ello consideraremos diferentes partículas (iones de hidrógeno, electrones y protones) en diversos instrumentos típicos y estudiados en la parte teórica de la asignatura: el espectrómetro de masas, el selector de velocidades y el ciclotrón. Para cada caso desarrollaremos las ecuaciones analíticas que nos permitan resolver el movimiento de dichas partículas de forma teórica para posteriormente ejecutar los programas de simulación proporcionados con el objetivo de contrastar los resultados teóricos con los generados numéricamente. Además, exploraremos el efecto de variar ciertos parámetros en cada uno de los instrumentos también tanto de forma teórica como simulada.
 
-El código Python que implementa esta práctica así las modificaciones realizadas a sus rutinas de visualización y las fuentes \LaTeX de este informe se encuentran disponibles online en el repositorio \url{https://github.com/Blitzman/physics/tree/master/fisica_2/practica_1}.
+El código Python que implementa esta práctica así las modificaciones realizadas a sus rutinas de visualización y las fuentes \LaTeX de este informe se encuentran disponibles online en el repositorio \url{https://github.com/Blitzman/physics/tree/master/fisica_2/practica_2}.
 \end{abstract}
 
 
@@ -402,6 +402,12 @@ L\frac{d^2Q}{dt} + R\frac{dQ}{dt} + \frac{Q}{C} = 0 ~,
 
 siendo esta ecuación totalmente análoga a la de un oscilador armónico amortiguado y que presenta las mismas soluciones. En el caso de la práctica, el programa \mintinline{c}{RCL.py} hace uso de la rutina \mintinline{c}{odeint} para resolver dicha ecuación diferencial para tres casos diferentes: amortiguado, subamortiguado y sobreamortiguado.
 
+La frecuencia de oscilación en cada uno de los casos se puede calcular como:
+
+\begin{equation}
+f = \frac{1}{2\pi\sqrt{LC}}~[Hz]
+\end{equation}
+
 A continuación analizaremos la dinámica de dichos circuitos en los tres casos usando el programa de integración proporcionado. Para ello emplearemos los siguientes valores para el condensador $C~[F]$, la bobina $L~[H]$ y el tiempo de simulación tal como se muestra en el Código \ref{listing:datos_rlc}.
 
 \bigskip
@@ -420,24 +426,34 @@ Por otro lado, la resistencia $R$ tendrá valores diferentes dependiendo de si e
 
 Para todos los casos representaremos la carga y la intensidad en función del tiempo $Q = f(t)~[C]$ e $I = (f)~[A]$ respectivamente. Además, también representaremos la variación de la energía magnética $U_m~[J]$, la energía electrostática $U_e~[J]$ y la suma de las dos $U~[J]$.
 
+También comprobaremos, a partir de las gráficas planteadas, que la frecuencia de oscilación teórica anteriormente expuesta coincide con la frecuencia de oscilación de las mismas.
+
 \subsection{Oscilador Amortiguado}
 \label{subsec:osciladoramortiguado}
 
 En esta sección estudiaremos el caso amortiguado, para el cual hemos elegido una resistencia de $R=0~[\Omega]$ y hemos ejecutado el programa \mintinline{c}{RLC.py} modificado para obtener las gráficas de evolución de la carga (ver Figura \ref{fig:cargaamortiguado}), de la intensidad (Figura \ref{fig:intensidadamortiguado}) y de las energías (Figura \ref{fig:energiaamortiguado}).
 
+\newpage
+
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth,trim={70 70 70 70},clip]{cargaamortiguado.png}
-    \caption{Evolución de la carga $Q$ en el caso amortiguado para $R=0~[\Omega]$.}
+    \caption{Evolución temporal de la carga $Q~[C]$ en el caso del circuito $RLC$ amortiguado para $R=0~[\Omega]$ y con $tf=10.0~[s]$.}
     \label{fig:cargaamortiguado}
 \end{figure}
 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth,trim={40 70 70 70},clip]{intensidadamortiguado.png}
-    \caption{Evolución de la intensidad $Q$ en el caso amortiguado para $R=0~[\Omega]$.}
+    \caption{Evolución temporal de la intensidad $I~[A]$ en el caso del circuito $RLC$ amortiguado para $R=0~[\Omega]$ y con $tf=10.0~[s]$.}
     \label{fig:intensidadamortiguado}
 \end{figure}
+
+\newpage
+
+Como podemos observar, en el caso amortiguado la evolución tanto de la carga como de la intensidad presentan el comportamiento de oscilación armónica amortiguada (una analogía típica es el péndulo sometido a rozamiento debido a la resistencia del aire). Así pues, la carga y la intensidad van a oscilar debido a la inversión de la carga en las placas del condensador.
+
+La Figura \ref{fig:energiaamortiguado} muestra la evolución tanto de la energía magnética como electrostática y la suma de ambas. En ella podemos comprobar cómo cuando la carga $Q$ es nula toda la energía es magnética y está almacenada en el inductor (por ejemplo, en el instante $t=0.03$). De la misma forma, cuando la carga es máxima (instantes $t=0.02$ y $t=0.01$ aproximadamente), toda la energía es electrostática y está almacenada en el condensador.
 
 \begin{figure}[!htb]
     \centering
@@ -446,30 +462,54 @@ En esta sección estudiaremos el caso amortiguado, para el cual hemos elegido un
     \label{fig:energiaamortiguado}
 \end{figure}
 
+De forma teórica, la frecuencia de oscilación es:
+
+\begin{equation}
+f = \frac{1}{2\pi\sqrt{LC}} = \frac{1}{2\pi\sqrt{(0.15 \cdot 75.0 \cdot 10^{-6})}} = 47.45~[Hz]
+\end{equation}
+
+Atendiendo a la gráfica de la evolución de la carga $Q~[C]$ mostrada en la Figura \ref{fig:cargaamortiguado}, podemos determinar que el período de oscilación (tiempo transcurrido entre dos máximos) es aproximadamente de $0.021~[s]$ ya que el primer máximo lo encontramos en $t=0~[s]$ y el siguiente en $t\simeq 0.021~[s]$. Dado que la frecuencia es la inversa del período $f = 1/T$, la frecuencia obtenida a partir de la gráfica es $f = 1 / 0.021 = 47.62$, la cual, apreciando los errores de precisión al seleccionar los valores de la gráfica, coincide con la frecuencia teórica calculada.
+
 \clearpage
 
 \subsection{Oscilador Subamortiguado}
 \label{subsec:osciladorsubamortiguado}
 
+Una vez analizado el caso del oscilador amortiguado, procederemos a estudiar la situación subamortiguada. Para ello, mantendremos los mismos valores de $C$, $L$ y $Q_0$ mientras que cambiaremos el valor para la resistencia $R$. Para darse la situación subamortiguada necesitamos la siguiente condición
+
+\begin{equation}
+R^2 < \frac{4L}{C}~[\Omega]~.
+\end{equation}
+
+Así pues, elegimos un valor para $R$
+
+\begin{equation}
+R = 0.1 \cdot \sqrt{\frac{4L}{C}} = 0.1\cdot\sqrt{\frac{4\cdot 0.15}{75.00\cdot10^{-6}}} = 8.94~[\Omega]~.
+\end{equation}
+
+Una vez determinado un valor necesario de $R~[\Omega]$ para producir la subamortiguación, ejecutamos de nuevo el programa \mintinline{c}{RLC.py} y obtenemos las gráficas de evolución de la carga $Q~[C]$ (Figura \ref{fig:cargasubamortiguado}), de la intensidad (Figura \ref{fig:intensidadsubamortiguado}) y de energía (Figura \ref{fig:energiasubamortiguado}).
+
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth,trim={70 70 70 70},clip]{cargasubamortiguado.png}
     \caption{Evolución de la carga $Q$ en el caso subamortiguado para $R=0.1 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
-    \label{fig:cargaamortiguado}
+    \label{fig:cargasubamortiguado}
 \end{figure}
+
+En este caso podemos observar cómo, aunque se sigue produciendo oscilación con el mismo comportamiento que en el caso anterior, la amplitud de la misma disminuye con el tiempo lo cual provoca una disminución progresiva del valor absoluto de la carga, de la intensidad y por lo tanto una disminución de la energía del sistema a medida que transcurre el tiempo.
 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth,trim={40 70 70 70},clip]{intensidadsubamortiguado.png}
     \caption{Evolución de la intensidad $Q$ en el caso subamortiguado para $R=0.1 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
-    \label{fig:intensidadamortiguado}
+    \label{fig:intensidadsubamortiguado}
 \end{figure}
 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth,trim={40 70 70 70},clip]{energiasubamortiguado.png}
     \caption{Evolución de las energías magnética $U_m$, electrostática $U_e$ y total $U$ en el caso subamortiguado para $R=0.1 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
-    \label{fig:intensidadamortiguado}
+    \label{fig:energiasubamortiguado}
 \end{figure}
 
 \clearpage
@@ -481,21 +521,21 @@ En esta sección estudiaremos el caso amortiguado, para el cual hemos elegido un
     \centering
     \includegraphics[width=\linewidth,trim={70 70 70 70},clip]{cargasobreamortiguado.png}
     \caption{Evolución de la carga $Q$ en el caso subamortiguado para $R=10 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
-    \label{fig:cargaamortiguado}
+    \label{fig:cargasobreamortiguado}
 \end{figure}
 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth,trim={40 70 70 70},clip]{intensidadsobreamortiguado.png}
     \caption{Evolución de la intensidad $Q$ en el caso subamortiguado para $R=10 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
-    \label{fig:intensidadamortiguado}
+    \label{fig:intensidadsobreamortiguado}
 \end{figure}
 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth,trim={40 70 70 70},clip]{energiasobreamortiguado.png}
     \caption{Evolución de las energías magnética $U_m$, electrostática $U_e$ y total $U$ en el caso subamortiguado para $R=10 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
-    \label{fig:intensidadamortiguado}
+    \label{fig:energiasobreamortiguado}
 \end{figure}
 
 \section{Circuito RLC en Serie con Generador}
