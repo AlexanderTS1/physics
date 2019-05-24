@@ -492,10 +492,30 @@ P = IV~[W][J\cdot s^{-1}]
 Así pues, la potencia suministrada al dispositivo es el producto de la caída de potencial por la intensidad. En un conductor, la energía potencial se disipa como energía térmica debido a su resistencia
 
 \begin{equation}
-P = IV = I^2R = \frac{V^2}{R}~[W]
+P = IV = I^2R = \frac{V^2}{R}~[W]~.
 \end{equation}
 
+En definitiva, se puede decir que la potencia $P$ es el trabajo $W = qV$ realiado por unidad de tiempo $t$ y por lo tanto por efecto Joule se disipa un calor $Q = Pt = IVt = I^2Rt~[J]$.
+
 \subsection{FEM y Baterías}
+
+Una fuente de FEM realiza un trabajo sobre la carga que pasa a través, elevando la energía potencial de la misma. El trabajo por unidad de carga recibe el nombre de FEM $\mathcal{E}$ de la fuente. Su unidad es el $[V]$ igual que la diferencia de potencial. Una batería ideal es una fuente de FEM que mantiene una diferencia de potencial constante de forma que la diferencia de potencial de una batería es igual a la FEM de la misma.
+
+Sin embargo, en una batería real, la diferencia de potencial entre los bornes no es igual al valor de la fem de la batería. Una batería real puede considerarse como una batería ideal de fem $\mathcal{E}$ más una pequeña resistencia $r$ denominada resistencia interna.
+
+Así pues, la diferencia de potencial en los bornes de una batería es
+
+\begin{equation}
+V = \mathcal{E} - Ir~[V]~,
+\end{equation}
+
+por lo que la intensidad de corriente en un circuito con una resistencia $R$ es
+
+\begin{equation}
+I = \frac{\mathcal{E}}{R + r}~[A]~.
+\end{equation}
+
+Frecuentemente, las baterías se especifican en $[Ah]$ (Amperios hora) lo que indica la carga total que pueden suministrar teniendo en cuenta que $[A] = [C\cdot s^{-1}]$. Así pues, una batería de $1 [Ah]$ tiene una carga total suministrable de $1 [C/s] \cdot 3600 [s] = 3600 [C]$. La energía almacenada en la batería es igual al trabajo que puede realizar así que $E = W = Q\mathcal{E}~[J]$.
 
 \subsection{Asociaciones de Resistencias}
 
@@ -523,9 +543,101 @@ por lo tanto, la resistencia equivalente es
 \frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots
 \end{equation}
 
+\subsection{Reglas de Kirchoff}
+
+Se define como nodo cualquier punto donde dos o más elementos tienen una conexión común. Una rama es el conjunto de todos los elementos comprendidos entre dos nodos consecutivos con la misma intensidad de corriente y una malla es cualquier camino cerrado en un circuito.
+
+\paragraph{Primera Ley de Kirchoff} en cualquier nodo, la suma de todas las corrientes que pasan por el nodo es igual a cero. La suma de las corrientes que entran en el nodo debe ser igual a la suma de las corrientes que salen (conservación de la carga).
+
+\paragraph{Segunda Ley de Kirchoff} la suma de las variaciones de potencial a lo largo de cualquier bucle o malla debe ser igual a cero.
+
+\subsection{Circuitos RC}
+
+Se denomina circuito RC aquel en el que interviene una resistencia y un condensador. La corriente de un circuito RC fluye en un solo sentido pero la intensidad de corriente varía con el tiempo. Mediante las reglas de Kirchoff podemos obtener las ecuaciones que rigen la evolución de la carga $Q$ y la intensidad $t$ en función del tiempo para los procesos de descarga y carga de un condensador.
+
+\paragraph{Descarga de un Condensador}
+
+\begin{equation}
+I_0 = \frac{V_0}{R} = \frac{Q_0}{RC}~[A]
+\end{equation}
+
+\begin{equation}
+I = -\frac{dQ}{dt}
+\end{equation}
+
+\begin{equation}
+\frac{Q}{C}-IR = 0
+\end{equation}
+
+\begin{equation}
+\frac{Q}{C}+R\frac{dQ}{dt} = 0 \rightarrow \frac{dQ}{Q} = -\frac{1}{RC}dt
+\end{equation}
+
+\begin{equation}
+\int_{Q_0}^{Q} \frac{dQ}{Q} = -\frac{1}{RC}\int_0^{t'}dt \rightarrow ln\frac{Q}{Q_0} = -\frac{t}{RC}
+\end{equation}
+
+\begin{equation}
+Q(t) = Q_0 \cdot e^{-t/(RC)} = Q_0\cdot e^{-t/\tau}~[C]
+\end{equation}
+
+$\tau = RC$ es la constante de tiempo que indica el tiempo durante el cual la carga disminuye hasta $1/e$ de su valor original.
+
+\begin{equation}
+I(t) = -\frac{dQ}{dt} = \frac{Q_0}{RC}\cdot e^{-t/(RC)} = I_0\cdot e^{-t/\tau}~[A]
+\end{equation}
+
+\paragraph{Carga de un Condensador}
+
+\begin{equation}
+I = +\frac{dQ}{dt}
+\end{equation}    
+
+\begin{equation}
+\mathcal{E}-\frac{Q}{C}-IR = 0
+\end{equation}
+
+\begin{equation}
+\mathcal{E}-\frac{Q}{C}-R\frac{dQ}{dt} = 0
+\end{equation}
+
+\begin{equation}
+Q(t) = C\mathcal{E} \cdot (1-e^{-t/(RC)}) = Q_f\cdot (1-e^{-t/\tau})~[C]
+\end{equation}
+
+\begin{equation}
+I(t) = \frac{\mathcal{E}}{R}\cdot e^{-t/(RC)} = I_0\cdot e^{-t/\tau}~[A]
+\end{equation}
+
+\paragraph{Energía en la Carga de un Condensador}
+
 \clearpage
 
 \section{Campo Magnético}
+
+\subsection{Fuerza Ejercida por un Campo Magnético}
+
+Cuando una carga $q$ posee una velocidad $\vec{v}$ en un campo magnético, aparece una fuerza que es proporcional a $q$ y $v$, y al seno del ángulo que foman $\vec{v}$ y $\vec{B}$. La fuerza magnética $\vec{F}$ que actúa sobre la carga es:
+
+\begin{equation}
+\vec{F} = q\vec{v}\times\vec{B}~[N]
+\end{equation}
+
+Cuando por un cable situado en el seno de un campo magnético circula una corriente, existe una fuerza que se ejerce sobre el conductor que es simplemente la suma de las fuerzas magnéticas sobre las partículas cargadas. Así pues, la fuerza total sobre el cable es
+
+\begin{equation}
+\vec{F} = (q\vec{v}_d\times\vec{B})nAL~[N],
+\end{equation}
+
+dado que $I = nqv_dA$ entonces la fuerza que ejerce un campo magnético sobre un segmento portador de corriente puede escribirse como
+
+\begin{equation}
+\vec{F} = I\vec{L}\times\vec{B}~[N]
+\end{equation}
+
+\subsection{Líneas de Campo Magnético}
+
+
 
 \clearpage
 
