@@ -73,6 +73,14 @@
 %
 \end{abstract}
 
+\tableofcontents
+
+\clearpage
+
+$\mu_0 = 4\pi \cdot 10^{-7}~[T\cdot m \cdot A^{-1}]$
+
+\clearpage
+
 \section{Campo Eléctrico}
 
 \paragraph{Carga Eléctrica} \textbf{La carga eléctrica es una magnitud fundamental y responsable de la interacción electromagnética. Su unidad es el Culombio $[C]$ que se define como la cantidad de carga que fluye por un punto de un conductor en un segundo cuando la corriente en el mismo es de $1~[A]$.} Posee las siguientes características:
@@ -637,7 +645,137 @@ dado que $I = nqv_dA$ entonces la fuerza que ejerce un campo magnético sobre un
 
 \subsection{Líneas de Campo Magnético}
 
+\begin{marginfigure}%
+    \includegraphics[width=\linewidth]{helix}
+    \caption{Líneas de campo magnético.}
+    \label{fig:lineascampomagnetico}
+\end{marginfigure}
 
+Del mismo modo que el campo eléctrico, el campo magnético también puede representarse con líneas de campo, en este caso magnético, con dos diferencias principales:
+
+\begin{itemize}
+    \item Las líneas de campo eléctrico tienen la misma dirección que la fuerza eléctrica sobre una carga positiva, mientras que las del campo magnético son perpendiculares a la fuerza magnética sobre una carga móvil.
+    \item Las líneas de campo eléctrico comienzan en las cargas positivas y acaban en las negativas, las líneas de campo magnético son cerradas: no existen monopolos magnéticos.
+\end{itemize}
+
+\subsection{Movimiento de una Carga Puntual}
+
+La fuerza magnética que actúa sobre una partícula cargada que se mueve a través de un campo magnético es siempre perpendicular a la velocidad de la partícula, por este motivo \textbf{la fuerza magnética modifica la dirección de la velocidad, pero no su módulo por lo que no realizan trabajo sobre las partículas y no modifican su energía cinética}.
+
+En el caso en el que la velocidad sea perpendicular a un campo magnético uniforme, la partícula se mueve describiendo una órbita circular. Utilizando la segunda Ley de Newton podemos relacionar el radio $r$ de la circunferencia con el campo magnético $\vec{B}$ y con la velocidad de la partícula $\vec{v}$.
+
+\begin{equation}
+qvB = ma \rightarrow qvB = m\frac{v^2}{r} \rightarrow r = \frac{mv}{qB}~[m]~.
+\end{equation}
+
+El período del movimiento circular es el tiempo que la partícula tarda en dar una vuelta completa alrededor del círculo, así que viene relacionado con la velocidad por
+
+\begin{equation}
+T = \frac{2\pi r}{v}~[s]~.
+\end{equation}
+
+Utilizando las dos ecuaciones anteriores podemos calcular el período y la frecuencia de ciclotrón:
+
+\begin{equation}
+T = \frac{2\pi(mv/qB)}{v} = \frac{2\pi m}{qB}~[s]~,
+\end{equation}
+\begin{equation}
+f = \frac{1}{T} = \frac{qB}{2\pi m}~[Hz] \rightarrow w = 2\pi f = \frac{qB}{m}~[rad\cdot s^{-1}]~.
+\end{equation}
+
+\subsection{Momento Magnético sobre Espiras de Corriente}
+
+Una espira portadora de corriente no experimenta ninguna fuerza neta cuando se encuentra en un campo magnético uniforme, pero sobre ella se ejerce un par que tiende a girarla.
+
+La fuerza neta ejercida por un campo magnético $\vec{B}$ que forma un ángulo $\theta$ con el vector unitario de la superficie de la espira $\hat{n}$ es cero. Siendo $a$ y $b$ los lados de la espira, las fuerzas $\vec{F}_1$ y $\vec{F}_2$ ejercidas sobre los laterales $a$ de la espira tienen el mismo módulo $F = ILB = IaB$ y por lo tanto el momento sobre un punto $P$ conveniente es $\tau = Fbsin\theta = IabB\sin{\theta} = IAB\sin{\theta}$, en el caso de que la espira tenga $N$ vueltas entonces es $\tau = NIAB\sin{\theta}$.
+
+De esta expresión podemos deducir que el momento sobre la espira se puede expresar en función del momento dipolar magnético $\vec{\mu} = NIA\hat{n}$ como $\vec{\tau} = \vec{\mu}\times\vec{B}~[N\cdot m]$.
+
+La energía potencial de un dipolo magnético es $U = -\mu B\cos{\theta} = -\vec{\mu}\cdot\vec{B}~[J]$.
+
+\subsection{Efecto Hall}
+
+$V_H = E_Hw = v_dBw~[V]$ donde $w$ es la anchura de la cinta.
+
+\subsection{Campo Magnético creado por Cargas Puntuales en Movimiento}
+
+\begin{equation}
+\vec{B} = \frac{\mu_0}{4\pi}\frac{q\vec{v}\times\hat{r}}{r^2}~[T]
+\end{equation}
+
+\subsection{Campo Magnético creado por Corrientes Eléctricas}
+
+También conocida como Ley de Biot-Savart:
+
+\begin{equation}
+d\vec{B} = \frac{\mu_0}{4\pi}\frac{Id\vec{l}\times\hat{r}}{r^2}~[T]
+\end{equation}
+
+El campo magnético producido por un segmento conductor en función de la distancia perpendicular $R$ y los ángulos $\theta_1$ y $\theta_2$ subtendidos en el punto del campo por los extremos del conductor según la Ley de Biot-Savart es:
+
+\begin{equation}
+B = \frac{\mu_0}{4\pi}\frac{I}{R}(\sin{\theta_2}-\sin{\theta_1})~[T]
+\end{equation}
+
+\subsection{Campo Magnético creado por Una Espira}
+
+\begin{equation}
+dB = \frac{\mu_0}{4\pi}{Idl\sin{\theta}}{R^2}
+\end{equation}
+
+\begin{equation}
+B = \frac{\mu_0}{4\pi}\frac{I}{R^2}\oint dl = \frac{\mu_0 I}{2R}~[T]
+\end{equation}
+
+\subsection{Ley de Gauss para el Magnetismo}
+
+El flujo neto del campo magnético a través de cualquier superficie cerrada $S$ es cero ya que no existen puntos en el espacio a partir de los cuales las líneas de campo divergen o puntos en los cuales convergen: no existen monopolos magnéticos.
+
+\begin{equation}
+\phi_m = \oint_S \vec{B}\cdot\hat{n}dA = \oint_S B_ndA = 0~[Wb]~.
+\end{equation}
+
+\subsection{Ley de Ampère}
+
+La Ley de Ampère relaciona la componente tangencial del campo magnético, alrededor de una curva cerrada $C$, con la corriente $I_c$ que atraviesa dicha curva. \textbf{Esta Ley únicamente se cumple para corrientes estacionarias y continuas.}
+
+\begin{equation}
+\oint_C B_t dl = \oint_C \vec{B}\cdot d\vec{l} = \mu_0 I_C
+\end{equation}
+
+\subsection{Campo Magnético creado por Segmento Rectilíneo}
+
+Empleando la Ley de Ampère se puede determinar el campo magnético creado por un conductor infinitamente largo y rectilíneo portador de corriente. Según la Ley de Biot y Savart, la dirección del campo magnético debido a cada elemento diferencial de corriente es tangente a la circunferencia que pasa alrededor del alambre (por lo que $\vec{B}$ y $d\vec{l}$ tienen la misma dirección, siendo su módulo constante a lo largo de toda la circunferencia). Así pues:
+
+\begin{equation}
+\oint_C B_t dl = \mu_0 I_c \rightarrow B \oint_C dl = \mu_o I_c \rightarrow B = \frac{\mu_0 I}{2\pi R}~[T]
+\end{equation}
+
+\subsection{Fuerza Magnética entre Dos Conductores Paralelos}
+
+Dos corrientes paralelas por las que circula una corriente se atraerán si las corrientes circulan en el mismo sentido, mientras que si circulan en sentido opuesto se repelen.
+
+\subsection{Definición de Amperio}
+
+Un amperio es la intensidad de corriente que, circulando en el mismo sentido por dos conductores paralelos muy largos separados por un metro, producen una fuerza atractiva mutua de $2\cdot 10^{-7}~[N]$ por cada metro de conductor.
+
+\subsection{Campo Magnético creado por un Solenoide}
+
+En el caso de un solenoide recto, en el interior del solenoide:
+
+\begin{equation}
+\oint_L B dl = \mu_0 N I \rightarrow BL = \mu_0 N I \rightarrow B = \mu_0 n I~[T]~,
+\end{equation}
+
+donde $n = N/L$ es la densidad lineal de espiras.
+
+En un solenoide toroidal, tomamos como curva de integración una circunferencia de radio $R$ centrada en el toroide. Como $B$ es constante en todo el círculo:
+
+\begin{equation}
+\oint_C \vec{B}d\vec{l} = \oint_C B dl = B2\pi R = \mu_0 I_c \rightarrow B = \frac{\mu_0 NI}{2\pi R}~[T]~,
+\end{equation}
+
+siempre que $a < R < b$. Cuando $r < a$ entonces $B = 0$ ya que no existe corriente en dicho círculo y si $r > b$ la corriente que entra es igual a la que sale y por lo tanto $B = 0$. Por lo general, si la variación de $a$ a $b$ es pequeña, $B$ es uniforme en el interior aunque en realidad decrece al incrementarse $R$.
 
 \clearpage
 
