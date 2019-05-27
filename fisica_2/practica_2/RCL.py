@@ -82,7 +82,7 @@ def simular(args):
 
     ur_ = np.zeros_like(u_)
     for i in range(len(t)-1):
-        ur_[i+1] = ur_[i] + z[i,1] * z[i,1] * R
+        ur_[i+1] = ur_[i] + z[i+1,1] * z[i+1,1] * R
 
     # Definicion del grafico
     # Modificar los limites de acuerdo a las necesidades, así como los titulos de los ejes

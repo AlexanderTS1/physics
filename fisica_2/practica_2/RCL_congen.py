@@ -3,6 +3,7 @@ import argparse
 import numpy as np
 import math
 import random
+import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.mlab as mlab
@@ -13,6 +14,12 @@ from scipy.integrate import odeint
 def simular(args):
     fig=plt.figure()
     fig.set_dpi(100)
+
+    matplotlib.rc('xtick', labelsize=40) 
+    matplotlib.rc('ytick', labelsize=40) 
+    plt.rc('text', usetex=True)
+    plt.rc('font', family='serif')
+    plt.rc('font', size='40')
     #fig.set_size_inches(7,6.5)
 
 
@@ -58,9 +65,9 @@ def simular(args):
 
     fig, ax1 = plt.subplots()
 
-    ax1.set_xlabel('time (s)')
+    ax1.set_xlabel("Tiempo~$[s]$")
 
-    ax1.set_ylabel('I (A)', color='b')
+    ax1.set_ylabel(r"$I~[A]$", color='b')
     ax1.tick_params('y', colors='b')
 
     ax2 = ax1.twinx()
@@ -71,10 +78,12 @@ def simular(args):
     line1, = ax1.plot(t[:],z[:,1],'--', linewidth=2, color='b')
     line2, = ax2.plot(t[:],V0*np.cos(omega*t[:]),'--', linewidth=2, color='r')
 
-    ax2.set_ylabel('Vgen (V)', color='r')
+    ax2.set_ylabel(r"$V_{gen}~[V]$", color='r')
     ax2.tick_params('y', colors='r')
 
     fig.tight_layout()
+    ax1.set_title(r"\textbf{Evolución de la Intensidad y del Voltaje}")
+    plt.grid()
 
     plt.show()
 
@@ -86,7 +95,7 @@ if __name__ == "__main__":
     parser_.add_argument("--R", nargs="?", type=float, default=300, help="R")
     parser_.add_argument("--f", nargs="?", type=float, default=75, help="f")
     parser_.add_argument("--V", nargs="?", type=float, default=165, help="V")
-    parser_.add_argument("--tf", nargs="?", type=float, default=1.0e-1, help="tf")
+    parser_.add_argument("--tf", nargs="?", type=float, default=2.0e-1, help="tf")
 
     args_ = parser_.parse_args()
 

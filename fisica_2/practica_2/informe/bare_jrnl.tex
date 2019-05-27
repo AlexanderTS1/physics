@@ -558,6 +558,52 @@ En esta situación podemos comprobar cómo una excesiva resistencia provoca pér
 
 \clearpage
 
+\subsection{Energía Disipada}
+
+Por último, de forma opcional, se nos plantea calcular la energía disipada en la resistencia conociendo la intensidad (cuyas gráficas se muestran en las Figuras \ref{fig:intensidadsubamortiguado} y \ref{fig:intensidadsobreamortiguado} para los casos subamortiguado y sobreamortiguado respectivamente):
+
+\begin{equation}
+U_R = \int_o^\infty I^2(t)R dt~[J]~.
+\end{equation}
+
+La implementación que nos permite resolver dicha integral se muestra en el Código \ref{listing:disipada} tal y como hemos desarrollado en el código adjunto a esta práctica.
+
+\bigskip
+
+\begin{code}
+    \begin{minted}{python}
+ue_ = 0.5 * np.square(z[:, 0]) / C
+um_ = 0.5 * L * np.square(z[:, 1])
+u_ = ue_ + um_
+
+ur_ = np.zeros_like(u_)
+for i in range(len(t)-1):
+    ur_[i+1] = ur_[i] + z[i,1] * z[i,1] * R
+    \end{minted}
+    \caption{Cálculo de la energía disipada.}
+    \label{listing:disipada}
+\end{code}
+
+Una vez ejecutada dicho cálculo podemos obtener la evolución de la energía disipada en función del tiempo. Las gráficas de dichas evoluciones se muestran en las Figuras \ref{fig:energiadisipadasubamortiguado} y \ref{fig:energiadisipadasobreamortiguado} para los casos subamortiguado y sobreamortiguado respectivamente.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth,trim={40 70 70 70},clip]{energiadisipadasubamortiguado.png}
+    \caption{Evolución de la energía disipada en función del tiempo en el caso subamortiguado para $R=0.1 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
+    \label{fig:energiadisipadasubamortiguado}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth,trim={40 70 70 70},clip]{energiadisipadasobreamortiguado.png}
+    \caption{Evolución de la energía disipada en función del tiempo en el caso sobreamortiguado para $R=10 \cdot\sqrt{\frac{4L}{C}}~[\Omega]$.}
+    \label{fig:energiadisipadasobreamortiguado}
+\end{figure}
+
+Como podemos observar, el valor final de $U_R$ (tras un tiempo suficiente para que la intensidad se vea reducida a cero) converge con el valor inicial de $U_e$ que tenía el condensador inicialmente en ambos casos (ver Figuras \ref{fig:energiasubamortiguado} y \ref{fig:energiasobreamortiguado}): aproximadamente $1.66\cdot 10^{-7}~[J]$ en ambos casos.
+
+\newpage
+
 \section{Circuito RLC en Serie con Generador}
 \label{sec:rlccongenerador}
 
@@ -586,6 +632,8 @@ De forma teórica, podemos expresar la ecuación que controla el sistema como la
 \begin{equation}
 L\frac{d^2Q}{dt^2} + R\frac{dQ}{dt} + \frac{1}{C}Q = V_s = V_0\cos{\omega t}
 \end{equation}
+
+\clearpage
 
 \subsection{Estudio Teórico Mediante Método de Fasores}
 \label{subsec:estudioteorico}
@@ -651,6 +699,9 @@ Si $\delta > 0$ significa que la corriente adelanta a la tensión y de lo contra
 
 Conociendo los fundamentos teóricos mediante el método de los fasores podemos calcular, antes de confirmarlos experimentalmente, los valores tanto de la corriente eficaz del circuito como del desfase. Los valores que utilizaremos para este propósito para la simulación se encuentran en el Código \ref{listing:datos_rlccongen} y han sido escogidos siguiendo las restricciones indicadas por el enunciado de la práctica.
 
+\bigskip
+\newpage
+
 \begin{code}
     \begin{minted}{python}
         R=300 # Resistencia
@@ -679,8 +730,22 @@ Z = 320.60
 El valor eficaz de la corriente es
 
 \begin{equation}
-I_{ef} = \frac{I_0}{\sqrt{2}} = \frac{V_0}{Z\sqrt{2}} = \frac{165.00}{320.60\sqrt{2}} = 0.36~[A]
+I_{ef} = \frac{I_0}{\sqrt{2}} = \frac{V_0}{Z\sqrt{2}} = \frac{165.00}{320.60\sqrt{2}} = 0.36~[A]~,
 \end{equation}
+
+y por lo tanto, su intensidad inicial es
+
+\begin{equation}
+I_0 = I_{ef} \sqrt{2} = 0.36 \sqrt{2} = 0.51~[A]~.
+\end{equation}
+
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth,trim={120 0 0 0},clip]{congenintensidadvoltaje.png}
+    \caption{Evolución de la intensidad y del voltaje para el circuito RLC con generador.}
+    \label{fig:congenintensidadvoltaje}
+\end{figure}
 
 \subsection{Estudio de Resonancia}
 \label{subsec:estudioresonancia}
