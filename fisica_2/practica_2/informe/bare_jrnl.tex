@@ -561,8 +561,126 @@ En esta situación podemos comprobar cómo una excesiva resistencia provoca pér
 \section{Circuito RLC en Serie con Generador}
 \label{sec:rlccongenerador}
 
+En esta segunda sección estudiaremos el sistema mostrado en la Figura \ref{fig:rlcgen}. En este caso disponemos de un generador de voltaje alterno en serie con una disposición similar al circuito anterior: un condensador incialmente descargado, una resistencia y una bobina. El generador produce un voltaje alterno del tipo $V(t) = V_0 \cos{\omega t}$.
+
+\begin{figure}[!htb]
+    \centering
+    \begin{circuitikz}
+        \draw[ very thick](5,3)-- +(30:0.46);
+        \draw (0,0)
+          to[C=\(C\),i=$I$] (0,3) % The voltage source
+          to[R=\(R\),i=$I$] (5,3) % The resistor
+          to[short,-o](5,3)
+          (5.5,3)to[short,o-](6,3)
+          to[L=\(L\),i=$I$] (6,0) % The inductor
+          to[sinusoidal current source] (3, 0)
+          to (0,0); %Inductor One
+        \end{circuitikz}
+        \medskip
+        \caption{Circuito RLC en serie con generador.}
+        \label{fig:rlcgen}
+\end{figure}
+
+De forma teórica, podemos expresar la ecuación que controla el sistema como la equivalente a la de un oscilador armónico amortiguado y forzado:
+
+\begin{equation}
+L\frac{d^2Q}{dt^2} + R\frac{dQ}{dt} + \frac{1}{C}Q = V_s = V_0\cos{\omega t}
+\end{equation}
+
 \subsection{Estudio Teórico Mediante Método de Fasores}
 \label{subsec:estudioteorico}
+
+Sabemos que el voltaje del circuito se puede expresar como
+
+\begin{equation}
+V_s = IZ~[V]~,
+\end{equation}
+
+siendo $Z$ la impedancia del circuito que posee tres componentes: la impedancia resistiva $R$, la impedancia capacitiva $X_C$ y la impedancia inductiva o reactancia $X_L$. Por lo tanto, el voltaje posee tres componentes:
+
+\begin{equation}
+V_R = IR~[V]~,
+\end{equation}
+\begin{equation}
+V_C = IX_C = I \frac{-i}{\omega C}~[V]~,
+\end{equation}
+\begin{equation}
+V_L = IX_L = Ii\omega L~[V]~,
+\end{equation}
+
+así pues, el voltaje se puede expresar como
+
+\begin{equation}
+\vec{V}_L + \vec{V}_C + \vec{V}_R = (V_R)\hat{u}_x + (V_L - V_C)\hat{u}_y~[V]~.
+\end{equation}
+
+El módulo de dicho vector (con componentes imaginaria y real) es la impedancia del circuito $Z$ multiplicada por la corriente $I$, el ángulo $\delta$ que forma con el eje horizontal es el desfase entre la corriente y el voltaje aplicado.
+
+\begin{equation}
+|\vec{V}_L + \vec{V}_C + \vec{V}_R| = \sqrt{V_R^2 + (V_L - V_C)^2}
+\end{equation}
+
+\begin{equation}
+|\vec{V}_L + \vec{V}_C + \vec{V}_R| = \sqrt{(IR)^2 + (I(X_L - X_C))^2}
+\end{equation}
+
+\begin{equation}
+\mathcal{E}_0 = IZ = I\sqrt{R^2 + (\omega L - \frac{1}{\omega C})^2}
+\end{equation}
+
+Así pues, podemos determinar el valor de la intensidad como
+\begin{equation}
+I = \frac{V_s}{Z} = \frac{V_s}{\sqrt{R^2 + (\omega L - \frac{1}{\omega C})^2}}~[A]~,
+\end{equation}
+\begin{equation}
+I(t) = Io \cdot \cos{(\omega t - \delta)}~[1]~,
+\end{equation}
+
+siendo $I_0 = V_0 / Z$ e $I_{ef}=I/\sqrt{2}$.
+
+El desfase entre el volataje y la corriente se puede calcular a partir del ángulo $\delta$ como
+
+\begin{equation}
+\tan{\delta} = \frac{|X_L - X_C|}{R}~,
+\end{equation}
+\begin{equation}
+\delta = \arctan{(\frac{\omega L - \frac{1}{\omega C}}{R})}~[rad]~.
+\end{equation}
+
+Si $\delta > 0$ significa que la corriente adelanta a la tensión y de lo contrario le tensión adelanta a la corriente.
+
+Conociendo los fundamentos teóricos mediante el método de los fasores podemos calcular, antes de confirmarlos experimentalmente, los valores tanto de la corriente eficaz del circuito como del desfase. Los valores que utilizaremos para este propósito para la simulación se encuentran en el Código \ref{listing:datos_rlccongen} y han sido escogidos siguiendo las restricciones indicadas por el enunciado de la práctica.
+
+\begin{code}
+    \begin{minted}{python}
+        R=300 # Resistencia
+        C=75.0e-6  # Condensador
+        L=0.30 # Bobina
+        V=165 # Tension eficaz
+        f=75 # Frecuencia
+        tf=1.0e-1 # Tiempo de simulación
+    \end{minted}
+    \caption{Datos de simulación para estudio de dinámica de circuito RLC con generador.}
+    \label{listing:datos_rlccongen}
+\end{code}
+
+La impedancia del circuito es
+
+\begin{equation}
+Z = \sqrt{R^2 + (\omega L - \frac{1}{\omega C})^2}
+\end{equation}
+\begin{equation}
+Z=\sqrt{300^2 + (2\pi\cdot 75\cdot 0.30 - \frac{1}{2\pi\cdot 75\cdot 75\cdot 10^{-6}})^2}
+\end{equation}
+\begin{equation}
+Z = 320.60
+\end{equation}
+
+El valor eficaz de la corriente es
+
+\begin{equation}
+I_{ef} = \frac{I_0}{\sqrt{2}} = \frac{V_0}{Z\sqrt{2}} = \frac{165.00}{320.60\sqrt{2}} = 0.36~[A]
+\end{equation}
 
 \subsection{Estudio de Resonancia}
 \label{subsec:estudioresonancia}
