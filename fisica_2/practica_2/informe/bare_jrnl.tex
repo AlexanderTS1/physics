@@ -707,9 +707,8 @@ Conociendo los fundamentos teóricos mediante el método de los fasores podemos 
         R=300 # Resistencia
         C=75.0e-6  # Condensador
         L=0.30 # Bobina
-        V=165 # Tension eficaz
+        Vef=165 # Tension eficaz
         f=75 # Frecuencia
-        tf=1.0e-1 # Tiempo de simulación
     \end{minted}
     \caption{Datos de simulación para estudio de dinámica de circuito RLC con generador.}
     \label{listing:datos_rlccongen}
@@ -730,30 +729,166 @@ Z = 320.60
 El valor eficaz de la corriente es
 
 \begin{equation}
-I_{ef} = \frac{I_0}{\sqrt{2}} = \frac{V_0}{Z\sqrt{2}} = \frac{165.00}{320.60\sqrt{2}} = 0.36~[A]~,
+I_{ef} = \frac{I_0}{\sqrt{2}} = \frac{V_{ef}\sqrt{2}}{Z\sqrt{2}} = \frac{165.00}{320.60} = 0.51~[A]~,
 \end{equation}
 
 y por lo tanto, su intensidad inicial es
 
 \begin{equation}
-I_0 = I_{ef} \sqrt{2} = 0.36 \sqrt{2} = 0.51~[A]~.
+I_0 = I_{ef} \sqrt{2} = 0.51 \sqrt{2} = 0.72~[A]~.
 \end{equation}
 
+El desfase es
+
+\begin{equation}
+\delta = \arctan{\frac{2 \pi \cdot 75.00 \cdot 0.30 - \frac{1}{2 \pi \cdot 75.00 \cdot 75.00\cdot 10^{-6}}}{300}}~.
+\end{equation}
+
+\begin{equation}
+\delta = 0.38~[rad] = 21.60~[deg]
+\end{equation}
+
+Así pues, la intensidad es $I(t) = 0.72\cdot cos(\omega t - 0.38)~[A]$ y dado que $\delta > 0$ adelanta a la tensión.
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=\linewidth,trim={120 0 0 0},clip]{congenintensidadvoltaje.png}
+    \includegraphics[width=\linewidth,trim={120 0 0 40},clip]{congenintensidadvoltaje.png}
     \caption{Evolución de la intensidad y del voltaje para el circuito RLC con generador.}
     \label{fig:congenintensidadvoltaje}
 \end{figure}
 
+Como podemos observar en la gráfica mostrada en la Figura \ref{fig:congenintensidadvoltaje}, la intensidad toma un valor máximo $I_0 \simeq 0.71$ que coincide (con el margen de error de la visualización) con el valor calculado. De la misma forma, el desfase calculado $\delta = 0.38~[rad] = 21.60~[deg]$ también coincide con el que podemos extraer de la gráfica como
+
+\begin{equation}
+\delta = 2\pi \frac{t}{T} = 2\pi\frac{8\cdot 10^{-4}}{1.1335 \cdot 10^{-2}} = 0.3765~[rad] = 21.57~[deg],
+\end{equation}
+
+siendo $t$ el espacio de tiempo entre dos puntos de igual amplitud en el voltaje y en la intensidad que hemos medido en la gráfica como $t = t_i - t_v$ siendo $t_v = 0.08665~[s]$ y $t_i = 0.08745~[s]$ por lo que $t = 0.08745 - 0.08665 = 8\cdot 10^{-4}~[s]$. El período es de forma similar pero tomando el tiempo entre dos oscilaciones $T = 0.10000 - 0.08665 = 1.1335 \cdot 10^{-2}~[s]$.
+
 \subsection{Estudio de Resonancia}
 \label{subsec:estudioresonancia}
 
+A continuación procederemos a realizar un estudio de resonancia para demostrar que el máximo de $I$ se obtiene para la frecuencia de resonancia 
+
+\begin{equation}
+f_{res} = \frac{1}{2\pi\sqrt{LC}} = \frac{1}{2\pi\sqrt{0.30\cdot 75\cdot 10^{-6}}} = 33.55~[Hz]~.
+\end{equation}
+
+Para este estudio hemos variado la frecuencia del generador y hemos obtenido la corriente que circula por el circuito para los diferentes valores con los que hemos experimentado: $f = \{ 75.00, 50.00, 33.55 10.00, 5.00\}~[Hz]$, siendo uno de ellos el valor de la frecuencia de resonancia $f_{res} = 33.55~[Hz]$.
+
+Las Figuras \ref{fig:f75}, \ref{fig:f50}, \ref{fig:fres}, \ref{fig:f10} y \ref{fig:f5} muestran las evoluciones de la intensidad y del voltaje para las diferentes frecuencias estudiadas $f=75.00~[Hz]$, $f=50.00~[Hz]$, $f=33.55~[Hz]$, $f=10.00~[Hz]$ y $f=5.00~[Hz]$ respectivamente.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth,trim={0 0 0 55},clip]{f75.png}
+    \caption{Evolución de la intensidad y del voltaje para el circuito RLC con generador para una frecuencia $f = 75.00~[Hz]$.}
+    \label{fig:f75}
+\end{figure}
+
+\newpage
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth,trim={70 0 70 55},clip]{f50.png}
+    \caption{Evolución de la intensidad y del voltaje para el circuito RLC con generador para una frecuencia $f = 50.00~[Hz]$.}
+    \label{fig:f50}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth,trim={70 0 70 55},clip]{fres.png}
+    \caption{Evolución de la intensidad y del voltaje para el circuito RLC con generador para una frecuencia $f = 33.55~[Hz]$ que coincide con la frecuencia de resonancia.}
+    \label{fig:fres}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth,trim={60 0 70 55},clip]{f10.png}
+    \caption{Evolución de la intensidad y del voltaje para el circuito RLC con generador para una frecuencia $f = 10.00~[Hz]$.}
+    \label{fig:f10}
+\end{figure}
+
+\newpage
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth,trim={0 0 0 55},clip]{f5.png}
+    \caption{Evolución de la intensidad y del voltaje para el circuito RLC con generador para una frecuencia $f = 5.00~[Hz]$.}
+    \label{fig:f5}
+\end{figure}
+
+Como podemos comprobar, en el caso mostrado en la Figura \ref{fig:fres}, el desfase es nulo $\delta = 0~[rad]$ y el voltaje coincide con la intensidad a la vez que se obtiene la intensidad máxima de $I_0 \simeq 0.779~[A]$. La Figura \ref{fig:intensidadfrecuencia} muestra la evolución de la intensidad en función de la frecuencia elegida y viene a constatar que la intensidad máxima se alcanza cuando la frecuencia elegida se corresponde con la frecuencia de resonancia $f_{res}$. También mostramos los cálculos necesarios para obtener las diferentes intensidades:
+
+\begin{equation}
+I_0 = \frac{V_0}{Z} = \frac{V_0}{\sqrt{R^2 + (2\pi f L - \frac{1}{2\pi f C})^2}}
+\end{equation}
+
+\begin{equation}
+I_{f=75} = \frac{165\sqrt{2}}{\sqrt{300^2 + (2\pi 75.00\cdot 0.30 - \frac{1}{2\pi 75.00\cdot 75.00\cdot 10^{-6}})^2}}
+\end{equation}
+\begin{equation}
+I_{f=75} = 0.728~[A]
+\end{equation}
+
+\begin{equation}
+I_{f=50} = \frac{165\sqrt{2}}{\sqrt{300^2 + (2\pi 50.00\cdot 0.30 - \frac{1}{2\pi 50.00\cdot 75.00\cdot 10^{-6}})^2}}
+\end{equation}
+\begin{equation}
+I_{f=50} = 0.766~[A]
+\end{equation}
+
+\begin{equation}
+I_{f=f_{res}} = \frac{165\sqrt{2}}{\sqrt{300^2 + (2\pi 33.55\cdot 0.30 - \frac{1}{2\pi 33.55\cdot 75.00\cdot 10^{-6}})^2}}
+\end{equation}
+\begin{equation}
+I_{f=f_{res}} = 0.779~[A]
+\end{equation}
+
+\begin{equation}
+I_{f=10} = \frac{165\sqrt{2}}{\sqrt{300^2 + (2\pi 10.00\cdot 0.30 - \frac{1}{2\pi 10.00\cdot 75.00\cdot 10^{-6}})^2}}
+\end{equation}
+\begin{equation}
+I_{f=10} = 0.654~[A]
+\end{equation}
+
+\begin{equation}
+I_{f=5} = \frac{165\sqrt{2}}{\sqrt{300^2 + (2\pi 5.00\cdot 0.30 - \frac{1}{2\pi 5.00\cdot 75.00\cdot 10^{-6}})^2}}
+\end{equation}
+\begin{equation}
+I_{f=5} = 0.456~[A]
+\end{equation}
+
+\begin{figure}[!htb]
+    \begin{tikzpicture}
+        \begin{axis}[
+            xlabel={$f = [Hz]$},
+            ylabel={$I_0 = [A]$},
+            xmin=0.0, xmax=80.0,
+            ymin=0.0, ymax=1.0,
+            enlargelimits=true,
+            xtick={0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0},
+            ytick={0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0},
+            ymajorgrids=true,
+            grid style=dashed,
+        ]
+         
+
+        \addplot[
+                smooth,
+                color=red,
+                mark=square,
+                ]
+                coordinates {
+                    (5, 0.456)(10,0.654)(33.55,0.779)(50,0.766)(75,0.728)
+                };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Intensidad en función de la frecuencia.}
+    \label{fig:intensidadfrecuencia}
+\end{figure}
+
 \section{Conclusión}
 \label{sec:conclusion}
-
-\clearpage
 
 El código Python que implementa esta práctica así como las fuentes \LaTeX de este informe se encuentran disponibles online en el repositorio \url{https://github.com/Blitzman/physics/tree/master/fisica_2/practica_1}.
 
