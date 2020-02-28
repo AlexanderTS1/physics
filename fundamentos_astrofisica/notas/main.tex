@@ -17,6 +17,7 @@
 %\geometry{showframe}% for debugging purposes -- displays the margins
 
 \usepackage{amsmath}
+\usepackage{siunitx}
 
 % Set up the images/graphics package
 \usepackage{graphicx}
@@ -85,7 +86,7 @@
 
 \section{Astrofisica Estelar}
 
-\paragraph{Luminosidad y Brillo}
+\subsection{Luminosidad y Brillo}
 
 La luminosidad $L~[erg \cdot s^{-1}]$ es la energía total emitida por unidad de tiempo mientras que el brillo $l~[erg \cdot s^{-1} \cdot m^{-2}]$ es la energía recibida por área y unidad de tiempo (es decir, el flujo de energía).
 
@@ -102,7 +103,7 @@ Ambas magnitudes se relacionan de la siguiente forma: imaginemos una estrella de
   l = \frac{L}{4\pi r^2}
 \end{align}
 
-\paragraph{Escala de Magnitudes Estelares}
+\subsection{Escala de Magnitudes Estelares}
 
 Utilizando la \emph{inverse square law}, podemos asignar una magnitud absoluta $M$ a cada estrella, la cual se define como la magnitud aparente $m$ de una estrella si se encontrara a $10 [pc]$ de distancia.
 
@@ -151,8 +152,87 @@ De estas ecuaciones se desprende que para dos estrellas a la misma distancia, el
   m = M_{\odot} - 2.5 \log_{10}\frac{l}{l_{10, \odot}}
 \end{align}
 
-\paragraph{Temperaturas Estelares}
+\subsection{Temperaturas Estelares}
 
+Todos los objetos con temperatura por encima del cero absoluto emiten luz de todas las longitudes de onda con diferentes niveles de eficiencia. Un emisor ideal es aquél que absorbe toda la luz incidente y radia toda esta energía con un espectro denominado espectro de cuerpo negro. Dado que un emisor ideal no refleja luz se le conoce como cuerpo negro (\emph{blackbody}) y la radiación que emite se conoce como radiación de cuerpo negro. Las estrellas son cuerpos negros (por lo menos de forma aproximada).
+
+\paragraph{Ley de Wien}
+
+Un cuerpo negro de temperatura $T$ emite un espectro continua con cierta energía en cada longitud de onda de manera que existe un pico máximo de energía en la longitud de onda $\lambda_{max}$ . La relación entre esta longitud de onda máxima y la temperatura fue descubierta por Wien:
+
+\begin{align}
+  \lambda_{max} T = 0.290 [cm \cdot K]
+\end{align}
+
+\marginnote{
+  
+\emph{Problema 2.} Expresa la temperatura ambiente (300 $K$) en $[eV]$ y calcula a qué temperatura corresponde una energía de 13.6 $[ev]$.\\\ \\
+
+La temperatura y la energía se relacionan mediante la constante de Boltzmann $E = \sigma T$.\\\ \\
+
+Una temperatura de $300 [K]$ corresponde a una energía $ E = \sigma T = 8.617 \cdot 10^{-5} \cdot 300 = 0.0259 [eV]$.\\\ \\
+
+Por otro lado, una energía de $13.6 [eV]$ corresponde a una temperatura $T = E / \sigma = 13.6 / 8.617 \cdot 10^{-5} = 1.58 \cdot 10^{15} [K]$.\\
+
+\rule{\linewidth}{0.4pt}
+}
+
+\paragraph{Ley de Boltzmann}
+
+A medida que la temperatura de un cuerpo negro aumenta, también lo hace su energía emitida por segundo en todas las longitudes de onda. Este fenómeno, descubierto por el físico austríaco Josef Stefan Boltzmann se expresa en función del área de dicho cuerpo negro $A$ como:
+
+\begin{align}
+  L = A \sigma T^4 ~ [erg \cdot s^{-1}]
+\end{align}
+
+Combinando esta ecuación con el brillo, podemos determinar la temperatura efectiva $T_e$ de la superficie de una estrella:
+
+\begin{align}
+  l = \sigma T_e^4 [erg \cdot s^{-1} \cdot m^{-2}]
+\end{align}
+
+\marginnote{
+La constante de Boltzmann relaciona temperatura absoluta y energía. Toma los siguientes valores:\\
+
+$\sigma = 1.380 \cdot 10^{-23} [J \cdot K^{-1}]$\\
+$\sigma = 8.617 \cdot 10^{-5} [eV \cdot K^{-1}]$\\
+$\sigma = 1.380 \cdot 10^{-16} [erg \cdot K^{-1}]$\\ 
+}
+
+\subsection{Color y Temperatura}
+
+Las magnitudes absolutas y aparentes medidas sobre todas las longitudes de onda de la luz emitida por una estrella se conocen como \emph{magnitudes bolométricas} $m_{bol}$ y $M_{bol}$. En la práctica, los detectores son sensibles a una cierta región de longitudes de onda. Así pues, el color de una estrella puede ser determinado con precisión empleando filtros que transmitan la luz de la estrella únicamente en ciertos rangos de longitudes de onda relativamente estrechos. Es el caso del sistema $UBV$ segundoún el cual la magnitud aparente de una estrella es determinada a partir de tres filtros:
+
+\marginnote{
+\emph{Problema 3.} Sirio es la estrella más brillante del cielo nocturno. Su paralaje es $p = 0.377 ["]$ y sus magnitudes aparentes son $U = -1.50$, $B = -1.46$ y $V = -1.46$.\\\ \\
+
+La distancia a Sirio es por lo tanto $d = 1 / p = 1 / 0.377 = 2.652 [pc]$. Dicha cantidad equivale a $d = 2.652 \cdot 3.26 = 8.649 [ly]$ y $d = 2.652 \cdot 206265 = 5.44 \cdot 10^{15} [AU]$ o $d = 8.14 \cdot 10^{16} [cm]$.
+}
+
+\begin{itemize}
+  \item U, la magnitud ultravioleta de la estrella (filtro centrado en $3650 [\si{\angstrom}]$ y con un ancho de banda de $680 [\si{\angstrom}]$).
+  \item B, la magnitud azul de la estrella (filtro centrado en $4400 [\si{\angstrom}]$ y con un ancho de banda de $980 [\si{\angstrom}]$).
+  \item V, la magnitud visual de la estrella (filtro centrado en $5500 [\si{\angstrom}]$ y con un ancho de banda de $890 [\si{\angstrom}]$).
+\end{itemize}
+
+Las magnitudes absolutas de color de la estrella $M_U$, $M_B$ y $M_V$ pueden determinarse si la distancia $d$ es conocida. Para ello, recurrimos a los índices de color $(U-B)$ y $(B-V)$:
+
+\begin{align}
+  U - B = M_U - M_B
+\end{align}
+\begin{align}
+  B - V = M_B = M_V
+\end{align}
+
+La diferencia respe
+
+\subsection{Distancia a las Estrellas}
+
+La distancia en pársecs a una estrella se puede determinar por su paralaje en segundos:
+
+\begin{align}
+  d = 1 / p [pc]
+\end{align}
 
 \clearpage
 
