@@ -166,11 +166,11 @@ if __name__ == "__main__":
     e5_x_values = np.array([-3.0, -2.7, -1.8, -0.9, -0.3])
     e5_y_values = e5_f(e5_x_values)
 
-    e5_x_cheb = _nodCheb(np.array([-4.0, 0.0]), 5)
+    e5_x_cheb = _nodCheb(np.array([-4.0, 0.0]), 4)
     e5_y_cheb = e5_f(e5_x_cheb)
 
-    e5_fit = np.polyfit(e5_x_values, e5_y_values, 5)
-    e5_cheb = np.polyfit(e5_x_cheb, e5_y_cheb, 5)
+    e5_fit = np.polyfit(e5_x_values, e5_y_values, 4)
+    e5_cheb = np.polyfit(e5_x_cheb, e5_y_cheb, 4)
 
     e5_linspace = np.linspace(-4.0, 0.0, 128)
 
