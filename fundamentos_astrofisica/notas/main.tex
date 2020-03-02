@@ -78,6 +78,11 @@
 
 \section{Constantes}
 
+$1 [\si{\angstrom}] = 0.1 ~[nm]$\\
+$\sigma = 1.380 \cdot 10^{-23} [J \cdot K^{-1}]$\\
+$\sigma_b = 8.617 \cdot 10^{-5} [eV \cdot K^{-1}]$\\
+$\sigma = 1.380 \cdot 10^{-16} [erg \cdot K^{-1}]$\\ 
+
 \clearpage
 
 \section{Astronomía de Posición e Instrumentación Astronómica}
@@ -164,6 +169,10 @@ Un cuerpo negro de temperatura $T$ emite un espectro continua con cierta energí
   \lambda_{max} T = 0.290 [cm \cdot K]
 \end{align}
 
+\begin{align}
+  \lambda_{max} T = (5000~[\si{\angstrom}])(5800~[K])
+\end{align}
+
 \marginnote{
   
 \emph{Problema 2.} Expresa la temperatura ambiente (300 $K$) en $[eV]$ y calcula a qué temperatura corresponde una energía de 13.6 $[ev]$.\\\ \\
@@ -201,13 +210,24 @@ $\sigma = 1.380 \cdot 10^{-16} [erg \cdot K^{-1}]$\\
 
 \subsection{Color y Temperatura}
 
-Las magnitudes absolutas y aparentes medidas sobre todas las longitudes de onda de la luz emitida por una estrella se conocen como \emph{magnitudes bolométricas} $m_{bol}$ y $M_{bol}$. En la práctica, los detectores son sensibles a una cierta región de longitudes de onda. Así pues, el color de una estrella puede ser determinado con precisión empleando filtros que transmitan la luz de la estrella únicamente en ciertos rangos de longitudes de onda relativamente estrechos. Es el caso del sistema $UBV$ segundoún el cual la magnitud aparente de una estrella es determinada a partir de tres filtros:
-
 \marginnote{
 \emph{Problema 3.} Sirio es la estrella más brillante del cielo nocturno. Su paralaje es $p = 0.377 ["]$ y sus magnitudes aparentes son $U = -1.50$, $B = -1.46$ y $V = -1.46$.\\\ \\
 
-La distancia a Sirio es por lo tanto $d = 1 / p = 1 / 0.377 = 2.652 [pc]$. Dicha cantidad equivale a $d = 2.652 \cdot 3.26 = 8.649 [ly]$ y $d = 2.652 \cdot 206265 = 5.44 \cdot 10^{15} [AU]$ o $d = 8.14 \cdot 10^{16} [cm]$.
+La distancia a Sirio es por lo tanto $d = 1 / p = 1 / 0.377 = 2.65 [pc]$. Dicha cantidad equivale a $d = 2.65 \cdot 3.26 = 8.65 [ly]$ y $d = 2.65 \cdot 206265 = 5.44 \cdot 10^{15} [AU]$ o $d = 8.14 \cdot 10^{16} [cm]$.\\\ \\
+
+Los índices de color de Sirio son $U-B = -0.04$ y $B-V = 0$. A partir de ellos podemos estimar una temperatura de $9900~[K]$ (tomando cualquier diagrama que relacione estos índices de color con la temperatura) o empleando la fórmula de Ballesteros:
+
+$T = 4600 \left(\frac{1}{0.92(B-V) + 1.7} + \frac{1}{0.92(B-V) + 0.62}\right) \simeq 10000~[K] = 10000 \cdot \sigma_b = 0.86~[eV]$\\\ \\
+
+La relación módulo-distancia $m - M = 5\log_{10}(d) - 5$ nos permite obtener las magnitudes absolutas cada una de las bandas en función de sus magnitudes relativas $U$, $B$, $V$ ya que $M = m + 2.88$ siendo $d = 2.65~[pc]$:\\
+
+$M_U = -1.50 + 2.88 = 1.38$\\
+$M_B = -1.46 + 2.88 = 1.42$\\
+$M_V = -1.46 + 2.88 = 1.42$\\
+
 }
+
+Las magnitudes absolutas y aparentes medidas sobre todas las longitudes de onda de la luz emitida por una estrella se conocen como \emph{magnitudes bolométricas} $m_{bol}$ y $M_{bol}$. En la práctica, los detectores son sensibles a una cierta región de longitudes de onda. Así pues, el color de una estrella puede ser determinado con precisión empleando filtros que transmitan la luz de la estrella únicamente en ciertos rangos de longitudes de onda relativamente estrechos. Es el caso del sistema $UBV$ segundoún el cual la magnitud aparente de una estrella es determinada a partir de tres filtros:
 
 \begin{itemize}
   \item U, la magnitud ultravioleta de la estrella (filtro centrado en $3650 [\si{\angstrom}]$ y con un ancho de banda de $680 [\si{\angstrom}]$).
@@ -224,7 +244,11 @@ Las magnitudes absolutas de color de la estrella $M_U$, $M_B$ y $M_V$ pueden det
   B - V = M_B = M_V
 \end{align}
 
-La diferencia respe
+\marginnote{
+\emph{Problema 4.} Usando una temperatura efectiva para la estrella Vega de $9500~[K]$ y suponiendo que tenemos tres filtros de badna U,B,V con los siguientes valores de longitud de onda central y ancho de banda, determina en qué filtro se verá más brillante. $\lambda_U = 365~[nm]$, $\Delta\lambda_U = 68~[nm]$, $\lambda_B = 440~[nm]$, $\Delta\lambda_B = 98~[nm]$, $\lambda_V = 550~[nm]$, $\Delta\lambda_V = 89~[nm]$.\\\ \\
+
+De acuerdo a la Ley de Wien, el espectro de Vega tiene un pico en la longitud de onda $\lambda_{max} = \frac{5000~[\si{\angstrom}] 5800~[K]}{9500~[K]} = 3052.63~[\si{\angstrom}] \approx 305~[nm]$, lo cual corresponde al espectro ultravioleta.
+}
 
 \subsection{Distancia a las Estrellas}
 
