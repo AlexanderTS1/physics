@@ -39,9 +39,9 @@ def PolNewton(x,y):
         polinomio = np.polyadd(polinomio,DD[i]*npol.polyfromroots(x[:i])[::-1])
     return polinomio
 
-==============================================================================
-Ejercicio 6 
-==============================================================================
+#==============================================================================
+#Ejercicio 6 
+#==============================================================================
 
 #============================================================================== 
 #Chebyshev
@@ -106,6 +106,8 @@ def Legendre_hasta(n):
         T.append(Legendre(i))    
     return np.array(T)
 
+print(Legendre_hasta(2))
+
 # Con la clase Legendre de Python:
 T5L = np.polynomial.legendre.Legendre([0,0,0,0,0,1])
 nodLeg5=T5L.roots()
@@ -113,9 +115,9 @@ T5L=npol.polyfromroots(nodLeg5)
 T5L=npol.polyfromroots(nodLeg5)[::-1]
 
 
-==============================================================================
-Ejercicio 7
-==============================================================================
+#==============================================================================
+# Ejercicio 7
+#==============================================================================
 
 def fun1(x):
     return np.exp(-2*x)*np.cos(3*x)
@@ -144,6 +146,7 @@ plt.plot(xreal,fun1(xreal),'k',xreal,aproxCheb(xreal),'r')
 plt.legend(('Función','Aprox. Chebyshev 2'),loc = 'best')
 plt.xlabel('Abscisas')
 plt.ylabel('Ordenadas')
+plt.show()
 
 
 #============================================================================== 
@@ -162,6 +165,7 @@ plt.plot(xreal,fun1(xreal),'k',xreal,aproxLeg(xreal),'r')
 plt.legend(('Funcion','Aprox. Legendre 2'),loc = 'best')
 plt.xlabel('Abscisas')
 plt.ylabel('Ordenadas')
+plt.show()
 
 
 
@@ -182,3 +186,6 @@ plt.ylabel('Ordenadas')
 
 errorCheb=(quad(lambda x:wCh(x)*(fun1(x)-aproxCheb(x))**2,-1,1)[0])**0.5
 errorLeg=(quad(lambda x:(fun1(x)-aproxLeg(x))**2,-1,1)[0])**0.5
+
+print(errorCheb)
+print(errorLeg)
