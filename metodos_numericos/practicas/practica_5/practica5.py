@@ -3,6 +3,14 @@ import matplotlib.pyplot as plt
 
 from scipy.integrate import quad
 
+from practicas.aproximacion import w_chebyshev
+from practicas.aproximacion import w_legendre
+from practicas.aproximacion import polinomios_ortogonales_chebyshev
+from practicas.aproximacion import polinomios_ortogonales_legendre
+from practicas.aproximacion import coeficientes_chebyshev
+from practicas.aproximacion import coeficientes_legendre
+from practicas.aproximacion import aproximacion_polinomial
+from practicas.aproximacion import polinomios_monicos
 
 if __name__ == "__main__":
 
@@ -169,70 +177,7 @@ if __name__ == "__main__":
     # Ejercicio 6 -----------------------------------------------------------
     print("Ejercicio 6 ****************************************************")
 
-    def polinomios_ortogonales_chebyshev(
-            n: int
-    ) -> np.array:
-
-        def _chebyshev(
-                i: int
-        ) -> np.array:
-
-            if i == 0:
-                return np.array([1.0])
-            elif i == 1:
-                return np.array([1.0, 0.0])
-            else:
-                tn1 = _chebyshev(i-1)
-                tn2 = _chebyshev(i-2)
-                tn = np.polysub(np.polymul(np.array([2.0, 0.0]), tn1), tn2)
-                return tn
-
-        t = []
-
-        for i in range(n+1):
-
-            t.append(_chebyshev(i))
-
-        return np.array(t)
-
     print(polinomios_ortogonales_chebyshev(5))
-
-    def polinomios_ortogonales_legendre(
-            n: int
-    ) -> np.array:
-
-        def _legendre(
-                i: int
-        ) -> np.array:
-
-            if i == 0:
-                return np.array([1.0])
-            elif i == 1:
-                return np.array([1.0, 0.0])
-            else:
-                tn1 = _legendre(i-1)
-                tn2 = _legendre(i-2)
-                tn = np.polysub(
-                    np.polymul(
-                        [(2.0 * i + 1.0) / (i + 1.0), 0.0],
-                        tn1
-                    ),
-                    np.polymul(
-                        [i / (i + 1.0)],
-                        tn2
-                    )
-                )
-                
-                return tn
-
-        t = []
-
-        for i in range(n + 1):
-
-            t.append(_legendre(i))
-
-        return np.array(t)
-
     print(polinomios_ortogonales_legendre(5))
 
     # Ejercicio 7 -----------------------------------------------------------
@@ -244,64 +189,31 @@ if __name__ == "__main__":
     # a
 
     # Pesos para Chebyshev y Legendre.
-    e7_w_chebyshev = lambda x: 1.0 / np.sqrt(1.0 - x**2.0)
-    e7_w_legendre = lambda x: 1.0
+    print(w_chebyshev)
+    print(w_legendre)
 
     # Obtenemos polinomios de Chebyshev y los convertimos en mónicos.
-    e7_pol_cheb = polinomios_ortogonales_chebyshev(e7_grado)
-    for i in range(len(e7_pol_cheb)):
-        e7_pol_cheb[i] /= e7_pol_cheb[i][0]
-
+    e7_pol_cheb = polinomios_monicos(polinomios_ortogonales_chebyshev(e7_grado))
     print(e7_pol_cheb)
 
     # Obtenemos polinomios de Legendre y convertimos en mónicos.
-    e7_pol_legr = polinomios_ortogonales_legendre(e7_grado)
-    for i in range(len(e7_pol_legr)):
-        e7_pol_legr[i] /= e7_pol_legr[i][0]
-
+    e7_pol_legr = polinomios_monicos(polinomios_ortogonales_legendre(e7_grado))
     print(e7_pol_legr)
 
     # Calculamos coeficientes para Chebyshev y Legendre
-    e7_a_cheb = np.zeros(e7_grado + 1)
-    for i in range(len(e7_a_cheb)):
-        e7_a_cheb[i] = (
-            quad(lambda x: e7_w_chebyshev(x) * e7_f(x) * np.polyval(e7_pol_cheb[i], x), -1.0, 1.0)[0] /
-            quad(lambda x: e7_w_chebyshev(x) * np.polyval(e7_pol_cheb[i], x)**2, -1.0, 1.0)[0]
-        )
-
+    e7_a_cheb = coeficientes_chebyshev(e7_f, e7_pol_cheb, 2)
     print("Coeficientes Chebyshev: " + str(e7_a_cheb))
 
-    e7_a_legr = np.zeros(e7_grado + 1)
-    for i in range(len(e7_a_legr)):
-        e7_a_legr[i] = (
-            quad(lambda x: e7_w_legendre(x) * e7_f(x) * np.polyval(e7_pol_legr[i], x), -1.0, 1.0)[0] /
-            quad(lambda x: e7_w_legendre(x) * np.polyval(e7_pol_legr[i], x)**2, -1.0, 1.0)[0]
-        )
-
+    e7_a_legr = coeficientes_legendre(e7_f, e7_pol_legr, 2)
     print("Coeficientes Legendre: " + str(e7_a_legr))
-
-    # Aproximación polinómica dados coeficienes, bases y valor.
-    def approxPolynomial(
-          coeffs: np.array,
-          polys: np.array,
-          x: float
-    ) -> float:
-
-        approx = 0.0
-
-        for i in range(len(e7_a_cheb)):
-
-            approx += coeffs[i] * np.polyval(polys[i], x)
-
-        return approx
 
     # b
 
     e7_linspace = np.linspace(-1.0, 1.0, 128)
 
     plt.plot(e7_linspace, e7_f(e7_linspace), "red", label="Función")
-    plt.plot(e7_linspace, approxPolynomial(e7_a_cheb, e7_pol_cheb, e7_linspace), "blue", label="Chebyshev")
-    plt.plot(e7_linspace, approxPolynomial(e7_a_legr, e7_pol_legr, e7_linspace), "green", label="Legendre")
+    plt.plot(e7_linspace, aproximacion_polinomial(e7_a_cheb, e7_pol_cheb, e7_linspace), "blue", label="Chebyshev")
+    plt.plot(e7_linspace, aproximacion_polinomial(e7_a_legr, e7_pol_legr, e7_linspace), "green", label="Legendre")
     plt.xlabel("Abscisas")
     plt.ylabel("Ordenadas")
     plt.show()
@@ -309,7 +221,7 @@ if __name__ == "__main__":
     # c
 
     e7_norm_cheb = quad(
-        lambda x: e7_w_chebyshev(x) * (e7_f(x) - approxPolynomial(e7_a_cheb, e7_pol_cheb, x))**2,
+        lambda x: w_chebyshev(x) * (e7_f(x) - aproximacion_polinomial(e7_a_cheb, e7_pol_cheb, x))**2,
         -1.0,
         1.0
     )[0]**0.5
@@ -317,7 +229,7 @@ if __name__ == "__main__":
     print("Norma Chebyshev: " + str(e7_norm_cheb))
 
     e7_norm_legr = quad(
-        lambda x: e7_w_legendre(x) * (e7_f(x) - approxPolynomial(e7_a_legr, e7_pol_legr, x))**2,
+        lambda x: w_legendre(x) * (e7_f(x) - aproximacion_polinomial(e7_a_legr, e7_pol_legr, x))**2,
         -1.0,
         1.0
     )[0]**0.5
