@@ -1,0 +1,100 @@
+\documentclass[12pt,a4paper,oneside,draft]{report}
+
+\usepackage{amsmath}
+\usepackage[spanish]{babel}
+
+\begin{document}
+
+\chapter{Problemas Tema 4. Derivación e Integración Numéricas}
+
+\section{Ejercicio 1}
+
+\textbf{Deduce razonadamente las fórmulas de derivación de tres y cinco puntos.}
+
+Para el caso de tres puntos, consideremos $x_0$, $x_1 = x_0 + h$ y $x_2 = x_0 + 2h$, el polinomio interpolador viene dado por:
+
+\begin{align}
+P(x) = f[x_0] + f[x_0,x_1](x - x_0) + f[x_0,x_1,x_2](x - x_0)(x - x_1)
+\end{align}
+
+y por lo tanto su derivada es
+
+\begin{align}
+P'(x) = f[x_0,x_1] + f[x_0,x_1,x_2][(x - x_0) + (x - x_1)]
+\end{align}
+
+El valor de la derivada en el punto $x_1$ será la aproximación de $f'(x_1)$:
+
+\begin{align}
+  \begin{split}
+P'(x_1) = & \displaystyle\frac{f(x_1) - f(x_0)}{h} + \displaystyle\frac{\displaystyle\frac{f(x_2)-f(x_1)}{h} - \displaystyle\frac{f(x_1)-f(x_0)}{h}}{2h}h\\
+=& \displaystyle\frac{f(x_1) - f(x_0)}{h} + \displaystyle\frac{f(x_2) - 2f(x_1) + f(x_0)}{2h}\\
+=& \displaystyle\frac{f(x_2) - f(x_0)}{2h}
+  \end{split}
+\end{align}
+
+Por lo que la fórmula se conoce como la fórmula de los tres puntos:
+
+\begin{align}
+f'(x_1) = f'(x_0 + h) \simeq \displaystyle\frac{f(x_2) - f(x_0)}{2h}
+\end{align}
+
+Si consideramos cinco puntos $x_0$, $x_1 = x_0 + h$, $x_2 = x_0 + 2h$, $x_3 = x_0 + 3h$ y $x_4 = x_0 + 4h$, el polinomio interpolador viene dado por:
+
+\begin{align}
+  \begin{split}
+    P(x) =& f[x_0]\\
+    &+ f[x_0, x_1](x - x_0)\\
+    &+ f[x_0, x_1, x_2](x - x_0)(x - x_1)\\
+    &+ f[x_0, x_1, x_2, x_3](x - x_0)(x - x_1)(x - x_2)\\
+    &+ f[x_0, x_1, x_2, x_3, x_4](x - x_0)(x - x_1)(x - x_2)(x - x_3)
+  \end{split}
+\end{align}
+
+El valor de su derivada en $x_2$ será la aproximación $f'(x_2)$:
+
+\begin{align}
+f'(x_2) = f'(x_0 + 2h) \simeq \displaystyle\frac{1}{12h}[f(x_0) - 8f(x_0 + h) + 8f(x_0 + 3h) - f(x_0 + 4h)]
+\end{align}
+
+\section{Ejercicio 2}
+
+\textbf{Si $f(x) = e^x$, calcular la derivada en $x_0 = 0$ con $h = 1$ usando las fórmulas centradas de los tres y cinco puntos. Calcular el error absoluto y relativo en cada caso.}
+
+Según la fórmula de los tres puntos:
+
+\begin{align}
+  f'(0) \simeq \displaystyle\frac{f(1) - f(-1)}{2} = \displaystyle\frac{e - 1/e}{2} = 1.5443.
+\end{align}
+
+Según la fórmula de los cinco puntos:
+
+\begin{align}
+  f'(0) = \simeq \displaystyle\frac{f(-2) - 8f(-1) + 8f(1) -f(2)}{12} = 0.9624.
+\end{align}
+
+Analíticamente sabemos que $f'(x) = e^x$ y por lo tanto que $f'(0) = 1$. Por lo tanto, los errores absoluto y relativo que cometemos con la fórmula de los tres puntos son:
+
+\begin{align}
+  |f'(0) - f_3'(0)| = 1.0000 - 1.5443
+\end{align}
+
+\begin{align}
+  \displaystyle\frac{|f'(0) - f_3'(0)|}{|f_3'(0)|} = \displaystyle\frac{|1.0000 - 1.5443|}{|1.5443|}
+\end{align}
+
+Para la fórmula de los cinco puntos:
+
+\begin{align}
+  |f'(0) - f_5'(0)| = 1.0000 - 0.9624
+\end{align}
+
+\begin{align}
+  \displaystyle\frac{|f'(0) - f_5'(0)|}{|f_5'(0)|} = \displaystyle\frac{|1.0000 - 0.9624|}{|0.9624|}
+\end{align}
+
+\section{Ejercicio 3}
+
+\textbf{Si $f(x) = e^x$, entonces $f'(1.5) \sim 4.4817$. Aproximamos el valor de esta derivada usando la fórmula progresiva. Si comenzamos con el paso $h = 0.2$ y lo vamos dividiendo cada vez a la mitad, ¿cuál es $h$ para el cual se obtiene un error absoluto menor que $10^{-3}$?}
+
+\end{document}
