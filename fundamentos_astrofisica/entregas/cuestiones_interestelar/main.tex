@@ -1,0 +1,103 @@
+% How to use writeLaTeX: 
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+\documentclass{tufte-handout}
+
+%\geometry{showframe}% for debugging purposes -- displays the margins
+
+\usepackage{amsmath}
+\usepackage{siunitx}
+
+% Set up the images/graphics package
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+\title{Fundamentos de Astrofísica\\ Between the Stars: Gas and Dust in Space}
+\author[Alberto Garcia-Garcia]{Alberto Garcia-Garcia < agg180 [at] alu.ua.es >}
+\date{\today}  % if the \date{} command is left out, the current date will be used
+
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% The units package provides nice, non-stacked fractions and better spacing
+% for units.
+\usepackage{units}
+
+\usepackage[americanvoltage]{circuitikz}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,positioning}
+\usetikzlibrary{decorations.markings}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+% Provides paragraphs of dummy text
+\usepackage{lipsum}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+
+% These commands are used to pretty-print LaTeX commands
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\section{Review Questions}
+
+\paragraph{\textbf{Why do nebulae near hot stars look red? Why do dust clouds near stars usually look blue?}}
+
+El gas interestelar cerca de las estrellas calientes es a su vez calentado a temperaturas de hasta $10000~[K]$ y la radiación ultravioleta de la estrella ioniza las nubes de gas. Como el hidrógeno es el principal componente de las mismas, se convierten en regiones $H-II$ que están continuamente capturando electrones libres y perdiéndolos por ionización. Durante este proceso, emiten luz por fluorescencia y como generalmente el hidrógeno es su principal constituyente, la línea más fuerte (línea de Balmer) en el espectro visible es la roja. Este fenómeno se conoce como nebulosas de emisión.
+
+Por otro lado, las nubes de polvo reflejan y dispersan la luz emitida por las estrellas cercanas. Al impactar contra el polvo estelar, la luz de longitud de onda azul se refleja de forma más eficiente que la roja por lo que parecen emitir un brillo azul. Se conocen como nebulosas de reflexión.
+
+\paragraph{\textbf{What causes reddening of starlight? Explain how the reddish color of the Sun’s disk at sunset is caused by
+the same process.}}
+
+Las partículas pequeñas, bien sea los granos de polvo en el medio interestelar o las moléculas en al aire de la atmósfera terrestre pueden absorber y dispersar (\emph{scatter}) la luz.
+
+Dado que la absorción y la dispersión de la longitud de onda azul es más eficiente que la roja, los granos de polvo interestelar producen \emph{scattering} de las longitudes de onda azules mientras que las rojas apenas se ven afectadas; esto provoca que cuando dicha radiación nos llega a nosotros como observadores capturamos aparentemente más luz roja que la que realmente emiten las estrellas. Este proceso se conoce como \emph{reddening} aunque, en realidad, el proceso es más bien un \emph{deblueing} o extinción del azul.
+
+Este mismo proceso pero producido por las partículas presentes en nuestra atmósfera causa que el cielo tenga un color azulado (\emph{scattering}) mientras que el disco del sol parezca más rojo. En concreto, el ángulo de incidencia de los rayos en la puesta de sol (\emph{sunset}) hace que los rayos de luz tengan que atravesar más atmósfera y por lo tanto existe una mayor probabilidad de que la luz del sol se disperse y se enrojezca.
+
+\section{Thought Question}
+
+\paragraph{\textbf{If the red glow around Antares is indeed produced by reflection of the light from Antares by dust, what does its red appearance tell you about the likely temperature of Antares? Look up the spectral type of Antares. Was your estimate of the temperature about right? In most of the images in this chapter, a red glow is associated with ionized hydrogen. Would you expect to find an H II region around Antares? Explain your answer.}}
+
+La luz dispersada (\emph{scattered}) por el polvo estelar es de apariencia más azul que la luz de la estrella que la ilumina. Partiendo de esa premisa, para que Antares siga teniendo una apariencia roja a pesar de ese efecto debe por lo tanto ser muy roja y eso significa que debe ser una estrella bastante fría.
+
+El tipo espectral de Antares es $M1.5Iab-Ib + B2.5V$ y su temperatura es de aproximadamente $3660~[K]$. Así que, efectivamente, Antares es una estrella fría y que por lo tanto emite luz muy roja (de hecho, es considerada una supergigante roja).
+
+Por otro lado, dada la escasa temperatura de Antares, no se espera encontrar una región $H-II$ a su alrededor ya que emite radiación de una longitud de onda demasiado corta como para ionizar el hidrógeno y producir dicha región. Para ello, se necesitan estrellas mucho más calientes que Antares. 
+
+\bibliography{sample-handout}
+\bibliographystyle{plainnat}
+
+
+
+\end{document}
