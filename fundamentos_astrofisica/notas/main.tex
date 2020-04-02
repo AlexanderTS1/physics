@@ -376,6 +376,60 @@ Un proceso similar ocurre para los granos de polvo cósmico, que se forman al co
 
 Los telescopios de rayos X han mostrado que la Galaxia está llena de burbujas de gases calientes emisores de rayos X. También han observado un fondo difuso de rayos X en todo el cielo desde nuestra perspectiva. Aunque una parte de ellos proviene de la interacción del viento solar con el medio interestelar, gran parte proviene de fuera del sistema solar. La explicación lógica a que haya gas caliente emisor de rayos X alrededor nuestro es que el Sol esté localizado en una de dichas burbujas conocida como la \emph{Local Hot Bubble}, mucho menos densa que el la densidad media interestelar (1 átomo por $cm^3$).
 
+\subsection{Transporte Radiativo}
+
+La cantidad de energía $dI_\nu$ que atraviesa un medio con absorción $\alpha_\nu$ y emisividad $j_\nu$ en una distancia $ds$ se define como:
+
+\begin{align}
+\frac{dI_\nu}{ds} = j_\nu - \alpha_\nu I_\nu~,
+\end{align}
+
+donde $I_\nu$ es la intensidad específica. En el caso sin emisión ($j_\nu = 0$):
+
+\begin{align}
+  \frac{dI_\nu}{ds} = - \alpha_\nu I_\nu
+\end{align}
+
+Si suponemos que el coeficiente de absorción es constante a lo largo de la trayectoria entonces:
+
+\begin{align}
+  \frac{dI_\nu(s)}{ds} = - \alpha_\nu I_\nu(s)\\
+  I_\nu = I_{\nu_0} e^{- \alpha_\nu s}
+\end{align}
+
+Esto quiere decir que si la radiación de cierta intensidad específica atraviesa una nube de absorción, se produce un decaimiento exponencial en la intensidad de dicha radiación.
+
+Podemos expresar $\tau_\nu \equiv \int \alpha_\nu(s) ds$, esto se conoce como la profundidad óptica u \emph{optical depth}.
+
+\begin{align}
+  I_\nu = I_{\nu_0} e^{-\tau_\nu}
+\end{align}
+
+Si $\tau_\nu \gg 1$ el medio se conoce como \emph{optically thick} (es muy difícil ver a través de un medio de dichas características). Por el contrario, si $\tau_\nu \ll 1$ el medio es \emph{optically thin}.
+
+Podemos por lo tanto expresar la ecuación de transporte radiativo en función de la profundidad óptica:
+
+\begin{align}
+  \frac{dI_\nu}{ds}\frac{ds}{d\tau_\nu} = [j_\nu - \alpha_\nu I_\nu]\frac{ds}{d\tau_\nu}\\
+  \frac{dI_\nu}{d\tau_\nu} = \frac{j_\nu}{\alpha_\nu} - I_\nu
+\end{align}
+
+De esta forma, aparece un ratio entre la emisión y la absorción conocido como la \emph{source function} $ S_\nu = j_\nu / \alpha_\nu$.
+
+Así pues, podemos expresar la solución formal de la ecuación de transporte radiativo como:
+
+\begin{align}
+I_\nu(\tau_\nu) = I_{\nu_0}e^{-\tau_\nu} + \int_0^{\tau_\nu} S_\nu(\tau_\nu')e^{-(\tau_\nu - \tau_\nu')}d\tau_\nu'
+\end{align}
+
+En ella, el primer término se conoce como \emph{background light} mientras que la integral es el \emph{glowing medium}; la exponecial recibe el nombre de \emph{self absorption}.
+
+Si asumimos que la \emph{source function} es constante (ni la emisión ni la absorción dependen de la profundidad óptica), la solución se simplifica notablemente:
+
+\begin{align}
+I_\nu(\tau_\nu) = I_{\nu_0}e^{-\tau_\nu} + S_\nu (1-e^{-\tau_\nu})
+\end{align}
+
 \section{Medio Interestelar: Review Questions}
 
 \paragraph{Identify several dark nebulae in photographs in this chapter. Give the figure numbers of the photographs,
