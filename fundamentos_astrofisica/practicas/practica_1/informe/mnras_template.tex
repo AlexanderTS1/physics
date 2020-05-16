@@ -27,6 +27,7 @@
 % installations will be fine) or prefer the old Computer Modern fonts, comment
 % out the following line
 \usepackage{newtxtext,newtxmath}
+\usepackage[spanish]{babel}
 % Depending on your LaTeX fonts installation, you might get better results with one of these:
 %\usepackage{mathptmx}
 %\usepackage{txfonts}
@@ -35,6 +36,7 @@
 % Don't change these lines unless you know what you are doing
 \usepackage[T1]{fontenc}
 \usepackage{ae,aecompl}
+\usepackage{float}
 
 
 %%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
@@ -91,21 +93,17 @@ $^{1}$Grado en Física, Universidad de Alicante\\
 \maketitle
 
 % Abstract of the paper
-\begin{abstract}
-
-\end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
 % Don't make up new ones.
-\begin{keywords}
-stars: magnetic field -- stars: neutron -- pulsars: general -- methods: observational
-\end{keywords}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
 
 \section{Introducción}
+
+En esta práctica trataremos de explorar algunos de los aspectos básicos que intervienen en el estudio de la estructura galáctica. Para ello, nos serviremos principalmente de un catálogo de datos generador por el instrumento astrofísico Gaia: el \emph{Gaia Data Release 2}~\cite{Gaia2018}. Para trabajar con ese catálogo, haremos uso de dos herramientas: el observatorio virtual \emph{Aladin} y la herramienta de procesado y visualización de datos asociada \emph{topcat}.
 
 \section{Ejercicio 1}
 
@@ -117,62 +115,131 @@ G, $\pi/G$, etc) para comparar ambas poblaciones. Repite el proceso después de 
 objetos con errores pequeños en los parámetros astrométricos (e.g. $e_\pi \leq 0.05 ~[mas]$). ¿Qué podemos aprender
 (o corroborar de las cosas que se han explicado en clase) a partir de estas poblaciones?}
 
+El sistema de coordenadas galácticas nos permite dar la posición de un objeto en la esfera celeste. Este sistema en particular tiene su centro en el Sol y está alineado con el centro aparente de la Vía Láctea. El plano ecuatorial está alineado con el plano de la galaxia. Las coordenadas pertenecientes a este sistema son longitud $l$ (que se mide sobre el plano en sentido antihorario $0 [\deg] \leq l \leq 360 [\deg]$) y latitud $b$ (que es el ángulo que forma el objeto en cuestión con el plano de la galaxia, siendo positivo al norte y negativo al sur $-90~[\deg] \leq 0 \leq 90~[deg]$).
+
 \begin{figure}
   \includegraphics[width=0.49\linewidth]{img/gaia_2_0}
   \includegraphics[width=0.49\linewidth]{img/gaia_180_20}
   \caption{Regiones de radio $10'$ de la galaxia seleccionadas para el ejercicio. A la izquierda, imagen de \ac{DSS2} de la región correspondiente a las coordenadas cercanas al plano galáctico $l=2.0,b=0$; a la derecha, región completamente alejada del plano galáctico $l=180,b=-20$. Imágenes obtenidas con el software \emph{Aladin}, las estrellas marcadas con cuadrados verdes corresponden a datos presentes en \emph{Gaia DR2}.}
+  \label{fig:e1_regiones}
 \end{figure}
+
+Para este primer ejercicio hemos seleccionado dos regiones: la primera de ellas cercana al centro galáctico $(l=2.00, b=0.00)$ y la segunda completamente alejada y anticéntrica $(l=180.00, b=-20.00)$. Empleando el software \emph{Aladin} hemos seleccionado regiones de radio $10'$ centradas en dichas coordenadas y hemos transferido los datos de \emph{Gaia DR2} a \emph{topcat} para su procesado y evaluación. La Figura \ref{fig:e1_regiones} muestra las visualizaciones de \emph{Aladin} para ambas regiones seleccionadas.
+
+Para comparar ambas poblaciones hemos empleado \emph{topcat} para representar diferentes diagramas de las mismas. En primer lugar, visualizaremos el diagrama que previsiblemente más información nos permitirá obtener: un diagrama HR empleando en este caso la fotometría integrada $Gmag$ contra el índice fotométrico azul-rojo $BP-RP$. La Figura \ref{fig:e1_bprpmag} muestra este diagrama.
 
 \begin{figure}
   \includegraphics[width=\linewidth]{img/ejercicio1_bprp_gmag}
+  \caption{Diagrama mostrando una representación similar a Hertzsprung-Rusell para las regiones estudiadas pero empleando la fotometría integrada $Gmag$ y el índice fotométrico azul-rojo integrado $BP-RP$ presentes en el catálogo \emph{Gaia DR2}.}
+  \label{fig:e1_bprpmag}
 \end{figure}
+
+En un diagrama de este estilo podemos apreciar dos efectos principalmente: la distancia de las estrellas (la cual reduce su magnitud aparente y por lo tanto las desplaza hacia abajo en la gráfica) y la extinción (que las enrojece y las desplaza lateralmente a la derecha). El efecto combinado de ambas, desplaza la población diagonalmente hacia la esquina inferior derecha. Atendiendo a estos efectos, la primera comparativa que podemos establecer gracias a este diagrama se puede observar con claridad: la región cercana al centro galáctico posee un efecto mucho más acusado de extinción que la población en el anticentro. Ambas acusan el efecto de la distancia, pero la población en el centro galáctico está mucho más enrojecida. Este efecto es lógico y se debe a la mayor densidad de dicha región y a la mayor presencia de factores en el medio interestelar cercano al centro galáctico.
+
+Por otro lado, podemos comparar las poblaciones atendiendo a otros criterios como el paralaje $Plx$ y su plano de movimientos propios $pmRA$ y $pmDE$. Las Figuras \ref{fig:e1_plx} y \ref{fig:e1_pmrapmde} muestran una comparativa de ambas poblaciones atendiendo a dichos parámetros.
 
 \begin{figure}
   \includegraphics[width=\linewidth]{img/ejercicio1_plx_gmag}
+  \caption{Diagrama de paralaje $Plx$ contra magnitud integrada $Gmag$ para las poblaciones seleccionadas con los datos de \emph{Gaia DR2}.}
+  \label{fig:e1_plx}
 \end{figure}
 
 \begin{figure}
   \includegraphics[width=\linewidth]{img/ejercicio1_pmra_pmde}
+  \caption{Diagrama de movimientos propios en ascensión recta $pmRA$ y declinación $pmDE$ para las poblaciones seleccionadas con los datos de \emph{Gaia DR2}.}
+  \label{fig:e1_pmrapmde}
+\end{figure}
+
+\newpage
+
+De estas dos representaciones se desprende y se corrobora la uniformidad de la galaxia: ambas poblaciones pese a residir en regiones diametralmente opuestas poseen una distribución de paralajes y de movimientos propios muy similar.
+
+Para completar este ejercicio, repetiremos el análisis anterior seleccionando únicamente aquellos objetos con errores pequeños en los parámetros astrométricos. Para realizar este filtrado, emplearemos la herramienta de subconjuntos de \emph{topcat}. Trataremos por lo tanto, de conservar aquellos objetos que residan en el $~10\%$ con menores errores astrométricos para paralaje $ePlx$ y movimientos propios $ePMRA$ y $ePMDE$. En la Figura \ref{fig:e1_eplx} se muestra un filtrado de ejemplo conservando aquellos objetos con un error en paralaje inferior a $0.05~[mas]$.
+
+\begin{figure}
+  \includegraphics[width=0.49\linewidth]{img/ejercicio1_eplx}
+  \includegraphics[width=0.49\linewidth]{img/ejercicio1_eplx_filtered}
+  \caption{Gráfica de error en paralaje $ePlx$ contra $Gmag$ (izquierda) y la misma gráfica pero con todos aquellos objetos con error mayor que $0.05$ filtrados.}
+  \label{fig:e1_eplx}
+\end{figure}
+
+En las Figuras \ref{fig:e1_bprpmag_filtered}, \ref{fig:e1_plx_filtered} y \ref{fig:e1_pmrapmde_filtered} se muestran los diagramas HR, paralaje contra magnitud y plano de movimientos propios respectivamente, esta vez omitiendo aquellos objetos con errores por encima de los umbrales comentados en los parámetros astrométricos.
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{img/ejercicio1_bprp_gmag_filtered}
+  \caption{Diagrama mostrando una representación similar a Hertzsprung-Rusell para las regiones estudiadas pero empleando la fotometría integrada $Gmag$ y el índice fotométrico azul-rojo integrado $BP-RP$ presentes en el catálogo \emph{Gaia DR2}. Se muestran únicamente los objetos con errores astrométricos reducidos.}
+  \label{fig:e1_bprpmag_filtered}
 \end{figure}
 
 \begin{figure}
-  \includegraphics[width=0.49\linewidth]{img/ejercicio1_era_ede}
-  \includegraphics[width=0.49\linewidth]{img/ejercicio1_era_ede_filtered}
+  \includegraphics[width=\linewidth]{img/ejercicio1_plx_gmag_filtered}
+  \caption{Diagrama de paralaje $Plx$ contra magnitud integrada $Gmag$ para las poblaciones seleccionadas con los datos de \emph{Gaia DR2}. Se muestran únicamente los objetos con errores astrométricos reducidos.}
+  \label{fig:e1_plx_filtered}
 \end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{img/ejercicio1_pmra_pmde_filtered}
+  \caption{Diagrama de movimientos propios en ascensión recta $pmRA$ y declinación $pmDE$ para las poblaciones seleccionadas con los datos de \emph{Gaia DR2}. Se muestran únicamente los objetos con errores astrométricos reducidos.}
+  \label{fig:e1_pmrapmde_filtered}
+\end{figure}
+
+Al aplicar este filtrado, el efecto más notable que apreciamos es la eliminación de todas aquellas estrellas de magnitud por encima de $16$ aproximadamente. Es lógico pensar que para estrellas tan poco brillantes estén sujetas a un error mayor dados los márgenes de sensibilidad de la instrumentación astrofísica. Si descartamos aquellos datos con mayor incertidumbre, ambas poblaciones siguen teniendo una situación en el plano de movimientos propios y una distribución de paralajes similar. Al descartar también aquellas estrellas más distantes y por lo tanto más afectadas por la extinción, el diagrama HR se torna más similar para las dos poblaciones.
+
+Para finalizar este ejercicio, podemos reflexionar sobre aquellos hechos explicados en clase que podemos corroborar a partir de las dos poblaciones: (1) la distribución de la galaxia, desde nuestro punto de vista, es prácticamente homogénea (ambas poblaciones presentan características muy similares), (2) la poca fiabilidad de los instrumentos para objetos de poco brillo (hemos observado cómo los objetos con magnitud fotométrica integrada a partir de 16 presentan una tasa de error muy elevada), (3) el efecto notable de la distancia y la extinción (tal y como hemos observado en los diagramas HR, las estrellas más lejanas se ven afectadas en gran medida por la extinción en aquellas zonas de mayor densidad de objetos).
 
 \section{Ejercicio 2}
 
-\textbf{Carga los datos para las estrellas en torno al cúmulo abierto de las Pléyades (M45). Este es un cúmulo muy
-cercano. Necesitarás tomar un radio grande (de, por lo menos, un grado). Intenta localizar el cúmulo en el
-plano de los movimientos propios. Estudia su extensión en diferentes diagramas y selecciona un conjunto de
-posibles miembros del cúmulo. Haz el mismo estudio para el cúmulo abierto problema que se ha asignado a tu grupo. Este cúmulo es más lejano y necesitarás tomar un radio entre $10'$ y $20'$. Una vez tengas una selección de miembros, identifica las estrellas evolucionadas que pertenecen al cúmulo. Dibuja el diagrama color/magnitud (en este caso, BP-RP/G) para los dos cúmulos. ¿Qué diferencias ves? ¿A qué puedes atribuirlo?}
+\textbf{Carga los datos para las estrellas en torno al cúmulo abierto de las Pléyades (M45). Este es un cúmulo muy cercano. Necesitarás tomar un radio grande (de, por lo menos, un grado). Intenta localizar el cúmulo en el plano de los movimientos propios. Estudia su extensión en diferentes diagramas y selecciona un conjunto de posibles miembros del cúmulo. Haz el mismo estudio para el cúmulo abierto problema que se ha asignado a tu grupo. Este cúmulo es más lejano y necesitarás tomar un radio entre $10'$ y $20'$. Una vez tengas una selección de miembros, identifica las estrellas evolucionadas que pertenecen al cúmulo. Dibuja el diagrama color/magnitud (en este caso, BP-RP/G) para los dos cúmulos. ¿Qué diferencias ves? ¿A qué puedes atribuirlo?}
+
+Para este segundo ejercicio hemos empleado \emph{Aladin} para seleccionar una región de radio $60'$ en las coordenadas galácticas del cúmulo M45 ($l=166.57, b=-23.522$). En la Figura \ref{fig:e2_m45} mostramos la visualización de dicho cúmulo así como los datos de \emph{Gaia DR2} que serán transmitidos a \emph{topcat} para su posterior análisis.
 
 \begin{figure}
-  \includegraphics[width=0.49\linewidth]{img/pleyades}
-  \includegraphics[width=0.49\linewidth]{img/pleyades_gaia}
+  \centering
+  \includegraphics[width=0.81\linewidth]{img/pleyades}
+  \includegraphics[width=0.81\linewidth]{img/pleyades_gaia}
   \caption{Región de $60'$ (1 grado) respecto al centro del cúmulo M45. A la izquierda, datos del catálogo \ac{DSS2} centrados en las coordenadas $l=166.56979, b=-23.52246$; a la derecha, la misma imagen con los datos de \emph{Gaia DR2} sobreimpuestos como cuadrados turquesas en la región dada. Imágenes obtenidas con el software \emph{Aladin}.}
+  \label{fig:e2_m45}
 \end{figure}
+
+Como podemos observar, en dicha región hemos seleccionado una gran cantidad de estrellas que no pertenecen al cúmulo en sí. A continuación procederemos a intentar localizar el cúmulo verdadero mediante la visualización de los datos astrométricos de la población inicial.
+
+En primer lugar, podemos realizar un primer filtrado eliminando todos aquellos objetos cuya magnitud exceda 14 (para los cuales de cualquier manera las medidas de las que disponemos poseen errores bastante elevados). En la Figura \ref{fig:e2_bprpgmag} se muestra el diagrama HR y el mismo filtrado de acuerdo a este criterio.
 
 \begin{figure}
   \includegraphics[width=0.49\linewidth]{img/ejercicio2_m45_bprp_gmag}
   \includegraphics[width=0.49\linewidth]{img/ejercicio2_m45_bprp_gmag_14}
+  \caption{Diagramas HR (en nuestro caso $Gmag$ contra $BP-RP$) para el cúmulo M45. A la izquierda, el diagrama completo. A la derecha, el mismo diagrama pero filtrando las estrellas de magnitud por encima de 14.}
+  \label{fig:e2_bprpgmag}
 \end{figure}
 
+Seguidamente, procederemos a analizar los movimientos propios. En la Figura \ref{fig:e2_pmrapmde} podemos observar el diagrama del plano de movimientos propios $pmRA$ y $pmDE$ en el que apreciamos dos grupos claramente diferenciados (además del prefiltrado por magnitud). Asumiendo que las estrellas del cúmulo han de tener movimientos propios similares, nuestro cúmulo se encuentra en uno de estos dos candidatos.
+
 \begin{figure}
-  \includegraphics[width=0.49\linewidth]{img/ejercicio2_m45_pmde_pmra}
-  \includegraphics[width=0.49\linewidth]{img/ejercicio2_m45_pmde_pmra_14}
+  \includegraphics[width=\linewidth]{img/ejercicio2_m45_pmde_pmra_14}
+  \caption{Diagrama de movimientos propios en ascensión recta y declinación para el cúmulo M45 mostrando dos posibles candidatos (clústers) de objetos. También se muestra el resultado de realizar el filtrado por magnitud antes mencionado (en amarillo).}
+  \label{fig:e2_pmrapmde}
 \end{figure}
+
+Si representamos el paralaje $Plx$ podemos distinguir y refinar aún mejor los dos cúmulos tal y como se muestra en la Figura \ref{fig:e2_plx}. Aplicando el mismo procedimiento, podemos representar el movimiento propio contra el paralaje en declinación o ascensión recta tal y como vemos en la Figura \ref{fig:e2_pmde} y obtener así un cúmulo todavía más refinado. Dado que nos enfrentamos a un cúmulo relativamente reducido, asumiremos que el subconjunto más pequeño de los obtenidos es el que verdaderamente representa al cúmulo M45 buscado.
 
 \begin{figure}
   \includegraphics[width=\linewidth]{img/ejercicio2_m45_plx_pmra}
+  \caption{Diagrama de movimiento propio $RA$ contra paralaje $Plx$. Un nuevo clúster (azul) es diferenciado respecto al subconjunto anterior.}
+  \label{fig:e2_plx}
 \end{figure}
 
 \begin{figure}
   \includegraphics[width=\linewidth]{img/ejercicio2_m45_plx_pmde}
+  \caption{Diagrama de movimiento propio $DE$ contra paralaje $Plx$. Otro nuevo clúster (verde) puede ser diferenciado incluido en el subconjunto anterior.}
+  \label{fig:e2_pmde}
 \end{figure}
+
+Si transportamos estos datos refinados de vuelta al observatorio virtual \emph{Aladin}, tal y como se muestra en la Figura \ref{fig:e2_final_m45}, podemos comprobar que hemos identificado las estrellas del cúmulo con efectividad.
 
 \begin{figure}
   \includegraphics[width=\linewidth]{img/m45_cumulo_def}
+  \caption{Resultados del cúmulo identificado visualizado de nuevo en \emph{Aladin}. Los datos originales transferidos a \emph{topcat} están marcados como círculos rojos mientras que el cúmulo seleccionado finalmente está indicado con rectángulos verdes.}
+  \label{fig:e2_final_m45}
 \end{figure}
 
 \section{Ejercicio Opcional}

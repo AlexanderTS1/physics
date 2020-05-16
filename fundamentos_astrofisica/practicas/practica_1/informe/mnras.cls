@@ -1545,7 +1545,7 @@ $\reset@font\displaystyle##$\hfil\cr>\cr\approx\cr}}}
 
 \newcounter{figure}
 \def\thefigure{\@arabic\c@figure}
-\def\fps@figure{tbp}
+\def\fps@figure{hbtp}
 \def\ftype@figure{2}
 \def\fstyle@figure{\reset@font\small\rm}
 \def\ext@figure{lof}
