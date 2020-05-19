@@ -1,0 +1,114 @@
+% How to use writeLaTeX: 
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+\documentclass{tufte-handout}
+
+%\geometry{showframe}% for debugging purposes -- displays the margins
+
+\usepackage{amsmath}
+\usepackage{siunitx}
+
+% Set up the images/graphics package
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+\title{Fundamentos de Astrofísica\\ Active Galaxies, Quasars, and Supermassive Black Holes }
+\author[Alberto Garcia-Garcia]{Alberto Garcia-Garcia < agg180 [at] alu.ua.es >}
+\date{\today}  % if the \date{} command is left out, the current date will be used
+
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% The units package provides nice, non-stacked fractions and better spacing
+% for units.
+\usepackage{units}
+
+\usepackage[americanvoltage]{circuitikz}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,positioning}
+\usetikzlibrary{decorations.markings}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+% Provides paragraphs of dummy text
+\usepackage{lipsum}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+
+% These commands are used to pretty-print LaTeX commands
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\section{Figuring For Yourself}
+
+\subsection{\textbf{If a quasar has a redshift of 3.3, at what fraction of the speed of light is it moving away from us?}}
+
+En el caso relativista (el cuásar se mueve a velocidades cercanas a la velocidad de la luz), la fórmula del Doppler \emph{shift} toma la siguiente forma:
+
+\begin{equation}
+\frac{v}{c} = \frac{(z + 1)^2 - 1}{(z + 1)^2 + 1}~.
+\end{equation}
+
+El enunciado nos dice que el cuásar en cuestión tiene un \emph{redshift} de $3.3$ por lo que podemos afirmar que $z = 3.3$ y por lo tanto:
+
+\begin{equation}
+\frac{v}{c} = \frac{(3.3 + 1)^2 -1}{(3.3 + 1)^2 + 1} = \frac{17.49}{19.49} = 0.897~,
+\end{equation}
+
+por lo que el cuásar se distancia de nosotros a una velocidad del $89.7\%$ de la velocidad de la luz.
+
+\subsection{\textbf{If a quasar is moving away from us at v/c = 0.8, what is the measured redshift?}}
+
+De igual manera que antes:
+
+\begin{align}
+0.8 = \frac{(z + 1)^2 - 1}{(z + 1)^2 + 1}
+\end{align}
+
+\begin{align}
+0.8 [(z + 1)^2 + 1] = (z + 1)^2 - 1 \rightarrow 0.8 (z + 1)**2 + 0.8 = (z + 1)**2 - 1
+\end{align}
+
+\begin{align}
+0.2 (z + 1)**2 = 1.8 \rightarrow (z + 1)**2 = 9.0
+\end{align}
+
+\begin{align}
+z + 1 = 3 \rightarrow z = 2
+\end{align}
+
+\bibliography{sample-handout}
+\bibliographystyle{plainnat}
+
+
+
+\end{document}
