@@ -183,6 +183,8 @@ En las Figuras \ref{fig:e1_bprpmag_filtered}, \ref{fig:e1_plx_filtered} y \ref{f
   \label{fig:e1_pmrapmde_filtered}
 \end{figure}
 
+\newpage
+
 Al aplicar este filtrado, el efecto más notable que apreciamos es la eliminación de todas aquellas estrellas de magnitud por encima de $16$ aproximadamente. Es lógico pensar que para estrellas tan poco brillantes estén sujetas a un error mayor dados los márgenes de sensibilidad de la instrumentación astrofísica. Si descartamos aquellos datos con mayor incertidumbre, ambas poblaciones siguen teniendo una situación en el plano de movimientos propios y una distribución de paralajes similar. Al descartar también aquellas estrellas más distantes y por lo tanto más afectadas por la extinción, el diagrama HR se torna más similar para las dos poblaciones.
 
 Para finalizar este ejercicio, podemos reflexionar sobre aquellos hechos explicados en clase que podemos corroborar a partir de las dos poblaciones: (1) la distribución de la galaxia, desde nuestro punto de vista, es prácticamente homogénea (ambas poblaciones presentan características muy similares), (2) la poca fiabilidad de los instrumentos para objetos de poco brillo (hemos observado cómo los objetos con magnitud fotométrica integrada a partir de 16 presentan una tasa de error muy elevada), (3) el efecto notable de la distancia y la extinción (tal y como hemos observado en los diagramas HR, las estrellas más lejanas se ven afectadas en gran medida por la extinción en aquellas zonas de mayor densidad de objetos).
@@ -195,8 +197,8 @@ Para este segundo ejercicio hemos empleado \emph{Aladin} para seleccionar una re
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.81\linewidth]{img/pleyades}
-  \includegraphics[width=0.81\linewidth]{img/pleyades_gaia}
+  \includegraphics[width=0.75\linewidth]{img/pleyades}
+  \includegraphics[width=0.75\linewidth]{img/pleyades_gaia}
   \caption{Región de $60'$ (1 grado) respecto al centro del cúmulo M45. A la izquierda, datos del catálogo \ac{DSS2} centrados en las coordenadas $l=166.56979, b=-23.52246$; a la derecha, la misma imagen con los datos de \emph{Gaia DR2} sobreimpuestos como cuadrados turquesas en la región dada. Imágenes obtenidas con el software \emph{Aladin}.}
   \label{fig:e2_m45}
 \end{figure}
@@ -241,6 +243,62 @@ Si transportamos estos datos refinados de vuelta al observatorio virtual \emph{A
   \caption{Resultados del cúmulo identificado visualizado de nuevo en \emph{Aladin}. Los datos originales transferidos a \emph{topcat} están marcados como círculos rojos mientras que el cúmulo seleccionado finalmente está indicado con rectángulos verdes.}
   \label{fig:e2_final_m45}
 \end{figure}
+
+A continuación, realizaremos el mismo estudio para el cúmulo problema \emph{Berkeley 51}. De la misma forma que antes, hemos empleado \emph{Aladin} para seleccionar una región de radio $10'$ en las coordenadas galácticas del cúmulo \emph{Berkeley 51}. La Figura \ref{fig:e2_b51} muestra dicho cúmulo en \emph{Aladin}. En la bibliografía proporcionada por \emph{Simbad}\footnote{http://simbad.u-strasbg.fr/simbad/sim-id?Ident=C2010\%2B342} sobre este cúmulo podemos encontrar una serie de referencias de gran relevancia: \cite{Negueruela2018,Lohr2018,Tadross2008,Ruprecth1966}.
+
+De dicha bibliografía podemos extraer una gran cantidad de información de alto nivel sobre el cúmulo a estudiar:
+
+\begin{itemize}
+  \item Se trata de un cúmulo abierto joven y altamente enrojecido. 
+  \item Contiene una población significativa de estrellas evolucionadas de tipo B que abandonan la secuencia principal en B3 V.
+  \item Se han identificado cuatro y cinco supergigantes amarillas y rojas respectivamente (tipos espectrales de F a M).
+  \item Dos de las supergigantes amarillas muestran cierta variedad espectral (tipo F8 Ib y comportamiento típico de cefeidas).
+  \item La distancia estimada es de $5.5~[kpc]$, obtenida mediante un ajuste a la secuencia principal.
+  \item Se sugiere una edad de aproximadamente $60~[Ma]$ por ajuste isócrono.
+  \item Cerca del centro del cúmulo encontramos una supergigante de tipo M2 Iab.
+  \item Posee una candidata importante a cefeida BE51\#162.
+\end{itemize}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{img/cumulo_berkeley}
+  \includegraphics[width=\linewidth]{img/cumulo_berkeley_gaia}
+  \caption{Región de $4'$ respecto al centro del cúmulo Berkeley 51. Arriba, datos del catálogo \ac{DSS2} centrados en las coordenadas $l=72.1536, b=00.2964$; abajo, la misma imagen con los datos de \emph{Gaia DR2} sobreimpuestos como círculos verdes en la región dada. Imágenes obtenidas con el software \emph{Aladin}.}
+  \label{fig:e2_b51}
+\end{figure}
+
+Cabe destacar que, atendiendo a \cite{Tadross2008}, el cúmulo posee un diámetro de $2'$. En nuestro estudio hemos escogido un diámetro algo más grande de $4'$ con el objetivo de comprobar si somos capaces de aislar las estrellas del cúmulo mediante el estudio de los diversos diagramas.
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{img/b51_bprp_gmag}
+  \caption{Diagramas HR (en nuestro caso $Gmag$ contra $BP-RP$) para el cúmulo M45. A la izquierda, el diagrama completo. A la derecha, el mismo diagrama pero filtrando las estrellas de magnitud por encima de 14.}
+  \label{fig:e2_b51_bprpgmag}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{img/b51_pmra_pmde}
+  \caption{Diagrama de movimientos propios en ascensión recta y declinación para el cúmulo M45 mostrando dos posibles candidatos (clústers) de objetos. También se muestra el resultado de realizar el filtrado por magnitud antes mencionado (en amarillo).}
+  \label{fig:e2_b51_pmrapmde}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{img/b51_radec}
+  \caption{Diagrama de movimientos propios en ascensión recta y declinación para el cúmulo M45 mostrando dos posibles candidatos (clústers) de objetos. También se muestra el resultado de realizar el filtrado por magnitud antes mencionado (en amarillo).}
+  \label{fig:e2_b51_radec}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{img/b51_plx}
+  \caption{Diagrama de movimiento propio $RA$ contra paralaje $Plx$. Un nuevo clúster (azul) es diferenciado respecto al subconjunto anterior.}
+  \label{fig:e2_b51_plx}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{img/b51_aladin}
+  \caption{Resultados del cúmulo identificado visualizado de nuevo en \emph{Aladin}. Los datos originales transferidos a \emph{topcat} están marcados como círculos rojos mientras que el cúmulo seleccionado finalmente está indicado con rectángulos verdes.}
+  \label{fig:e2_b51_aladin}
+\end{figure}
+
 
 \section{Ejercicio Opcional}
 
