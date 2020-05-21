@@ -250,7 +250,6 @@ De dicha bibliografía podemos extraer una gran cantidad de información de alto
 
 \begin{itemize}
   \item Se trata de un cúmulo abierto joven y altamente enrojecido. 
-  \item Contiene una población significativa de estrellas evolucionadas de tipo B que abandonan la secuencia principal en B3 V.
   \item Se han identificado cuatro y cinco supergigantes amarillas y rojas respectivamente (tipos espectrales de F a M).
   \item Dos de las supergigantes amarillas muestran cierta variedad espectral (tipo F8 Ib y comportamiento típico de cefeidas).
   \item La distancia estimada es de $5.5~[kpc]$, obtenida mediante un ajuste a la secuencia principal.
@@ -267,31 +266,53 @@ De dicha bibliografía podemos extraer una gran cantidad de información de alto
   \label{fig:e2_b51}
 \end{figure}
 
-Cabe destacar que, atendiendo a \cite{Tadross2008}, el cúmulo posee un diámetro de $2'$. En nuestro estudio hemos escogido un diámetro algo más grande de $4'$ con el objetivo de comprobar si somos capaces de aislar las estrellas del cúmulo mediante el estudio de los diversos diagramas.
+Cabe destacar que, atendiendo a \cite{Tadross2008}, el cúmulo posee un diámetro de $2'$. En nuestro estudio hemos escogido un diámetro algo más grande de $4'$ con el objetivo de comprobar si somos capaces de aislar las estrellas del cúmulo mediante el estudio de los diversos diagramas. Algunas de ellas obvias y otras no tan sencillas de distinguir. A continuación, procederemos a la visualización de los datos astrométricos con \emph{topcat} y, atendiendo también a las características básicas del cúmulo obtenidas en la bibliografía, trataremos de obtener el conjunto de estrellas que verdaderamente pertenecen a Berkeley 51.
+
+En primer lugar, en la Figura \ref{fig:e2_b51} podemos visualizar el diagrama HR (en nuestro caso BP-RP / Gmag). Realizaremos un corte para aquellos objetos con un alto error en sus magnitudes astrométricas. Tras visualizar la evolución de dichos errores, hemos considerado que la magnitud 18 es un buen límite para filtrar la calidad de los datos.
 
 \begin{figure}
   \includegraphics[width=\linewidth]{img/b51_bprp_gmag}
-  \caption{Diagramas HR (en nuestro caso $Gmag$ contra $BP-RP$) para el cúmulo M45. A la izquierda, el diagrama completo. A la derecha, el mismo diagrama pero filtrando las estrellas de magnitud por encima de 14.}
+  \caption{Diagrama HR (en nuestro caso $Gmag$ contra $BP-RP$) para el cúmulo B51. Mostramos (en rojo) todos los objetos seleccionados y los objetos filtrados quedándonos con aquellos que posean bajas cotas de error en sus parámetros astrométricos (en azul).}
   \label{fig:e2_b51_bprpgmag}
 \end{figure}
 
+Seguidamente, visualizaremos otra vista que nos permita diferenciar las estrellas evolucionadas del cúmulo respecto al resto no pertenecientes al mismo: el plano de los movimientos propios. Las Figuras \ref{fig:e2_b51_pmrapmde} y \ref{fig:e2_b51_radec} muestran el diagrama de movimientos propios (pmRA vs. pmDE) para los objetos anteriormente seleccionados y para el subconjunto trazado atendiendo a este propio diagrama respectivamente (bajo la hipótesis de que las estrellas evolucionadas del cúmulo han de tener movimientos propios similares o por lo menos no enormemente dispares).
+
 \begin{figure}
   \includegraphics[width=\linewidth]{img/b51_pmra_pmde}
-  \caption{Diagrama de movimientos propios en ascensión recta y declinación para el cúmulo M45 mostrando dos posibles candidatos (clústers) de objetos. También se muestra el resultado de realizar el filtrado por magnitud antes mencionado (en amarillo).}
+  \caption{Diagrama de movimientos propios en ascensión recta y declinación para el cúmulo B51 mostrando dos posibles candidatos (clústers) de objetos: tanto todos los objetos seleccionados en \emph{Aladin} (rojo) como aquellos filtrados por magnitud (azul).}
   \label{fig:e2_b51_pmrapmde}
 \end{figure}
 
 \begin{figure}
   \includegraphics[width=\linewidth]{img/b51_radec}
-  \caption{Diagrama de movimientos propios en ascensión recta y declinación para el cúmulo M45 mostrando dos posibles candidatos (clústers) de objetos. También se muestra el resultado de realizar el filtrado por magnitud antes mencionado (en amarillo).}
+  \caption{Diagrama de movimientos propios en ascensión recta y declinación para el cúmulo M51 mostrando tres posibles candidatos de clústers: (rojo) los objetos originales, (azul) objetos filtrados por magnitud y (verde) subconjunto seleccionado con movimientos propios similares.}
   \label{fig:e2_b51_radec}
 \end{figure}
 
+Por último, para poder trazar una distinción más crítica, visualizaremos el diagrama de movimiento propio en ascensión recta contra paralaje en la Figura \ref{fig:e2_b51_plx}. En dicho diagrama hemos seleccionado otro subconjunto con paralaje y movimiento propio en ascensión recta similar.
+
 \begin{figure}
   \includegraphics[width=\linewidth]{img/b51_plx}
-  \caption{Diagrama de movimiento propio $RA$ contra paralaje $Plx$. Un nuevo clúster (azul) es diferenciado respecto al subconjunto anterior.}
+  \caption{Diagrama de movimiento propio $RA$ contra paralaje $Plx$. Un nuevo clúster (gris) es diferenciado respecto al subconjunto anterior.}
   \label{fig:e2_b51_plx}
 \end{figure}
+
+Después de todo este filtrado, podemos tener una mejor idea de las estrellas evolucionadas que forman parte verdaderamente del cúmulo. Como podemos comprobar en la Figura \ref{fig:e2_b51_aladin}, si transferimos estos datos de vuelta a \emph{Aladin}, hemos sido capaces de identificar correctamente la mayor parte de estrellas enrojecidas y evolucionadas pertenecientes al cúmulo mientras que hemos dejado fuera todas aquellas de tipos espectrales diferentes y menos enrojecidas que presumiblemente no pertenecen al cúmulo objetivo.
+
+Las estrellas identificadas y pertenecientes al cúmulo se muestran en la Tabla \ref{table:b51} junto con sus identificadores en los catálogos correspondientes y sus coordenadas.
+
+Por otro lado, en la Figura \ref{fig:e2_m45_b51} podemos observar una comparativa de los diagramas HR tanto para los datos seleccionados en el cúmulo M45 como para el cúmulo objetivo Berkeley51. De dicha figura podemos extraer varias conclusiones:
+
+\begin{itemize}
+  \item Efectivamente, el cúmulo B51 está desplazado a la derecha respecto al M45 y por lo tanto mucho más enrojecido.
+  \item El cúmulo B51 está mucho más afectado por la distancia que el cúmulo M45 (desplazamiento vertical y extinción). Atendiendo a los datos, de hecho, el cúmulo M45 es ciertamente mucho más cercano.
+  \item Observamos también la presencia de supergigantes rojas y amarillas en el caso de B51 pero no en M45 (en el cual la mayoría de las estrellas están en secuencia principal).
+  \item Observamos la presencia de posibles enanas blancas en el diagrama HR de M45, no así en el caso de B51.
+  \item En general, el cúmulo M45 está mucho más poblado que el cúmulo B51.
+\end{itemize}
+
+\newpage
 
 \begin{figure}
   \includegraphics[width=\linewidth]{img/b51_aladin}
@@ -300,10 +321,73 @@ Cabe destacar que, atendiendo a \cite{Tadross2008}, el cúmulo posee un diámetr
 \end{figure}
 
 
+\begin{table}
+  \caption{Lista de estrellas en el cúmulo Berkeley 51 extraída de la herramienta \emph{Simbad}.}
+  \resizebox{\linewidth}{!}{
+  \begin{tabular}{c|c|c}
+  \# & Catálogo e Identificador & Coordenadas (ICRS,J2000/2000) \\
+  \hline
+  1  & 2MASS J20115005+3425028      & 20 11 50.0546321696 +34 25 02.749686434 \\
+  2  & 2MASS J20115645+3424222      & 20 11 56.4411840807 +34 24 22.206964366 \\
+  3  & Gaia DR2 2055722466316862976 & 20 12 03.7217196755 +34 25 04.559180572 \\
+  4  & Gaia DR2 2055722535028287104 & 20 11 53.9483574818 +34 23 54.591310474 \\
+  5  & Gaia DR2 2055718922944280192 & 20 11 58.8788001990 +34 21 09.622910962 \\
+  6  & Gaia DR2 2055722225798781696 & 20 11 49.3970985794 +34 24 09.742825064 \\
+  7  & Gaia DR2 2055722191439041408 & 20 11 47.4750152119 +34 23 22.422433551 \\
+  8  & Gaia DR2 2055722328869693440 & 20 11 59.6027695781 +34 23 22.392957036 \\
+  9  & Gaia DR2 2055719305220885632 & 20 12 03.2966417461 +34 22 24.266511463 \\
+  10 & Gaia DR2 2055722431957076352 & 20 12 08.6536643358 +34 24 12.173629896 \\
+  11 & Gaia DR2 2055722981713031424 & 20 11 48.2014477078 +34 24 04.265982196 \\
+  12 & Gaia DR2 2055722393277929088 & 20 12 05.8501494573 +34 24 10.465235085 \\
+  13 & Gaia DR2 2055722530716877184 & 20 11 55.7969643369 +34 23 47.113290563 \\
+  14 & Gaia DR2 2055722461997415296 & 20 12 05.2314411590 +34 24 29.816149172 \\
+  15 & Gaia DR2 2055722530716886144 & 20 11 56.1271635432 +34 24 04.112607580 \\
+  16 & Gaia DR2 2055722603755888256 & 20 11 51.7806251786 +34 24 18.541681979 \\
+  17 & Gaia DR2 2055722603755884672 & 20 11 53.6337739553 +34 24 47.350277107 \\
+  18 & Gaia DR2 2055723428389662848 & 20 11 47.2337793263 +34 25 27.182649079 \\
+  19 & Gaia DR2 2055722535028295424 & 20 11 53.9665853664 +34 24 04.450662316 \\
+  20 & Gaia DR2 2055722221479222912 & 20 11 50.7581702549 +34 23 33.697276471 \\
+  21 & Gaia DR2 2055722187119477376 & 20 11 49.6900784087 +34 23 16.598636830 \\
+  22 & Gaia DR2 2055722535036372864 & 20 11 56.5953786228 +34 24 14.603770161 \\
+  23 & Gaia DR2 2055722530716872576 & 20 11 56.5376221479 +34 23 41.751631412 \\
+  24 & Gaia DR2 2055722535036380160 & 20 11 55.9257236632 +34 24 21.049076259 \\
+  25 & Gaia DR2 2055723050432539392 & 20 11 46.5562753237 +34 25 08.145797140 \\
+  \end{tabular}}
+  \label{table:b51}
+\end{table}
+
+\begin{figure}
+  \includegraphics[width=0.5\linewidth]{img/m45_b51_1}
+  \includegraphics[width=0.5\linewidth]{img/m45_b51_2}
+  \caption{Comparativa de diagramas HR (BP-RP / Gmag) de los objetos seleccionados para el cúmulo M45 (izquierda) y para el cúmulo objetivo Berkeley51 (derecha).}
+  \label{fig:e2_m45_b51}
+\end{figure}
+
 \section{Ejercicio Opcional}
 
-\textbf{Para las estrellas evolucionadas del cúmulo problema descarga datos fotométricos de diferentes catálogos y
-estudia su distribución espectral de energía. ¿Qué te puede ser necesario?}
+\textbf{Para las estrellas evolucionadas del cúmulo problema descarga datos fotométricos de diferentes catálogos y estudia su distribución espectral de energía. ¿Qué te puede ser necesario?}
+
+En la Figura \ref{fig:e2_b51_simbad} podemos observar aquellas estrellas evolucionadas del cúmulo para las que poseemos datos de \emph{Simbad} y por lo tanto están identificadas (son las estrellas, o mejor dicho, el subconjunto de ellas de las que identificamos en el ejercicio anterior como candidatas del cúmulo).
+
+\newpage
+
+Empleando los datos de \emph{Gaia}, en concreto la temperatura efectiva Teff, podemos generar un pseudo-diagrama de distribución espectral como se muestra en la Figura \ref{fig:e2_b51_teff}. En él, podemos confirmar que la mayor parte de las estrellas del cúmulo son de tipo M ($2500-3500~[K]$) o K ($3500-5000~[K]$) y algunas G ($5000-6000~[K]$) y F ($6000-7500~[K]$).
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{img/simbad_b51}
+  \caption{Estrellas identificadas por \emph{Simbad} (en rojo) en el cúmulo Berkeley 51 y aquellas para las que disponemos de datos de Gaia (en azul).}
+  \label{fig:e2_b51_simbad}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{img/b51_teff}
+  \caption{Histograma de distribución de temperatura de las estrellas del cúmulo Berkeley 51.}
+  \label{fig:e2_b51_teff}
+\end{figure}
+
+\section{Conclusión}
+
+En esta práctica hemos empleado las herramientas \emph{Simbad} y \emph{topcat} tanto para analizar poblaciones de estrellas en regiones dispares de la galaxia como para tratar de identificar aquellas pertenecientes a ciertos cúmulos aislándolas de otras poblaciones de estrellas fuera de ellos. Esto nos ha permitido reforzar los conocimientos aprendidos sobre la galaxia así como aprender a discernir información de cúmulos a partir de los datos astrométricos.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
