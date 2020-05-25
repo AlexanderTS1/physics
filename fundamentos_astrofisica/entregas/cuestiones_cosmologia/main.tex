@@ -1,0 +1,121 @@
+% How to use writeLaTeX: 
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+\documentclass{tufte-handout}
+
+%\geometry{showframe}% for debugging purposes -- displays the margins
+
+\usepackage{amsmath}
+\usepackage{siunitx}
+
+% Set up the images/graphics package
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+\title{Fundamentos de Astrofísica\\ Cosmology }
+\author[Alberto Garcia-Garcia]{Alberto Garcia-Garcia < agg180 [at] alu.ua.es >}
+\date{\today}  % if the \date{} command is left out, the current date will be used
+
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% The units package provides nice, non-stacked fractions and better spacing
+% for units.
+\usepackage{units}
+
+\usepackage[americanvoltage]{circuitikz}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,positioning}
+\usetikzlibrary{decorations.markings}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+% Provides paragraphs of dummy text
+\usepackage{lipsum}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+
+% These commands are used to pretty-print LaTeX commands
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+
+\subsection{\textbf{Explica qué es la recombinación, a qué temperatura ocurre, cómo se relaciona con el potencial de ionización del hidrógeno, cómo se relaciona con la superficie de último scattering, etc.}}
+
+Al comienzo del Universo después del Big Bang, el cosmos poseía una temperatura muy elevada causada por la intensa y energética radiación de fondo la cual impedía la formación de núcleos. En estos primeros momentos, el scattering debido a la cantidad de electrones libres (recientemente formados) opacaba el Universo.
+
+Aproximadamente $3-4 \cdot 10^5$ años después del Big Bang, la temperatura de la radiación decreció hasta $3000~[K]$ (inferior a la energía de ionización típica del hidrógeno), marcando una etapa conocida como recombinación. Durante este período, la temperatura hace que la formación de núcleos de hidrógeno se vea favorecida en términos de energía. Así pues, los electrones se combinan con los protones para formar núcleos de hidrógeno.
+
+Añadiendo un poco más de detalle, sabemos que al temperatura de ionización del hidrógeno son $13.6~[eV]$. De acuerdo a la ecuación de Saha (no resuelta aquí):
+
+\begin{equation}
+\frac{1 - X_e}{X_e^2} = \frac{1}{n}(\frac{2\pi m_e k T}{h^2})^{3/2} e^{-13.6}
+\end{equation}
+
+podemos establecer que para un porcentaje de ionización de hidrógeno del $50\%$ se necesita una temperatura de recombinación de $\approx 4000~[K]$. Como ya mencionamos anteriormente, en esta etapa se alcanza una temperatura de $\approx 3000~[K]$ lo cual provoca que el porcentaje de ionización del hidrógeno sea todavía inferior y se permita la formación de átomos del mismo.
+
+Como efecto secundario, la recombinación provoca que la densidad de electrones libres caiga bruscamente, lo cual a su vez provoca la reducción de \emph{scattering} y aumenta el camino libre de los fotones que escapan del horizonte del Universo (que deja de ser opaco) y producen el fondo de radiación de microondas. Podemos encontrar una analogía de este fenómeno en nuestro Sol en el cual el interior a partir de la fotosfera es opaco debido a la imposibilidad que tienen los fotones de atravesarlo pero que se convierte en transparente a medida que la densidad de las capas disminuye hacia el exterior.
+
+\clearpage
+
+\subsection{\textbf{Se suele decir que el Universo es plano o prácticamente plano. Explica qué significa esto y las posibles evidencias observacionales que se tienen.}}
+
+Para entender qué significa que el Universo sea prácticamente plano debemos en primer lugar definir o aclarar dos conceptos: (1) ¿qué significa curvatura? y (2) ¿a qué nos referimos cuando hablamos de la geometría del Universo? Por un lado, la curvatura expresa la cantidad por la que una superficie (en este caso el Universo) difiere respecto a una superficie plana. Por otro lado, cuando hablamos de la geometría del Universo podemos hacerlo desde dos puntos de vista: localmente (forma particular del Universo observable) o globalmente (topología general del cosmos).
+
+Si analizamos la curvatura de la geometría local del Universo, pueden darse tres situaciones: curvatura positiva, curvatura negativa o sin curvatura (plano). Estas tres situaciones están relacionadas con la teoría General de la Relatividad y con la fuerza de la gravedad. De forma resumida: en el escenario de curvatura negativa, el Universo contiene una cantidad de masa insuficiente para que la fuerza de la atracción gravitatoria contenga su expansión y nos encontraremos ante un Universo abierto; en el caso de curvatura positiva, el cosmos contiene una cantidad de masa suficiente para prevenir su expansión y hablamos de un Universo cerrado; por último, si la cantidad de masa-energía es la adecuada, la expansión del Universo se ve frenada pasado un tiempo infinito, pero ni colapsa sobre sí mismo ni se abre para siempre: es plano.
+
+Según las ecuaciones de Friedmann, que modelan el Universo de acuerdo a la teoría de la Relatitividad General, el parámetro de densidad $\Omega$ se define como el ratio entre la densidad de energía-masa del Universo observada y la densidad crítica. Esta relación determina la geometría local del Universo: si el ratio es $1$, el Universo es plano; si es mayor que $1$ posee una curvatura positiva; si es menor que $1$ posee una curvatura negativa.
+
+La principal evidencia observacional que disponemos para confirmar esta hipótesis son los datos sobre radiación de fondo de microondas obtenidos por los instrumentos Planck, WMAP y BOOMERang. Según mediciones realizadas por dichas misiones, el valor experimental obtenido para $\Omega$ corresponde a un Universo plano (incluso teniendo en cuenta los márgenes de error).
+
+Otra evidencia observacional la podemos obtener atendiendo a la forma y tamaño de las variaciones de temperatura que se observan en la radiación de fondo. Si el Universo poseyera curvatura (positiva o negativa) apreciaríamos ciertas distorsiones en las imágenes de CMB que, actualmente, no somos capaces de discernir.
+
+\clearpage
+
+\subsection{\textbf{Enuncia y explica brevemente las tres evidencias observacionales del modelo del Big Bang.}}
+
+Las tres evidencias observacionales más sólidas que soportan el modelo del Big Bang son:
+
+\begin{itemize}
+  \item La radiación de fondo de microondas: de acuerdo a los modelos de expasión del Universo siguiendo la hipótesis del Big Bang, Gamow (junto con Alpher y Herman) predijeron que el Universo debería estar lleno de radiación de fondo de microondas y estimaron que esa radiación debería corresponder a la emitida por un cuerpo negro a $3~[K]$. Con los instrumentos actuales hemos descubierto que, efectivamente, de media el CMB se ajusta perfectamente a un cuerpo negro de aproximadamente $2.7~[K]$. 
+  \item La Ley de Hubble y la expansión del Universo: el hecho de que las galaxias lejanas muestren un corrimiento al rojo mucho mayor que las cercanas sugiere que el espacio entre las galaxias se está expandiendo y dicha velocidad de expansión concuerda con nuestro modelo de Big Bang.
+  \item La presencia o abundancia de ciertos elementos: la existencia, distribución y las cantidades de ciertos elementos ligeros como el hidrógeno, helio o litio en el Universo concuerda con la explicación de su síntesis en el Big Bang y no como un producto de la síntesis de núcleos de estrellas.
+\end{itemize}
+
+Otras evidencias observacionales quizás no tan directas pero que aún así son pruebas consistentes con el modelo de Big Bang actual son, por ejemplo, la morfología, distribución y evolución de las galaxias, la existencia de nubes de gas primordiales y el hecho de que las estiamciones de la edad del Universo concuerda con otras estimaciones realizadas a partir de la edad de las estrellas más viejas que hemos podido encontrar y los modelos de evolución estelar que disponemos hasta la fecha. 
+
+\bibliography{sample-handout}
+\bibliographystyle{plainnat}
+
+
+
+\end{document}
